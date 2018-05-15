@@ -1,6 +1,5 @@
 package edu.iis.powp.decorator;
 
-import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.CompoundCommand;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
@@ -34,11 +33,5 @@ public class MoveCommandDecorator extends CommandDecorator {
             result.addPlotterCommand(command);
         });
         return result;
-    }
-
-    @Override
-    public void execute(IPlotter plotter) {
-        super.execute(plotter);
-        compoundCommand.execute(plotter);
     }
 }
