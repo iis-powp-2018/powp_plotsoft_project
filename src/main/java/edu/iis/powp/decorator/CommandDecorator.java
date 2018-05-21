@@ -20,7 +20,6 @@ public abstract class CommandDecorator implements IPlotterCommand {
 
     @Override
     public void execute(IPlotter plotter) {
-        compoundCommand = constructTransformedCompoundCommand(coordinates);
         compoundCommand.execute(plotter);
     }
 

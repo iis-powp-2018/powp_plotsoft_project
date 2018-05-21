@@ -13,6 +13,7 @@ public class MoveCommandDecorator extends CommandDecorator {
         super(baseCommand);
         this.moveX = moveX;
         this.moveY = moveY;
+        compoundCommand = constructTransformedCompoundCommand(coordinates);
     }
 
     @Override

@@ -13,6 +13,7 @@ public class FlipCommandDecorator extends CommandDecorator {
         super(baseCommand);
         this.flipX = flipX;
         this.flipY = flipY;
+        compoundCommand = constructTransformedCompoundCommand(coordinates);
     }
 
     @Override
