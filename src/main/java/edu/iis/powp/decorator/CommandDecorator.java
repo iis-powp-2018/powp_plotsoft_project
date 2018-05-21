@@ -11,11 +11,13 @@ import java.util.List;
 public abstract class CommandDecorator implements IPlotterCommand {
     protected ICompoundCommand compoundCommand;
     protected List<PlotterMovementModel> coordinates;
+    protected IPlotterCommand baseCommand;
 
     public CommandDecorator(IPlotterCommand baseCommand) {
         InterceptCoordinatesAdapterPlotterDriver plotterDriver = new InterceptCoordinatesAdapterPlotterDriver();
         baseCommand.execute(plotterDriver);
         coordinates = plotterDriver.getCoordinates();
+        this.baseCommand = baseCommand;
     }
 
     @Override

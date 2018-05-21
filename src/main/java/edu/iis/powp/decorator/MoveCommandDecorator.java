@@ -32,4 +32,9 @@ public class MoveCommandDecorator extends CommandDecorator {
         });
         return result;
     }
+
+    @Override
+    public String toString() {
+        return baseCommand.toString() + " -> move(" + moveX + ", " + moveY + ")";
+    }
 }

@@ -36,4 +36,22 @@ public class FlipCommandDecorator extends CommandDecorator {
         });
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder(baseCommand.toString());
+        builder.append(" -> flip(");
+        if(flipX) {
+            builder.append("x");
+        }
+        if(flipX && flipY) {
+            builder.append(", ");
+        }
+        if(flipY) {
+            builder.append("y");
+        }
+        builder.append(")");
+
+        return builder.toString();
+    }
 }
