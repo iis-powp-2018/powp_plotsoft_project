@@ -2,15 +2,15 @@ package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.InterceptCoordinatesAdapterPlotterDriver;
-import edu.iis.powp.command.CompoundCommand;
+import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.model.PlotterMovementModel;
 
 import java.util.List;
 
 public abstract class CommandDecorator implements IPlotterCommand {
-    protected CompoundCommand compoundCommand;
-    private List<PlotterMovementModel> coordinates;
+    protected ICompoundCommand compoundCommand;
+    protected List<PlotterMovementModel> coordinates;
 
     public CommandDecorator(IPlotterCommand baseCommand) {
         InterceptCoordinatesAdapterPlotterDriver plotterDriver = new InterceptCoordinatesAdapterPlotterDriver();
@@ -24,5 +24,5 @@ public abstract class CommandDecorator implements IPlotterCommand {
         compoundCommand.execute(plotter);
     }
 
-    protected abstract CompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates);
+    protected abstract ICompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates);
 }

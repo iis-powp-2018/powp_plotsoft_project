@@ -1,9 +1,6 @@
 package edu.iis.powp.decorator;
 
-import edu.iis.powp.command.CompoundCommand;
-import edu.iis.powp.command.DrawToCommand;
-import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.command.SetPositionCommand;
+import edu.iis.powp.command.*;
 import edu.iis.powp.model.PlotterMovementModel;
 
 import java.util.List;
@@ -18,9 +15,8 @@ public class FlipCommandDecorator extends CommandDecorator {
         this.flipY = flipY;
     }
 
-
     @Override
-    protected CompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates) {
+    protected ICompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates) {
         CompoundCommand result = new CompoundCommand();
         coordinates.forEach(coordinate -> {
             IPlotterCommand command;
