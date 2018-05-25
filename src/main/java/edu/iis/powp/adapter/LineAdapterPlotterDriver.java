@@ -43,9 +43,6 @@ public class LineAdapterPlotterDriver implements IPlotter {
 			inkController.reduceInkLevel(lineLength);
 			drawController.drawLine(line);
 		}
-		else {
-			//TODO do not draw + log? + back to fill
-		}
 	}
 
 	private float calculateLineLength(int startX, int startY, int x, int y) {

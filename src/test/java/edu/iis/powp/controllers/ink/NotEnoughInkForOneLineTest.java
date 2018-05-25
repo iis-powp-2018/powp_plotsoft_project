@@ -11,7 +11,7 @@ import edu.kis.powp.drawer.shape.LineFactory;
  *
  * @author Klaudia
  */
-public class enoughInkForMultiplyLinesTest {
+public class NotEnoughInkForOneLineTest {
     /**
      * Ink controller test.
      */
@@ -25,16 +25,8 @@ public class enoughInkForMultiplyLinesTest {
 
         InkControllerInterface inkController = SimmulationInkController.getInstance();
 
-        linePlotter.setPosition(0, 0);
-        linePlotter.drawTo(200, 200);
-        System.out.println("Ink level: " + inkController.getInkLevel());
-
-        linePlotter.setPosition(200, 200);
-        linePlotter.drawTo(400, 0);
-        System.out.println("Ink level: " + inkController.getInkLevel());
-
-        linePlotter.setPosition(400, 0);
-        linePlotter.drawTo(200, 100);
+        linePlotter.setPosition(-300, -300);
+        linePlotter.drawTo(500, 500);
         System.out.println("Ink level: " + inkController.getInkLevel());
     }
 }
