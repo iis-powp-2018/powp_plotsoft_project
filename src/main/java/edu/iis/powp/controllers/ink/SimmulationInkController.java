@@ -1,5 +1,9 @@
 package edu.iis.powp.controllers.ink;
 
+/**
+ * Implementation of Ink Controller for simulation.
+ * Singleton design pattern. One unit of ink can be used to draw line of one unit length.
+ */
 public class SimmulationInkController implements InkControllerInterface {
     private static SimmulationInkController instance = null;
     private float inkLevel;
@@ -9,6 +13,10 @@ public class SimmulationInkController implements InkControllerInterface {
         inkLevel = MAX_LEVEL_INK;
     };
 
+    /**
+     * Implementation for Singleton design pattern
+     * @return SimmulationInkController instance
+     */
     public static SimmulationInkController getInstance(){
         if (instance == null)
         {

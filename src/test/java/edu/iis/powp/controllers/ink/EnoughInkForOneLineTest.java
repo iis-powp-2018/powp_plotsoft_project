@@ -13,7 +13,7 @@ import edu.kis.powp.drawer.shape.LineFactory;
  */
 public class EnoughInkForOneLineTest {
     /**
-     * Ink controller test.
+     * Ink controller test showing one multiply lines when there is enough ink
      */
     public static void main(String[] args) {
         DrawPanelController controller = new DrawPanelController();
