@@ -26,11 +26,9 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         Container content = this.getContentPane();
         content.setLayout(new GridBagLayout());
 
-        GridBagConstraints constraints = new GridBagConstraints();
+        GridBagConstraints constraints = getGridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 0.5;
         constraints.gridx = 0;
-        constraints.gridy = 0;
 
         List<JPanel> panelList = new LinkedList<>();
         panelList.add(buildFlipCommandPanel());
@@ -48,10 +46,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 0.5;
-        constraints.gridy = 0;
+        GridBagConstraints constraints = getGridBagConstraints();
 
         JCheckBox flipXCheckBox = new JCheckBox("Flip X");
         constraints.gridx = 0;
@@ -63,12 +58,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panel.add(flipYCheckBox, constraints);
 
         JButton applyButton = new JButton("Apply flip command");
-        constraints.ipady = 20;
-        constraints.weightx = 0.0;
-        constraints.gridwidth = 2;
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.insets = new Insets(10, 0, 10, 0);
+        setPaddings(constraints);
 
         applyButton.addActionListener(event -> {
             IPlotterCommand currentCommand = commandManager.getCurrentCommand();
@@ -89,10 +79,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 0.5;
-        constraints.gridy = 0;
+        GridBagConstraints constraints = getGridBagConstraints();
 
 
         JLabel moveXLabel = new JLabel("X movement:");
@@ -113,12 +100,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panel.add(moveYSpinner, constraints);
 
         JButton applyButton = new JButton("Apply move command");
-        constraints.ipady = 20;
-        constraints.weightx = 0.0;
-        constraints.gridwidth = 2;
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(10, 0, 10, 0);
+        setPaddings(constraints);
 
         applyButton.addActionListener(event -> {
             IPlotterCommand currentCommand = commandManager.getCurrentCommand();
@@ -143,15 +125,20 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         return panel;
     }
 
+    private void setPaddings(GridBagConstraints constraints) {
+        constraints.ipady = 20;
+        constraints.weightx = 0.0;
+        constraints.gridwidth = 2;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.insets = new Insets(10, 0, 10, 0);
+    }
+
     private JPanel buildGraduationCommandPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 0.5;
-        constraints.gridy = 0;
-
+        GridBagConstraints constraints = getGridBagConstraints();
 
         JLabel graduationLabel = new JLabel("Graduation:");
         JSpinner graduationSpinner = new JSpinner(new SpinnerNumberModel(0, null, null, 1));
@@ -162,12 +149,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panel.add(graduationSpinner, constraints);
 
         JButton applyButton = new JButton("Apply graduation command");
-        constraints.ipady = 20;
-        constraints.weightx = 0.0;
-        constraints.gridwidth = 2;
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(10, 0, 10, 0);
+        setPaddings(constraints);
 
         applyButton.addActionListener(event -> {
             IPlotterCommand currentCommand = commandManager.getCurrentCommand();
@@ -196,12 +178,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
 
         JButton runCommandButton = new JButton("Run command");
         constraints.fill = GridBagConstraints.HORIZONTAL | GridBagConstraints.VERTICAL;
-        constraints.ipady = 20;
-        constraints.weightx = 0.0;
-        constraints.gridwidth = 2;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.insets = new Insets(10, 0, 10, 0);
+        setPaddings(constraints);
 
         runCommandButton.addActionListener(event -> {
             IPlotterCommand currentCommand = commandManager.getCurrentCommand();
@@ -213,6 +190,14 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panel.add(runCommandButton, constraints);
 
         return panel;
+    }
+
+    private GridBagConstraints getGridBagConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 0.5;
+        constraints.gridy = 0;
+        return constraints;
     }
 
     @Override
