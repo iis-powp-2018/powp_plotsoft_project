@@ -5,6 +5,7 @@ import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.decorator.FlipCommandDecorator;
+import edu.iis.powp.decorator.GraduationCommandDecorator;
 import edu.iis.powp.decorator.MoveCommandDecorator;
 
 import javax.swing.*;
@@ -34,6 +35,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         List<JPanel> panelList = new LinkedList<>();
         panelList.add(buildFlipCommandPanel());
         panelList.add(buildMoveCommandPanel());
+        panelList.add(buildGraduationCommandPanel());
         panelList.add(buildRunCommandPanel());
 
         panelList.forEach(panel -> {
@@ -138,6 +140,51 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
 
         panel.add(applyButton, constraints);
 
+        return panel;
+    }
+
+    private JPanel buildGraduationCommandPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 0.5;
+        constraints.gridy = 0;
+
+
+        JLabel graduationLabel = new JLabel("Graduation:");
+        JSpinner graduationSpinner = new JSpinner(new SpinnerNumberModel(0, null, null, 1));
+
+        constraints.gridx = 0;
+        panel.add(graduationLabel, constraints);
+        constraints.gridy = 1;
+        panel.add(graduationSpinner, constraints);
+
+        JButton applyButton = new JButton("Apply graduation command");
+        constraints.ipady = 20;
+        constraints.weightx = 0.0;
+        constraints.gridwidth = 2;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.insets = new Insets(10, 0, 10, 0);
+
+        applyButton.addActionListener(event -> {
+            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
+            int graduation;
+            try {
+                graduation = (Integer) graduationSpinner.getValue();
+            } catch (ClassCastException e) {
+                return; // TODO: Implement error logging
+            }
+            if (currentCommand != null) {
+                GraduationCommandDecorator newCommand = new GraduationCommandDecorator(currentCommand, graduation);
+                commandManager.setCurrentCommand(newCommand);
+                graduationSpinner.setValue(0);
+            }
+        });
+
+        panel.add(applyButton, constraints);
         return panel;
     }
 
