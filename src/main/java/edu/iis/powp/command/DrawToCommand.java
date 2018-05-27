@@ -14,6 +14,13 @@ public class DrawToCommand implements IPlotterCommand {
 		coordinates = new Coordinates(posX, posY);
 	}
 
+	public DrawToCommand(Coordinates coordinates) {
+		super();
+		this.coordinates = coordinates;
+	}
+
+
+
 	@Override
 	public void execute(IPlotter plotter) {
 		plotter.drawTo(coordinates.getPosX(), coordinates.getPosY());

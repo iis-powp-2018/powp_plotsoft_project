@@ -13,6 +13,11 @@ public class SetPositionCommand implements IPlotterCommand {
 		super();
 		coordinates = new Coordinates(posX, posY);
 	}
+	
+	public SetPositionCommand(Coordinates coordinates) {
+		super();
+		this.coordinates = coordinates;
+	}
 
 	@Override
 	public void execute(IPlotter plotter) {
