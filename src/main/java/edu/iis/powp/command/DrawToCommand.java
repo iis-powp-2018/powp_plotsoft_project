@@ -7,17 +7,16 @@ import edu.iis.client.plottermagic.IPlotter;
  */
 public class DrawToCommand implements IPlotterCommand {
 
-	private int posX, posY;
+	private Coordinates coordinates;
 
 	public DrawToCommand(int posX, int posY) {
 		super();
-		this.posX = posX;
-		this.posY = posY;
+		coordinates = new Coordinates(posX, posY);
 	}
 
 	@Override
 	public void execute(IPlotter plotter) {
-		plotter.drawTo(posX, posY);
+		plotter.drawTo(coordinates.getPosX(), coordinates.getPosY());
 	}
 
 }
