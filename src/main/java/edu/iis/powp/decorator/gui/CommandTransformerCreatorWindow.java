@@ -7,6 +7,7 @@ import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.decorator.FlipCommandDecorator;
 import edu.iis.powp.decorator.GraduationCommandDecorator;
 import edu.iis.powp.decorator.MoveCommandDecorator;
+import edu.iis.powp.decorator.StretchingCommandDecorator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +35,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panelList.add(buildFlipCommandPanel());
         panelList.add(buildMoveCommandPanel());
         panelList.add(buildGraduationCommandPanel());
+        panelList.add(buildStretchingCommandPanel());
         panelList.add(buildRunCommandPanel());
 
         panelList.forEach(panel -> {
@@ -125,15 +127,6 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         return panel;
     }
 
-    private void setPaddings(GridBagConstraints constraints) {
-        constraints.ipady = 20;
-        constraints.weightx = 0.0;
-        constraints.gridwidth = 2;
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(10, 0, 10, 0);
-    }
-
     private JPanel buildGraduationCommandPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -170,6 +163,57 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         return panel;
     }
 
+    private JPanel buildStretchingCommandPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = getGridBagConstraints();
+
+        JCheckBox stretchXCheckBox = new JCheckBox("Stretch X");
+        constraints.gridx = 0;
+        panel.add(stretchXCheckBox, constraints);
+
+
+        JCheckBox stretchYCheckBox = new JCheckBox("Stretch Y");
+        constraints.gridx = 1;
+        panel.add(stretchYCheckBox, constraints);
+        constraints.gridy = 1;
+
+        JLabel stretchingLabel = new JLabel("Stretching:");
+        JSpinner stretchingSpinner = new JSpinner(new SpinnerNumberModel(0, null, null, 1));
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panel.add(stretchingLabel, constraints);
+        constraints.gridy = 2;
+        panel.add(stretchingSpinner, constraints);
+
+        JButton applyButton = new JButton("Apply stretching command");
+        setPaddings(constraints);
+
+        applyButton.addActionListener(event -> {
+            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
+            int stretching;
+            try {
+                stretching = (Integer) stretchingSpinner.getValue();
+            } catch (ClassCastException e) {
+                return; // TODO: Implement error logging
+            }
+            if (currentCommand != null) {
+                StretchingCommandDecorator newCommand = new StretchingCommandDecorator(currentCommand, stretchXCheckBox.isSelected(), stretchYCheckBox.isSelected(), stretching);
+                commandManager.setCurrentCommand(newCommand);
+                stretchXCheckBox.setSelected(false);
+                stretchYCheckBox.setSelected(false);
+                stretchingSpinner.setValue(0);
+            }
+        });
+
+        constraints.gridy = 3;
+        panel.add(applyButton, constraints);
+        return panel;
+
+    }
+
     private JPanel buildRunCommandPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -198,6 +242,15 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         constraints.weightx = 0.5;
         constraints.gridy = 0;
         return constraints;
+    }
+
+    private void setPaddings(GridBagConstraints constraints) {
+        constraints.ipady = 20;
+        constraints.weightx = 0.0;
+        constraints.gridwidth = 2;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.insets = new Insets(10, 0, 10, 0);
     }
 
     @Override
