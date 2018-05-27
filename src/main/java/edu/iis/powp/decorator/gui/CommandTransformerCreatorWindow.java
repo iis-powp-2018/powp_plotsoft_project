@@ -4,10 +4,7 @@ import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
-import edu.iis.powp.decorator.FlipCommandDecorator;
-import edu.iis.powp.decorator.GraduationCommandDecorator;
-import edu.iis.powp.decorator.MoveCommandDecorator;
-import edu.iis.powp.decorator.StretchingCommandDecorator;
+import edu.iis.powp.decorator.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +33,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panelList.add(buildMoveCommandPanel());
         panelList.add(buildGraduationCommandPanel());
         panelList.add(buildStretchingCommandPanel());
+        panelList.add(buildRotationCommandPanel());
         panelList.add(buildRunCommandPanel());
 
         panelList.forEach(panel -> {
@@ -212,6 +210,42 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         panel.add(applyButton, constraints);
         return panel;
 
+    }
+
+    private JPanel buildRotationCommandPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = getGridBagConstraints();
+
+        JLabel rotationLabel = new JLabel("Rotation:");
+        JSpinner rotationSpinner = new JSpinner(new SpinnerNumberModel(0, -360, 360, 1));
+
+        constraints.gridx = 0;
+        panel.add(rotationLabel, constraints);
+        constraints.gridy = 1;
+        panel.add(rotationSpinner, constraints);
+
+        JButton applyButton = new JButton("Apply graduation command");
+        setPaddings(constraints);
+
+        applyButton.addActionListener(event -> {
+            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
+            int rotation;
+            try {
+                rotation = (Integer) rotationSpinner.getValue();
+            } catch (ClassCastException e) {
+                return; // TODO: Implement error logging
+            }
+            if (currentCommand != null) {
+                RotationCommandDecorator newCommand = new RotationCommandDecorator(currentCommand, rotation);
+                commandManager.setCurrentCommand(newCommand);
+                rotationSpinner.setValue(0);
+            }
+        });
+
+        panel.add(applyButton, constraints);
+        return panel;
     }
 
     private JPanel buildRunCommandPanel() {
