@@ -18,7 +18,7 @@ public class CompoundCommand implements ICompoundCommand {
     }
 
     public boolean addPlotterCommands(List<IPlotterCommand> commands) {
-        return commands.addAll(commands);
+        return this.commands.addAll(commands);
     }
 
     public void addPlotterCommand(IPlotterCommand command, int position) {
