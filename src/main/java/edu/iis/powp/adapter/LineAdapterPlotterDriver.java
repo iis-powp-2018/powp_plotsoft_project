@@ -3,16 +3,26 @@ package edu.iis.powp.adapter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.ILine;
+import edu.kis.powp.drawer.shape.LineFactory;
 
 /**
  * Line adapter - IPlotter with DrawPanelController object.
  */
 public class LineAdapterPlotterDriver implements IPlotter {
-	private ILine line;
+
+
+    private ILine line;
 	private int startX = 0, startY = 0;
 	private String name;
 
 	private DrawPanelController drawController;
+
+	public enum operationType{
+		setpos,
+		drawpos
+	}
+
+	operationType opType;
 
 	public LineAdapterPlotterDriver(DrawPanelController drawController, ILine line, String name) {
 		super();
@@ -25,19 +35,34 @@ public class LineAdapterPlotterDriver implements IPlotter {
 	public void setPosition(int x, int y) {
 		this.startX = x;
 		this.startY = y;
+
+        opType = operationType.setpos;
+        System.out.println("Normal adapter " + opType);
 	}
 
 	@Override
 	public void drawTo(int x, int y) {
+		//line = LineFactory.getBasicLine();
 		line.setStartCoordinates(this.startX, this.startY);
 		this.setPosition(x, y);
 		line.setEndCoordinates(x, y);
+
+        opType = operationType.drawpos;
+        System.out.println("Normal adapter " + opType);
 
 		drawController.drawLine(line);
 	}
 
 	@Override
 	public String toString() {
-		return "Plotter Simulator - " + name;
+		return "Basic plotter";
 	}
+
+    public ILine getLine() {
+        return line;
+    }
+
+    public void setLine(ILine line) {
+        this.line = line;
+    }
 }

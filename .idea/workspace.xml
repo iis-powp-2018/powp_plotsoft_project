@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="74fbbad8-7bea-4fef-9600-4a40f5b7d245" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="InkController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LineAdapterPlotterDriver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/LineAdapterPlotterDriver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12">
+              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1298#1299#0" expanded="true" />
+                <element signature="e#1341#1342#0" expanded="true" />
+                <element signature="e#1379#1380#0" expanded="true" />
+                <element signature="e#1406#1407#0" expanded="true" />
+                <element signature="e#1445#1446#0" expanded="true" />
+                <element signature="e#1477#1478#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPlotterApp.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/test/java/edu/iis/powp/events/SelectLoadSecretCommandOptionListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/LineAdapterPlotterDriver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1612" />
+    <option name="height" value="876" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="powp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="powp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="plotsoft" type="b2602c69:ProjectViewProjectNode" />
+              <item name="powp_plotsoft_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="powp" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="edu.iis.powp.gui.TestPlotterApp" />
+      <module name="plotsoft" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74fbbad8-7bea-4fef-9600-4a40f5b7d245" name="Default" comment="" />
+      <created>1527504008355</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1527504008355</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.328594" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32543445" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
+      <window_info id="Learn" order="5" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39968404" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/drawer/TestDrawer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="70" column="66" lean-forward="true" selection-start-line="70" selection-start-column="66" selection-end-line="70" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/LineAdapterPlotterDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1445#1446#0" expanded="true" />
+            <element signature="e#1477#1478#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/drawer/TestDrawer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/command/ICompoundCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/command/DrawToCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/command/IPlotterCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/command/SetPositionCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/events/predefine/SelectChangeVisibleOptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/events/predefine/SelectClearPanelOptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/events/SelectRunCurrentCommandOptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/events/SelectTestFigure2OptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/events/predefine/SelectTestFigureOptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/iplotter/IPlotterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/events/SelectLoadSecretCommandOptionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/features/DrawerFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/features/CommandsFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-29">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/InkController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/iis/powp/adapter/LineAdapterPlotterDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1445#1446#0" expanded="true" />
+            <element signature="e#1477#1478#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/iis/powp/gui/TestPlotterApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

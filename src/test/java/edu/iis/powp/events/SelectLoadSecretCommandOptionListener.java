@@ -16,6 +16,7 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>();
+		/*
 		commands.add(new SetPositionCommand(-20, -50));
 		commands.add(new DrawToCommand(-20, -50));
 		commands.add(new SetPositionCommand(-20, -40));
@@ -30,6 +31,13 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 		commands.add(new DrawToCommand(70, 0));
 		commands.add(new DrawToCommand(70, 50));
 		commands.add(new DrawToCommand(20, 50));
+		*/
+		commands.add(new SetPositionCommand(0, 0));
+		commands.add(new DrawToCommand(0, -100));
+		commands.add(new SetPositionCommand(200, 200));
+		commands.add(new DrawToCommand(300, 200));
+		commands.add(new SetPositionCommand(150, 100));
+		commands.add(new DrawToCommand(-50, 100));
 
 		PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
 		manager.setCurrentCommand(commands, "TopSecretCommand");
