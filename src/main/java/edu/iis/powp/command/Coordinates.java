@@ -3,15 +3,28 @@ package edu.iis.powp.command;
 public class Coordinates {
 	private int posX, posY;
 	
+	/**
+	 * 	Create Coordinate object
+	 * @param posX X coordinate
+	 * @param posY Y coordinate
+	 */
 	public Coordinates(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
 	}
-
+	
+	/**
+	 *  returns X coordinate
+	 * @return X coordinate
+	 */
 	public int getPosX() {
 		return posX;
 	}
-
+	
+	/**
+	 *  returns Y coordinate
+	 * @return Y coordinate
+	 */
 	public int getPosY() {
 		return posY;
 	}
