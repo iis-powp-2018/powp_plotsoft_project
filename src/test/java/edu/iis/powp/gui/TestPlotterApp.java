@@ -11,6 +11,7 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
+import edu.iis.powp.commandtransformer.CommandTransformer;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
@@ -89,7 +90,6 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupLogger(Application application) {
-
 		application.addComponentMenu(Logger.class, "Logger", 0);
 		application.addComponentMenuElement(Logger.class, "Clear log",
 				(ActionEvent e) -> application.flushLoggerOutput());
@@ -115,6 +115,7 @@ public class TestPlotterApp {
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
+				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
 				setupWindows(app);
 
