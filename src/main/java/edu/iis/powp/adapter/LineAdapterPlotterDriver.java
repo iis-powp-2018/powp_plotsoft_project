@@ -15,6 +15,13 @@ public class LineAdapterPlotterDriver implements IPlotter {
 
 	private DrawPanelController drawController;
 
+	public enum operationType{
+		setpos,
+		drawpos
+	}
+
+	operationType opType;
+
 	public LineAdapterPlotterDriver(DrawPanelController drawController, ILine line, String name) {
 		super();
 		this.drawController = drawController;
@@ -26,16 +33,21 @@ public class LineAdapterPlotterDriver implements IPlotter {
 	public void setPosition(int x, int y) {
 		this.startX = x;
 		this.startY = y;
+
+        opType = operationType.setpos;
+        System.out.println("Normal adapter " + opType);
 	}
 
 	@Override
 	public void drawTo(int x, int y) {
-		ILine line = LineFactory.getDottedLine();
+		//line = LineFactory.getBasicLine();
 		line.setStartCoordinates(this.startX, this.startY);
 		this.setPosition(x, y);
 		line.setEndCoordinates(x, y);
 
-		System.out.println("Normal line adapter");
+        opType = operationType.drawpos;
+        System.out.println("Normal adapter " + opType);
+
 		drawController.drawLine(line);
 	}
 
