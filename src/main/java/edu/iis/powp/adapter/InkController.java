@@ -2,12 +2,17 @@ package edu.iis.powp.adapter;
 
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.observer.Subscriber;
+import edu.kis.powp.drawer.shape.ILine;
+import edu.kis.powp.drawer.shape.LineFactory;
+
+import javax.imageio.event.IIOReadProgressListener;
 
 import static edu.iis.powp.adapter.InkController.operationType.drawpos;
 import static edu.iis.powp.adapter.InkController.operationType.setpos;
 
 public class InkController implements IPlotter{
 
+    private ILine line = LineFactory.getBasicLine();
     IPlotter plotter;
 
     public enum operationType{
@@ -25,7 +30,8 @@ public class InkController implements IPlotter{
     }
 
     @Override
-    public void setPosition(int x, int y) {
+    public void setPosition(int x, int y)
+    {
         plotter.setPosition(x, y);
 
         posX = x;
@@ -35,9 +41,8 @@ public class InkController implements IPlotter{
     }
 
     @Override
-    public void drawTo(int x, int y) {
-
-        plotter.drawTo(x, y);
+    public void drawTo(int x, int y)
+    {
         opType = drawpos;
         System.out.println("Ink controller adapter - " + opType);
         if(opType == drawpos)
@@ -47,6 +52,14 @@ public class InkController implements IPlotter{
         posX = x;
         posY = y;
         System.out.println("Amount of ink - " + amountOfInk);
+        if (amountOfInk < 0)
+        {
+            if(plotter.toString().equals("Basic plotter"))
+            {
+                ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getSpecialLine());
+            }
+        }
+        plotter.drawTo(x, y);
     }
 
 }

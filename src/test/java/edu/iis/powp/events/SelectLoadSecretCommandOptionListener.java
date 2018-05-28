@@ -33,7 +33,7 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 		commands.add(new DrawToCommand(20, 50));
 		*/
 		commands.add(new SetPositionCommand(0, 0));
-		commands.add(new DrawToCommand(0, 125));
+		commands.add(new DrawToCommand(0, -100));
 		commands.add(new SetPositionCommand(200, 200));
 		commands.add(new DrawToCommand(300, 200));
 		commands.add(new SetPositionCommand(150, 100));
