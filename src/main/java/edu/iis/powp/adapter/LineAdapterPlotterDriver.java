@@ -3,6 +3,7 @@ package edu.iis.powp.adapter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.ILine;
+import edu.kis.powp.drawer.shape.LineFactory;
 
 /**
  * Line adapter - IPlotter with DrawPanelController object.
@@ -29,10 +30,12 @@ public class LineAdapterPlotterDriver implements IPlotter {
 
 	@Override
 	public void drawTo(int x, int y) {
+		ILine line = LineFactory.getDottedLine();
 		line.setStartCoordinates(this.startX, this.startY);
 		this.setPosition(x, y);
 		line.setEndCoordinates(x, y);
 
+		System.out.println("Normal line adapter");
 		drawController.drawLine(line);
 	}
 
