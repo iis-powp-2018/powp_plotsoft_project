@@ -4,7 +4,6 @@ import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.decorator.gui.events.*;
-import edu.iis.powp.events.predefine.*;
 
 import javax.swing.*;
 import java.awt.*;
