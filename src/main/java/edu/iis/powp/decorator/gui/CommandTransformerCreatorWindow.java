@@ -20,7 +20,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         this.driverManager = driverManager;
 
         this.setTitle("Command Transformer Creator");
-        this.setSize(400, 400);
+        this.setSize(500, 630);
         Container content = this.getContentPane();
         content.setLayout(new GridBagLayout());
 
