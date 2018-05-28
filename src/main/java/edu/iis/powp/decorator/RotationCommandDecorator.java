@@ -19,9 +19,7 @@ public class RotationCommandDecorator extends CommandDecorator {
         CompoundCommand result = new CompoundCommand();
         coordinates.forEach(coordinate -> {
             IPlotterCommand command;
-            coordinate.setPosX(getRotatedX(coordinate.getPosX(), coordinate.getPosY()));
-            coordinate.setPosY(getRotatedY(coordinate.getPosX(), coordinate.getPosY()));
-
+            setRotatedCoordinates(coordinate);
             if (coordinate.isDrawing()) {
                 command = new DrawToCommand(coordinate.getPosX(), coordinate.getPosY());
             } else {
@@ -32,14 +30,16 @@ public class RotationCommandDecorator extends CommandDecorator {
         return result;
     }
 
-    private int getRotatedX(int x, int y) {
+    private void setRotatedCoordinates(PlotterMovementModel coordinate){
         double rotationAngleInRadians = Math.toRadians(rotationAngle);
-        return (int) (x * Math.cos(rotationAngleInRadians) - y * Math.sin(rotationAngleInRadians));
-    }
+        double sin = Math.sin(rotationAngleInRadians);
+        double cos = Math.cos(rotationAngleInRadians);
 
-    private int getRotatedY(int x, int y) {
-        double rotationAngleInRadians = Math.toRadians(rotationAngle);
-        return (int) (y * Math.cos(rotationAngleInRadians) + x * Math.sin(rotationAngleInRadians));
+        double rotatedXPoint = (coordinate.getPosX() * cos) - (coordinate.getPosY() * sin);
+        double rotatedYPoint = (coordinate.getPosX() * sin) + (coordinate.getPosY() * cos);
+
+        coordinate.setPosY((int)rotatedYPoint);
+        coordinate.setPosX((int)rotatedXPoint);
     }
 
     @Override
