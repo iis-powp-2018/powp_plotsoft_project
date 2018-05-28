@@ -40,10 +40,6 @@ public class GraduationCommandDecorator extends CommandDecorator {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(baseCommand.toString());
-        builder.append(" -> graduation(");
-        builder.append(graduationValue);
-        builder.append(")");
-        return builder.toString();
+        return baseCommand.toString() + " -> graduation(" + graduationValue + ")";
     }
 }

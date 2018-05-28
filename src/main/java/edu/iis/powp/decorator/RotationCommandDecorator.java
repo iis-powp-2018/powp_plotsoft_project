@@ -44,11 +44,7 @@ public class RotationCommandDecorator extends CommandDecorator {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(baseCommand.toString());
-        builder.append(" -> rotation(");
-        builder.append(rotationAngle);
-        builder.append(")");
-        return builder.toString();
+        return baseCommand.toString() + " -> rotation(" + rotationAngle + ")";
     }
 }
 
