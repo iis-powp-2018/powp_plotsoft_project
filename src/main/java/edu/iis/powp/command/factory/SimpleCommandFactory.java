@@ -1,12 +1,15 @@
-package edu.iis.powp.command;
+package edu.iis.powp.command.factory;
 
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class SimpleCommandFactory {
+import edu.iis.powp.command.Coordinates;
+import edu.iis.powp.command.IPlotterCommand;
+
+public abstract class SimpleCommandFactory {
 	private static HashSet<Coordinates> coordinatesPool = new HashSet<>();
 	
-	public static Coordinates checkPool(Coordinates coordinates) {
+	protected Coordinates checkPool(Coordinates coordinates) {
 		Coordinates buff = null;
 		
 		if(coordinatesPool.contains(coordinates)) {
@@ -25,12 +28,6 @@ public class SimpleCommandFactory {
 			
 	}
 	
-	public static IPlotterCommand makeSetPositionCommand(Coordinates coordinates) {
-		return new SetPositionCommand(checkPool(coordinates));
-	}
-	
-	public static IPlotterCommand makeDrawToCommand(Coordinates coordinates) {
-		return new DrawToCommand(checkPool(coordinates));
-	}
+	public abstract IPlotterCommand makeSimpleCommand(Coordinates coordinates);
 	
 }
