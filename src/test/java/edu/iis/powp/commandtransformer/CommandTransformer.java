@@ -7,7 +7,7 @@ import edu.iis.powp.features.CommandsFeature;
 public class CommandTransformer {
     public static void setupCommandTransformer(Application application) {
         CommandTransformerCreatorWindow commandTransformerCreatorWindow =
-                new CommandTransformerCreatorWindow(application.getDriverManager(), CommandsFeature.getPlotterCommandManager());
+                new CommandTransformerCreatorWindow(application.getDriverManager());
         application.addWindowComponent("Command Transformer Creator", commandTransformerCreatorWindow);
     }
 }

@@ -11,11 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CommandTransformerCreatorWindow extends JFrame implements WindowComponent {
-    private PlotterCommandManager commandManager;
     private DriverManager driverManager;
 
-    public CommandTransformerCreatorWindow(DriverManager driverManager, PlotterCommandManager plotterCommandManager) {
-        this.commandManager = plotterCommandManager;
+    public CommandTransformerCreatorWindow(DriverManager driverManager) {
         this.driverManager = driverManager;
 
         this.setTitle("Command Transformer Creator");
