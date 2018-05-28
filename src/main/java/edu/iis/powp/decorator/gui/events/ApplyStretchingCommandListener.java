@@ -28,7 +28,7 @@ public class ApplyStretchingCommandListener implements ActionListener {
         try {
             stretching = (Integer) stretchingSpinner.getValue();
         } catch (ClassCastException f) {
-            return; // TODO: Implement error logging
+            return;
         }
         if (currentCommand != null) {
             StretchingCommandDecorator newCommand = new StretchingCommandDecorator(currentCommand, stretchXCheckBox.isSelected(), stretchYCheckBox.isSelected(), stretching);

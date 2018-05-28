@@ -24,7 +24,7 @@ public class ApplyRotationCommandListener implements ActionListener {
         try {
             rotation = (Integer) rotationSpinner.getValue();
         } catch (ClassCastException f) {
-            return; // TODO: Implement error logging
+            return;
         }
         if (currentCommand != null) {
             RotationCommandDecorator newCommand = new RotationCommandDecorator(currentCommand, rotation);

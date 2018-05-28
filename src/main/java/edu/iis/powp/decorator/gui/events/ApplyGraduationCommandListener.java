@@ -24,7 +24,7 @@ public class ApplyGraduationCommandListener implements ActionListener {
         try {
             graduation = (Integer) graduationSpinner.getValue();
         } catch (ClassCastException f) {
-            return; // TODO: Implement error logging
+            return;
         }
         if (currentCommand != null) {
             GraduationCommandDecorator newCommand = new GraduationCommandDecorator(currentCommand, graduation);

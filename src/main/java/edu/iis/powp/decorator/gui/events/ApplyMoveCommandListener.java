@@ -29,7 +29,7 @@ public class ApplyMoveCommandListener implements ActionListener {
             moveX = (Integer) moveXSpinner.getValue();
             moveY = (Integer) moveYSpinner.getValue();
         } catch (ClassCastException f) {
-            return; // TODO: Implement error logging
+            return;
         }
         if (currentCommand != null) {
             MoveCommandDecorator newCommand = new MoveCommandDecorator(currentCommand, moveX, moveY);
