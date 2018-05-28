@@ -7,17 +7,21 @@ import edu.iis.client.plottermagic.IPlotter;
  */
 public class SetPositionCommand implements IPlotterCommand {
 
-	private int posX, posY;
+	private Coordinates coordinates;
 
 	public SetPositionCommand(int posX, int posY) {
 		super();
-		this.posX = posX;
-		this.posY = posY;
+		coordinates = new Coordinates(posX, posY);
+	}
+	
+	public SetPositionCommand(Coordinates coordinates) {
+		super();
+		this.coordinates = coordinates;
 	}
 
 	@Override
 	public void execute(IPlotter plotter) {
-		plotter.setPosition(posX, posY);
+		plotter.setPosition(coordinates.getPosX(), coordinates.getPosY());
 	}
 
 }
