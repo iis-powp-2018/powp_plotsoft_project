@@ -5,7 +5,7 @@ import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.decorator.*;
-import edu.iis.powp.events.predefine.ApplyFlipCommandListener;
+import edu.iis.powp.events.predefine.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,23 +95,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JButton applyButton = new JButton("Apply move command");
         setPaddings(constraints);
 
-        applyButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            int moveX;
-            int moveY;
-            try {
-                moveX = (Integer) moveXSpinner.getValue();
-                moveY = (Integer) moveYSpinner.getValue();
-            } catch (ClassCastException e) {
-                return; // TODO: Implement error logging
-            }
-            if (currentCommand != null) {
-                MoveCommandDecorator newCommand = new MoveCommandDecorator(currentCommand, moveX, moveY);
-                commandManager.setCurrentCommand(newCommand);
-                moveXSpinner.setValue(0);
-                moveYSpinner.setValue(0);
-            }
-        });
+        applyButton.addActionListener(new ApplyMoveCommandListener(moveXSpinner,moveYSpinner));
 
         panel.add(applyButton, constraints);
 
@@ -135,20 +119,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JButton applyButton = new JButton("Apply graduation command");
         setPaddings(constraints);
 
-        applyButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            int graduation;
-            try {
-                graduation = (Integer) graduationSpinner.getValue();
-            } catch (ClassCastException e) {
-                return; // TODO: Implement error logging
-            }
-            if (currentCommand != null) {
-                GraduationCommandDecorator newCommand = new GraduationCommandDecorator(currentCommand, graduation);
-                commandManager.setCurrentCommand(newCommand);
-                graduationSpinner.setValue(0);
-            }
-        });
+        applyButton.addActionListener(new ApplyGraduationCommandListener(graduationSpinner));
 
         panel.add(applyButton, constraints);
         return panel;
@@ -182,22 +153,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JButton applyButton = new JButton("Apply stretching command");
         setPaddings(constraints);
 
-        applyButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            int stretching;
-            try {
-                stretching = (Integer) stretchingSpinner.getValue();
-            } catch (ClassCastException e) {
-                return; // TODO: Implement error logging
-            }
-            if (currentCommand != null) {
-                StretchingCommandDecorator newCommand = new StretchingCommandDecorator(currentCommand, stretchXCheckBox.isSelected(), stretchYCheckBox.isSelected(), stretching);
-                commandManager.setCurrentCommand(newCommand);
-                stretchXCheckBox.setSelected(false);
-                stretchYCheckBox.setSelected(false);
-                stretchingSpinner.setValue(0);
-            }
-        });
+        applyButton.addActionListener(new ApplyStretchingCommandListener(stretchingSpinner,stretchXCheckBox,stretchYCheckBox));
 
         constraints.gridy = 3;
         panel.add(applyButton, constraints);
@@ -219,23 +175,10 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         constraints.gridy = 1;
         panel.add(rotationSpinner, constraints);
 
-        JButton applyButton = new JButton("Apply graduation command");
+        JButton applyButton = new JButton("Apply rotation command");
         setPaddings(constraints);
 
-        applyButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            int rotation;
-            try {
-                rotation = (Integer) rotationSpinner.getValue();
-            } catch (ClassCastException e) {
-                return; // TODO: Implement error logging
-            }
-            if (currentCommand != null) {
-                RotationCommandDecorator newCommand = new RotationCommandDecorator(currentCommand, rotation);
-                commandManager.setCurrentCommand(newCommand);
-                rotationSpinner.setValue(0);
-            }
-        });
+        applyButton.addActionListener(new ApplyRotationCommandListener(rotationSpinner));
 
         panel.add(applyButton, constraints);
         return panel;
@@ -251,12 +194,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         constraints.fill = GridBagConstraints.HORIZONTAL | GridBagConstraints.VERTICAL;
         setPaddings(constraints);
 
-        runCommandButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            if (currentCommand != null) {
-                currentCommand.execute(driverManager.getCurrentPlotter());
-            }
-        });
+        runCommandButton.addActionListener(new RunCommandListener(driverManager));
 
         panel.add(runCommandButton, constraints);
 
