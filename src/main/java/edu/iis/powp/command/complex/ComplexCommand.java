@@ -10,7 +10,11 @@ import java.util.List;
 
 public class ComplexCommand implements ICompoundCommand {
 
-    List<IPlotterCommand> listOfCommands = new ArrayList<>();
+    List<IPlotterCommand> listOfCommands;
+    
+    public ComplexCommand(List<IPlotterCommand> listOfCommands) {
+		this.listOfCommands = listOfCommands;
+	}
 
     @Override
     public Iterator<IPlotterCommand> iterator() {
