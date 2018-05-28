@@ -60,9 +60,10 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupDrivers(Application application) {
+
+	    /* works fine! no need for it to be uncommented for now
 		IPlotter clientPlotter = new ClientPlotter();
 
-		/* works fine! no need for it to be uncommented for now
 		application.addDriver("Client Plotter", clientPlotter);
 		application.addDriver("Ink Controller (Client plotter)", new InkController(clientPlotter, 500.0f));
 		*/
@@ -70,12 +71,12 @@ public class TestPlotterApp {
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
 		plotter = new InkController(plotter, 500.0f);
-		application.addDriver("Line Simulator", plotter);
+		application.addDriver("Basic line simulator", plotter);
+        application.addDriver("Ink Controller", new InkController(plotter, 500.0f));
 		application.getDriverManager().setCurrentPlotter(plotter);
 
-		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "special");
+		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
 		application.addDriver("Special line Simulator", plotter);
-		application.addDriver("Ink Controller (Special lines)", new InkController(plotter, 500.0f));
 		application.updateDriverInfo();
 	}
 

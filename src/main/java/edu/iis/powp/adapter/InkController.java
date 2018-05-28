@@ -56,7 +56,7 @@ public class InkController implements IPlotter{
         {
             if(plotter.toString().equals("Basic plotter"))
             {
-                ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getSpecialLine());
+                ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getDottedLine());
             }
         }
         plotter.drawTo(x, y);
