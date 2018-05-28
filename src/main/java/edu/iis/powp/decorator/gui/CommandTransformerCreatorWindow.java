@@ -5,6 +5,7 @@ import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.decorator.*;
+import edu.iis.powp.events.predefine.ApplyFlipCommandListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,15 +61,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         JButton applyButton = new JButton("Apply flip command");
         setPaddings(constraints);
 
-        applyButton.addActionListener(event -> {
-            IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-            if (currentCommand != null) {
-                FlipCommandDecorator newCommand = new FlipCommandDecorator(currentCommand, flipXCheckBox.isSelected(), flipYCheckBox.isSelected());
-                commandManager.setCurrentCommand(newCommand);
-                flipXCheckBox.setSelected(false);
-                flipYCheckBox.setSelected(false);
-            }
-        });
+        applyButton.addActionListener(new ApplyFlipCommandListener(flipYCheckBox,flipXCheckBox));
 
         panel.add(applyButton, constraints);
 
