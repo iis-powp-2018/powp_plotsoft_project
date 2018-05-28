@@ -1,4 +1,4 @@
-package edu.iis.powp.events.predefine;
+package edu.iis.powp.decorator.gui.events;
 
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
