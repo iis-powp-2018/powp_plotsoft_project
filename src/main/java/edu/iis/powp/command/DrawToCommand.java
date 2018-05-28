@@ -5,21 +5,15 @@ import edu.iis.client.plottermagic.IPlotter;
 /**
  * Implementation of IPlotterCommand for drawTo command functionality.
  */
-public class DrawToCommand implements IPlotterCommand {
-
-	private Coordinates coordinates;
+public class DrawToCommand extends SimpleCommand {
 
 	public DrawToCommand(int posX, int posY) {
-		super();
-		coordinates = new Coordinates(posX, posY);
+		super(new Coordinates(posX, posY));
 	}
 
 	public DrawToCommand(Coordinates coordinates) {
-		super();
-		this.coordinates = coordinates;
+		super(coordinates);
 	}
-
-
 
 	@Override
 	public void execute(IPlotter plotter) {

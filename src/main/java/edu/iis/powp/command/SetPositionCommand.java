@@ -5,18 +5,14 @@ import edu.iis.client.plottermagic.IPlotter;
 /**
  * Implementation of IPlotterCommand for setPosition command functionality.
  */
-public class SetPositionCommand implements IPlotterCommand {
-
-	private Coordinates coordinates;
+public class SetPositionCommand extends SimpleCommand {
 
 	public SetPositionCommand(int posX, int posY) {
-		super();
-		coordinates = new Coordinates(posX, posY);
+		super(new Coordinates(posX, posY));
 	}
 	
 	public SetPositionCommand(Coordinates coordinates) {
-		super();
-		this.coordinates = coordinates;
+		super(coordinates);
 	}
 
 	@Override
