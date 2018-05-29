@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.ICompoundCommand;
-import edu.iis.powp.command.complex.CommandFileIOStorage;
+import edu.iis.powp.command.io.CommandFileIOStorage;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
