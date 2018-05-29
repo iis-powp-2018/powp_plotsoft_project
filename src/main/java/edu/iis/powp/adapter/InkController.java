@@ -1,11 +1,8 @@
 package edu.iis.powp.adapter;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.observer.Subscriber;
 import edu.kis.powp.drawer.shape.ILine;
 import edu.kis.powp.drawer.shape.LineFactory;
-
-import javax.imageio.event.IIOReadProgressListener;
 
 import static edu.iis.powp.adapter.InkController.operationType.drawpos;
 import static edu.iis.powp.adapter.InkController.operationType.setpos;
@@ -19,6 +16,7 @@ public class InkController implements IPlotter, InkGuiUpdater{
     @Override
     public void updateValue(float value) {
         amountOfInk = value;
+        tempAmountOfInk = value;
         inkGui.updateValue(amountOfInk);
     }
 
@@ -28,12 +26,13 @@ public class InkController implements IPlotter, InkGuiUpdater{
     }
     operationType opType;
 
-    float amountOfInk;
+    float amountOfInk, tempAmountOfInk;
     double posX, posY;
 
     public InkController(IPlotter plotter, float amountOfInk){
         this.plotter = plotter;
         this.amountOfInk = amountOfInk;
+        this.tempAmountOfInk = amountOfInk;
     }
 
     @Override
@@ -54,20 +53,31 @@ public class InkController implements IPlotter, InkGuiUpdater{
         System.out.println("Ink controller adapter - " + opType);
         if(opType == drawpos)
         {
-            amountOfInk -= Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2));
+            tempAmountOfInk -= Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2));
         }
         posX = x;
         posY = y;
         System.out.println("Amount of ink - " + amountOfInk);
-        if (amountOfInk < 0)
+        if (tempAmountOfInk > 0)
         {
+            amountOfInk = tempAmountOfInk;
             if(plotter.toString().equals("Basic plotter"))
             {
                 ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getDottedLine());
             }
+            plotter.drawTo(x, y);
+            inkGui.updateValue(amountOfInk);
         }
-        plotter.drawTo(x, y);
-        inkGui.updateValue(amountOfInk);
+        else
+        {
+            inkGui.informationPopUp();
+            try {
+                    plotter.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
