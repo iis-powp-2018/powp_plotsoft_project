@@ -10,11 +10,17 @@ import javax.imageio.event.IIOReadProgressListener;
 import static edu.iis.powp.adapter.InkController.operationType.drawpos;
 import static edu.iis.powp.adapter.InkController.operationType.setpos;
 
-public class InkController implements IPlotter{
+public class InkController implements IPlotter, InkGuiUpdater{
 
     private ILine line = LineFactory.getBasicLine();
     IPlotter plotter;
     InkGui inkGui = InkGui.getInstance();
+
+    @Override
+    public void updateValue(float value) {
+        amountOfInk = value;
+        inkGui.updateValue(amountOfInk);
+    }
 
     public enum operationType{
         setpos,

@@ -70,7 +70,7 @@ public class TestPlotterApp {
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
 		plotter = new InkController(plotter, 500.0f);
 		application.addDriver("Basic line simulator", plotter);
-        application.addDriver("Ink Controller", new InkController(plotter, 500.0f));
+        application.addDriver("Ink Controller", plotter);
 		application.getDriverManager().setCurrentPlotter(plotter);
 
 		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
@@ -92,6 +92,7 @@ public class TestPlotterApp {
 
 		InkGuiObserver inkGuiObserver = new InkGuiObserver(inkGui);
 		application.getDriverManager().getChangePublisher().addSubscriber(inkGuiObserver);
+		inkGui.setApplication(application);
 	}
 
 	/**
