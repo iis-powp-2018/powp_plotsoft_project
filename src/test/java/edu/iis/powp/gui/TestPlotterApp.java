@@ -5,12 +5,8 @@ import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.InkController;
-import edu.iis.powp.adapter.InkGui;
-import edu.iis.powp.adapter.InkGuiObserver;
-import edu.iis.powp.adapter.LineAdapterPlotterDriver;
+import edu.iis.powp.adapter.*;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
@@ -87,7 +83,7 @@ public class TestPlotterApp {
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
 
-		InkGui inkGui = new InkGui();
+		InkGui inkGui = InkGui.getInstance();
 		application.addWindowComponent("Ink controller", inkGui);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(

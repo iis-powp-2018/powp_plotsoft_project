@@ -14,6 +14,7 @@ public class InkController implements IPlotter{
 
     private ILine line = LineFactory.getBasicLine();
     IPlotter plotter;
+    InkGui inkGui = InkGui.getInstance();
 
     public enum operationType{
         setpos,
@@ -60,6 +61,8 @@ public class InkController implements IPlotter{
             }
         }
         plotter.drawTo(x, y);
+        inkGui.updateValue(amountOfInk);
     }
+
 
 }
