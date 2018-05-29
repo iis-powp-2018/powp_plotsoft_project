@@ -7,10 +7,13 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.complex.CommandFileIOStorage;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
@@ -73,6 +76,13 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnClearObservers, c);
+	}
+	
+	private void importCommand() {
+		JFileChooser fileChooser = new JFileChooser();
+		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+		ICompoundCommand compoundCommand = storage.read();
+//		TODO do sth with compoundCommand
 	}
 
 	private void clearCommand() {
