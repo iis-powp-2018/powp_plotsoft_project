@@ -4,11 +4,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.InkController;
-import edu.iis.powp.adapter.LineAdapterPlotterDriver;
+import edu.iis.powp.adapter.*;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
@@ -23,6 +20,7 @@ import edu.kis.powp.drawer.shape.LineFactory;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	private final static float initialInkLvl = 400f;
 
 	/**
 	 * Setup test concerning preset figures in context.
@@ -70,9 +68,9 @@ public class TestPlotterApp {
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-		plotter = new InkController(plotter, 500.0f);
+		plotter = new InkController(plotter, initialInkLvl);
 		application.addDriver("Basic line simulator", plotter);
-        application.addDriver("Ink Controller", new InkController(plotter, 500.0f));
+        application.addDriver("Ink Controller", plotter);
 		application.getDriverManager().setCurrentPlotter(plotter);
 
 		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
@@ -85,9 +83,17 @@ public class TestPlotterApp {
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
 
+		InkGui inkGui = InkGui.getInstance();
+		inkGui.setInitialInkLvl(initialInkLvl);
+		application.addWindowComponent("Ink controller", inkGui);
+
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
 		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
+
+		InkGuiObserver inkGuiObserver = new InkGuiObserver(inkGui);
+		application.getDriverManager().getChangePublisher().addSubscriber(inkGuiObserver);
+		inkGui.setApplication(application);
 	}
 
 	/**
