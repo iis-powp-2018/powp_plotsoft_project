@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.*;
 import edu.iis.powp.app.Application;
@@ -21,6 +20,7 @@ import edu.kis.powp.drawer.shape.LineFactory;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	private final static float initialInkLvl = 400f;
 
 	/**
 	 * Setup test concerning preset figures in context.
@@ -68,7 +68,7 @@ public class TestPlotterApp {
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-		plotter = new InkController(plotter, 500.0f);
+		plotter = new InkController(plotter, initialInkLvl);
 		application.addDriver("Basic line simulator", plotter);
         application.addDriver("Ink Controller", plotter);
 		application.getDriverManager().setCurrentPlotter(plotter);
@@ -84,6 +84,7 @@ public class TestPlotterApp {
 		application.addWindowComponent("Command Manager", commandManager);
 
 		InkGui inkGui = InkGui.getInstance();
+		inkGui.setInitialInkLvl(initialInkLvl);
 		application.addWindowComponent("Ink controller", inkGui);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
