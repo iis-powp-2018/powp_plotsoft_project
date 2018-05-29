@@ -1,4 +1,4 @@
-package edu.iis.powp.command.complex;
+package edu.iis.powp.command.io;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,10 +15,11 @@ import edu.iis.powp.command.Coordinates;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SimpleCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.factory.DrawToCommandFactory;
 import edu.iis.powp.command.factory.SetPositionCommandFactory;
 
-public class CommandFileIOStorage {
+public class CommandFileIOStorage implements ICommandIOOperation {
 
     private final String commandPath;
     private JSONArray arrayOfCommands;
@@ -32,12 +33,8 @@ public class CommandFileIOStorage {
         commandPath = path;
     }
 
-    /**
-     * Save command to file
-     *
-     * @param command
-     */
-    public void save(ICompoundCommand command) {
+    @Override
+	public void save(ICompoundCommand command) {
     	arrayOfCommands = new JSONArray();
     	
     	createJSONOutput(command);
@@ -73,12 +70,8 @@ public class CommandFileIOStorage {
     	} 	
     }
 
-    /**
-     * Read complex command from disk
-     *
-     * @return
-     */
-    public ICompoundCommand read() {
+    @Override
+	public ICompoundCommand read() {
     	ICompoundCommand result = null;
     	List<IPlotterCommand> commands = new ArrayList<>();
         JSONParser jParser = new JSONParser();
@@ -100,8 +93,9 @@ public class CommandFileIOStorage {
         			commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(coordinates));
         		}
         		
-        		result = new ComplexCommand(commands);
-        	}     	
+        		
+        	}
+        	result = new ComplexCommand(commands);
         } catch(IOException|ParseException e) {
         	e.printStackTrace();
         }
