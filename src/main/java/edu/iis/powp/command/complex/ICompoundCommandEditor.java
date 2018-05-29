@@ -14,8 +14,8 @@ public interface ICompoundCommandEditor {
 	public void changeSequence(int index, int indexToSwap);
 	
 	/**
-	 *  Removing commmand
-	 * @param index Index for romoving command
+	 * Removing commmand
+	 * @param index Index for removing command
 	 */
 	public void removeCommand(int index);
 	

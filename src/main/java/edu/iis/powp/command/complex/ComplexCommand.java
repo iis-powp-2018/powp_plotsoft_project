@@ -10,10 +10,17 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Complex command containg IPlotterCommand
+ */
 public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor {
 
     List<IPlotterCommand> listOfCommands;
     
+    /**
+     * Constructor to create ComplexCommnad
+     * @param listOfCommands List of commands to create
+     */
     public ComplexCommand(List<IPlotterCommand> listOfCommands) {
 		this.listOfCommands = listOfCommands;
 	}
@@ -27,7 +34,7 @@ public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor 
     public void execute(IPlotter plotter) {
         listOfCommands.stream().forEach(command -> command.execute(plotter));
     }
-
+    
 	@Override
 	public void changeSequence(int index, int indexToSwap) {
 		Collections.swap(listOfCommands, index, indexToSwap);
