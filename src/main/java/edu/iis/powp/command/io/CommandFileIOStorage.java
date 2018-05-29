@@ -33,11 +33,6 @@ public class CommandFileIOStorage implements ICommandIOOperation {
         commandPath = path;
     }
 
-    /**
-     * Save command to file
-     *
-     * @param command
-     */
     @Override
 	public void save(ICompoundCommand command) {
     	arrayOfCommands = new JSONArray();
@@ -75,11 +70,6 @@ public class CommandFileIOStorage implements ICommandIOOperation {
     	} 	
     }
 
-    /**
-     * Read complex command from disk
-     *
-     * @return
-     */
     @Override
 	public ICompoundCommand read() {
     	ICompoundCommand result = null;
