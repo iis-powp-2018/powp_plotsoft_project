@@ -12,12 +12,14 @@ public class InkController implements IPlotter, InkGuiUpdater{
     private ILine line = LineFactory.getBasicLine();
     IPlotter plotter;
     InkGui inkGui = InkGui.getInstance();
+    private boolean enoughInk = true;
 
     @Override
     public void updateValue(float value) {
         amountOfInk = value;
         tempAmountOfInk = value;
         inkGui.updateValue(amountOfInk);
+        enoughInk = true;
     }
 
     public enum operationType{
@@ -43,21 +45,23 @@ public class InkController implements IPlotter, InkGuiUpdater{
         posX = x;
         posY = y;
         opType = setpos;
-        System.out.println("Int controller adapter - " + opType);
+        //System.out.println("Int controller adapter - " + opType);
+        System.out.println("Settin position to X "+x + " Y "+y);
     }
 
     @Override
     public void drawTo(int x, int y)
-    {
+        {
         opType = drawpos;
-        System.out.println("Ink controller adapter - " + opType);
+        //System.out.println("Ink controller adapter - " + opType);
+            System.out.println("Drawin to X"+x+ " Y "+y);
         if(opType == drawpos)
         {
             tempAmountOfInk -= Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2));
         }
         posX = x;
         posY = y;
-        System.out.println("Amount of ink - " + amountOfInk);
+    //    System.out.println("Amount of ink - " + amountOfInk);
         if (tempAmountOfInk > 0)
         {
             amountOfInk = tempAmountOfInk;
@@ -71,13 +75,13 @@ public class InkController implements IPlotter, InkGuiUpdater{
         else
         {
             inkGui.informationPopUp();
-            try {
-                    plotter.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            enoughInk = false;
+            inkGui.updateValue(amountOfInk);
         }
+    }
 
+    public boolean isEnoughInk(){
+        return enoughInk;
     }
 
 

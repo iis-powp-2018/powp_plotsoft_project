@@ -46,7 +46,7 @@ public class InkGui extends JFrame implements WindowComponent{
         content.add(progressBar,c);
 
         JButton btnClearCommand = new JButton("Fill up");
-        btnClearCommand.addActionListener((ActionEvent e) -> inkGuiUpdater.updateValue(1000));
+        btnClearCommand.addActionListener((ActionEvent e) -> inkGuiUpdater.updateValue(500));
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
