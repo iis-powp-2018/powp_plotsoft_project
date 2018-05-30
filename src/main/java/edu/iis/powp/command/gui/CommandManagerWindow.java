@@ -67,6 +67,9 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(btnImportCommands, c);
 
+		JButton btnExportCommands = new JButton("Export commands");
+		
+		
 		JButton btnClearCommand = new JButton("Clear command");
 		btnClearCommand.addActionListener((ActionEvent e) -> this.clearCommand());
 		c.fill = GridBagConstraints.BOTH;
@@ -89,7 +92,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		fileChooser.showOpenDialog(this);
 		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
 		ICompoundCommand compoundCommand = storage.read();
-//		TODO: Do sth with compoundCommand
+//		TODO: Do sth with compoundCommande
 	}
 
 	private void clearCommand() {
