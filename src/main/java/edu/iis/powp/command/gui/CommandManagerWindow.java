@@ -68,7 +68,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnImportCommands, c);
 
 		JButton btnExportCommands = new JButton("Export commands");
-		
+		btnExportCommands.addActionListener((ActionEvent e) -> this.exportCommand());
 		
 		JButton btnClearCommand = new JButton("Clear command");
 		btnClearCommand.addActionListener((ActionEvent e) -> this.clearCommand());
@@ -88,7 +88,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 	}
 	
 	private void exportCommand() {
-		
+//		TODO: implement this
 	}
 	
 	private void importCommand() {
