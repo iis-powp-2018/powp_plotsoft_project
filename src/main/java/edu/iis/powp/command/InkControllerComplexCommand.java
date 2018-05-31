@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, IPlotterCommand {
 
     private ArrayList<IPlotterCommand> commandList = new ArrayList<>();
-    private int executedCommands = 0;
+    private ArrayList<IPlotterCommand> executedCommandList = new ArrayList<>();
 
     private InkController plotter;
 
@@ -18,34 +18,33 @@ public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, IPl
     }
 
     @Override
-    public void setPosition(int i, int i1) {
+    public void setPosition(int x, int y) {
         if(plotter.isEnoughInk())
-            plotter.setPosition(i,i1);
+            plotter.setPosition(x,y);
         else
-            commandList.add(new SetPositionCommand(i,i1));
+            commandList.add(new SetPositionCommand(x,y));
     }
 
     @Override
-    public void drawTo(int i, int i1) {
-        if(plotter.isEnoughInk())
-            plotter.drawTo(i,i1);
+    public void drawTo(int x, int y) {
+        if(plotter.isEnoughInk(x,y))
+            plotter.drawTo(x,y);
         else
-            commandList.add(new DrawToCommand(i,i1));
+            commandList.add(new DrawToCommand(x,y));
     }
 
     @Override
     public void execute(IPlotter driver) {
-        for(int i = executedCommands; i < commandList.size(); i++){
-            if(plotter.isEnoughInk()){
-                commandList.get(i).execute(driver);
-                executedCommands++;
-            }else
+        for(IPlotterCommand command : commandList){
+            command.execute(driver);
+            executedCommandList.add(command);
+            if(!plotter.isEnoughInk()) {
+                executedCommandList.remove(command);
                 break;
+            }
         }
-        if(executedCommands == commandList.size()){
-            commandList.clear();
-            executedCommands=0;
-        }
+        commandList.removeAll(executedCommandList);
+        executedCommandList.clear();
     }
 
     @Override

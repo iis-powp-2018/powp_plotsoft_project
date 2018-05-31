@@ -84,5 +84,14 @@ public class InkController implements IPlotter, InkGuiUpdater{
         return enoughInk;
     }
 
+    public boolean isEnoughInk(int x, int y){
+        if((tempAmountOfInk - Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2)))<0){
+            inkGui.informationPopUp();
+            enoughInk = false;
+            inkGui.updateValue(amountOfInk);
+        }
+        return enoughInk;
+    }
+
 
 }

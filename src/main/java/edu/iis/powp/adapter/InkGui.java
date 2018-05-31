@@ -19,6 +19,8 @@ public class InkGui extends JFrame implements WindowComponent{
     private IPlotter currentPlotter;
     private JProgressBar progressBar;
 
+    boolean isShowedAlert = false;
+
     private InkGui() {
         this.setTitle("Ink controller");
         this.setSize(400, 200);
@@ -46,7 +48,7 @@ public class InkGui extends JFrame implements WindowComponent{
         content.add(progressBar,c);
 
         JButton btnClearCommand = new JButton("Fill up");
-        btnClearCommand.addActionListener((ActionEvent e) -> inkGuiUpdater.updateValue(500));
+        btnClearCommand.addActionListener((ActionEvent e) -> fillInk());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
@@ -89,7 +91,15 @@ public class InkGui extends JFrame implements WindowComponent{
     }
 
     public void informationPopUp(){
-        JOptionPane.showMessageDialog(ourInstance, "Low Ink Level!","Ink Level Warning", JOptionPane.WARNING_MESSAGE );
+        if(!isShowedAlert) {
+            JOptionPane.showMessageDialog(ourInstance, "Low Ink Level!", "Ink Level Warning", JOptionPane.WARNING_MESSAGE);
+            isShowedAlert = true;
+        }
+    }
+
+    public void fillInk(){
+        isShowedAlert = false;
+        inkGuiUpdater.updateValue(500);
     }
 
 }
