@@ -30,7 +30,7 @@ public class TestICompoundCommandTest {
 		commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(new Coordinates(4, 2)));
 		commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(2, 2)));
 		
-		command = new ComplexCommand(commands);
+		command = new ComplexCommand(commands, "Test Complex Command");
 		}
 
 	@Test

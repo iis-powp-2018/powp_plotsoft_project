@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+
 import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
@@ -81,7 +83,17 @@ public class TestPlotterApp {
 				commandManager);
 		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
 	}
-
+     
+	
+	
+	static void actionOpenGUI() { //31.05
+		 JFrame frame = new JFrame("Command builder");
+		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    frame.setContentPane(new GUI());
+		    frame.setSize(600, 370);
+		    frame.setVisible(true);
+		}
+	
 	/**
 	 * Setup menu for adjusting logging settings.
 	 * 
@@ -90,7 +102,10 @@ public class TestPlotterApp {
 	 */
 	private static void setupLogger(Application application) {
 
+		
+		
 		application.addComponentMenu(Logger.class, "Logger", 0);
+		
 		application.addComponentMenuElement(Logger.class, "Clear log",
 				(ActionEvent e) -> application.flushLoggerOutput());
 		application.addComponentMenuElement(Logger.class, "Fine level", (ActionEvent e) -> logger.setLevel(Level.FINE));
@@ -100,6 +115,13 @@ public class TestPlotterApp {
 		application.addComponentMenuElement(Logger.class, "Severe level",
 				(ActionEvent e) -> logger.setLevel(Level.SEVERE));
 		application.addComponentMenuElement(Logger.class, "OFF logging", (ActionEvent e) -> logger.setLevel(Level.OFF));
+	}
+	
+	private static void setupCommandOption(Application application) {
+		application.addComponentMenu(null, "Complex commands",/*(ActionEvent e)-> TestPlotterApp.actionOpenGUI()*/0); //added 31.05
+		application.addComponentMenuElement(null, "Load Commands from disk", null);
+		application.addComponentMenuElement(null, "Export Commands", null);
+		application.addComponentMenuElement(null, "Configure Commands", (ActionEvent e)-> actionOpenGUI());
 	}
 
 	/**
@@ -115,6 +137,7 @@ public class TestPlotterApp {
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
+				setupCommandOption(app);
 				setupLogger(app);
 				setupWindows(app);
 

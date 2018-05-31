@@ -13,8 +13,10 @@ import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.io.CommandFileIOStorage;
 import edu.iis.powp.command.manager.PlotterCommandManager;
+import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.observer.Subscriber;
 
 public class CommandManagerWindow extends JFrame implements WindowComponent {
@@ -59,7 +61,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		content.add(currentCommandField, c);
 		updateCurrentCommandField();
 		
-		JButton btnImportCommands = new JButton("Import commands");
+		JButton btnImportCommands = new JButton("Import command");
 		btnImportCommands.addActionListener((ActionEvent e) -> this.importCommand());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
@@ -67,7 +69,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(btnImportCommands, c);
 
-		JButton btnExportCommands = new JButton("Export commands");
+		JButton btnExportCommands = new JButton("Export command");
 		btnExportCommands.addActionListener((ActionEvent e) -> this.exportCommand());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
@@ -96,15 +98,27 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showSaveDialog(this);
 		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+<<<<<<< Updated upstream
 		storage.save((ICompoundCommand)commandManager.getCurrentCommand());
+=======
+		 storage.save((ComplexCommand) commandManager.getCurrentCommand());
+>>>>>>> Stashed changes
 	}
 	
 	private void importCommand() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(this);
 		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+<<<<<<< Updated upstream
 		ICompoundCommand compoundCommand = storage.read();
 		commandManager.setCurrentCommand(compoundCommand);
+=======
+		ComplexCommand compoundCommand = storage.read();
+//		TODO: Do sth with compoundCommande
+		//add command to manager and set as current one\PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
+		PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
+		manager.addCommand(compoundCommand);
+>>>>>>> Stashed changes
 	}
 
 	private void clearCommand() {
