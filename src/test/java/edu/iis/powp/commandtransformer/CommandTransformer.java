@@ -14,11 +14,11 @@ public class CommandTransformer {
     }
 
     private static void setupBasicWindowComponents() {
-        commandTransformerCreatorWindow.addComponent(new FlipCommandComponent());
-        commandTransformerCreatorWindow.addComponent(new MoveCommandComponent());
-        commandTransformerCreatorWindow.addComponent(new GraduationCommandComponent());
-        commandTransformerCreatorWindow.addComponent(new StretchingCommandComponent());
-        commandTransformerCreatorWindow.addComponent(new RotationCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Flip", new FlipCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Move", new MoveCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Graduate", new GraduationCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Stretch", new StretchingCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Rotate", new RotationCommandComponent());
     }
 
     public static CommandTransformerCreatorWindow getCommandTransformerCreatorWindow() {

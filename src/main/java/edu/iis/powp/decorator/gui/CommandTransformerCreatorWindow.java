@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CommandTransformerCreatorWindow extends JFrame implements WindowComponent {
-    private static final int WINDOW_WIDTH = 500;
-    private static final int WINDOW_HEIGHT = 630;
+    private static final int WINDOW_WIDTH = 400;
+    private static final int WINDOW_HEIGHT = 600;
     private int gridY;
     private final JPanel content;
 
@@ -25,17 +25,19 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.gridY = 0;
 
-        addComponent(new RunCommandComponent(driverManager));
+        addComponent("Command runner", new RunCommandComponent(driverManager));
     }
 
-    public void addComponent(CommandTransformerCreatorComponent component) {
+    public void addComponent(String title, CommandTransformerCreatorComponent component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
         constraints.gridx = 0;
         constraints.gridy = gridY;
 
-        content.add(component.buildComponent(), constraints);
+        JPanel builtComponent = component.buildComponent();
+        builtComponent.setBorder(BorderFactory.createTitledBorder(title));
+        content.add(builtComponent, constraints);
         gridY++;
     }
 
