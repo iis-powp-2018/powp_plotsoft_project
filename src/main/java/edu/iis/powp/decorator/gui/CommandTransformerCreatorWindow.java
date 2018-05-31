@@ -9,21 +9,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CommandTransformerCreatorWindow extends JFrame implements WindowComponent {
+    private static final int WINDOW_WIDTH = 500;
+    private static final int WINDOW_HEIGHT = 630;
     private int gridY;
+    private final JPanel content;
 
     public CommandTransformerCreatorWindow(DriverManager driverManager) {
-        this.gridY = 0;
+        this.content = new JPanel();
+        this.content.setLayout(new GridBagLayout());
+        JScrollPane scrollPane = new JScrollPane(content);
+        scrollPane.setWheelScrollingEnabled(true);
+
         this.setTitle("Command Transformer Creator");
-        this.setSize(500, 630);
-        Container content = this.getContentPane();
-        content.setLayout(new GridBagLayout());
+        this.setContentPane(scrollPane);
+        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.gridY = 0;
 
         addComponent(new RunCommandComponent(driverManager));
     }
 
     public void addComponent(CommandTransformerCreatorComponent component) {
-        Container content = this.getContentPane();
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
