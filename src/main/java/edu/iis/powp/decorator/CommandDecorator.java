@@ -8,11 +8,26 @@ import edu.iis.powp.model.PlotterMovementModel;
 
 import java.util.List;
 
+/**
+ * The CommandDecorator specifies common behaviour for classes which extends action of IPlotterCommand
+ */
 public abstract class CommandDecorator implements IPlotterCommand {
+    /**
+     * Field which contains decorated commands
+     */
     protected ICompoundCommand compoundCommand;
+    /**
+     * Field which contains coordinates of current plotter head movement
+     */
     protected List<PlotterMovementModel> coordinates;
+    /**
+     * This field is used to know what command is set in plotter
+     */
     protected IPlotterCommand baseCommand;
 
+    /**
+     * @param baseCommand command which is set in plotter
+     */
     public CommandDecorator(IPlotterCommand baseCommand) {
         InterceptCoordinatesAdapterPlotterDriver plotterDriver = new InterceptCoordinatesAdapterPlotterDriver();
         baseCommand.execute(plotterDriver);
@@ -20,10 +35,19 @@ public abstract class CommandDecorator implements IPlotterCommand {
         this.baseCommand = baseCommand;
     }
 
+    /**
+     * Method which invoke execute method from compoundCommand field
+     * @param plotter the plotter which is used to draw figure
+     */
     @Override
     public void execute(IPlotter plotter) {
         compoundCommand.execute(plotter);
     }
 
+    /**
+     * Method which creates extended commands
+     * @param coordinates list of coordinates of plotter head movement
+     * @return ICompoundCommand
+     */
     protected abstract ICompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates);
 }
