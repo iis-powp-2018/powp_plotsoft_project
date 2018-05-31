@@ -1,4 +1,4 @@
-package edu.iis.powp.adapter;
+package edu.iis.powp.inkDriver;
 
 import edu.iis.powp.observer.Subscriber;
 
@@ -13,7 +13,6 @@ public class InkGuiObserver implements Subscriber {
 
     @Override
     public void update() {
-        System.out.println("Reaguje na zmiane plottera");
         inkGuiWindow.changePlotter();
     }
 

@@ -1,20 +1,21 @@
-package edu.iis.powp.command;
+package edu.iis.powp.inkDriver;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.InkController;
-import edu.iis.powp.adapter.InkGuiUpdater;
+import edu.iis.powp.command.DrawToCommand;
+import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.SetPositionCommand;
 
 import java.util.ArrayList;
 
-public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, IPlotterCommand {
+public class InkControllerWithCriticalCharge implements IPlotter, InkGuiUpdater, IPlotterCommand {
 
     private ArrayList<IPlotterCommand> commandList = new ArrayList<>();
     private ArrayList<IPlotterCommand> executedCommandList = new ArrayList<>();
 
     private InkController plotter;
 
-    public InkControllerComplexCommand(IPlotter plotter){
-        this.plotter = (InkController) plotter;
+    public InkControllerWithCriticalCharge(IPlotter plotter, float amountOfInk){
+        this.plotter = new InkController(plotter, amountOfInk, true);
     }
 
     @Override

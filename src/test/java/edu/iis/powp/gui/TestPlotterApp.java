@@ -4,10 +4,11 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.*;
+import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
-import edu.iis.powp.command.InkControllerComplexCommand;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
@@ -16,6 +17,7 @@ import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
+import edu.iis.powp.inkDriver.*;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -59,24 +61,23 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupDrivers(Application application) {
-
-	    /* works fine! no need for it to be uncommented for now
 		IPlotter clientPlotter = new ClientPlotter();
-
+		//Plotter with ink controll and critical recharging
+		//drawing with the InkController is impossible due to the change of line style when ink is low
+		clientPlotter = new InkControllerWithCriticalCharge(clientPlotter, initialInkLvl);
 		application.addDriver("Client Plotter", clientPlotter);
-		application.addDriver("Ink Controller (Client plotter)", new InkController(clientPlotter, 500.0f));
-		*/
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-		application.addDriver("Basic line simulator", plotter);
 
+		// Plotter with ink controll, will change line style when ink is low, we can add 3rd parameter as true, then we have a InkAlert with stopping
 		plotter = new InkController(plotter, initialInkLvl);
-		plotter = new InkControllerComplexCommand(plotter);
-        application.addDriver("Ink Controller", plotter);
+		application.addDriver("Line Simulator", plotter);
 		application.getDriverManager().setCurrentPlotter(plotter);
 
 		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
+		//Plotter with ink controll and critical recharging, button "fill ink" will resume drawing
+		plotter = new InkControllerWithCriticalCharge(plotter, initialInkLvl);
 		application.addDriver("Special line Simulator", plotter);
 		application.updateDriverInfo();
 	}
@@ -89,6 +90,10 @@ public class TestPlotterApp {
 		InkGui inkGui = InkGui.getInstance();
 		inkGui.setInitialInkLvl(initialInkLvl);
 		application.addWindowComponent("Ink controller", inkGui);
+
+		CommandEditor commandEditor = CommandEditor.getInstance();
+		commandEditor.setApplication(application);
+		application.addWindowComponent("Command Editor", commandEditor);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
