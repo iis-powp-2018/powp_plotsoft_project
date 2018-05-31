@@ -8,10 +8,25 @@ import edu.iis.powp.decorator.gui.events.RunCommandListener;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class which provides simple interface for adding new tranformed commands to GUI
+ */
 public class CommandTransformerCreatorWindow extends JFrame implements WindowComponent {
+    /**
+     * Field which indicates width of the window
+     */
     private static final int WINDOW_WIDTH = 400;
+    /**
+     * Field which indicates height of the window
+     */
     private static final int WINDOW_HEIGHT = 600;
+    /**
+     * Field which handles number of rows
+     */
     private int gridY;
+    /**
+     * Container for included components
+     */
     private final JPanel content;
 
     public CommandTransformerCreatorWindow(DriverManager driverManager) {
@@ -28,6 +43,11 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         addComponent("Command runner", new RunCommandComponent(driverManager));
     }
 
+    /**
+     * Method which add new component
+     * @param title title of the new added component
+     * @param component specific component to add
+     */
     public void addComponent(String title, CommandTransformerCreatorComponent component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -50,8 +70,14 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         }
     }
 
+    /**
+     * Inner class which is responsible for run added components
+     */
     private class RunCommandComponent extends CommandTransformerCreatorComponent {
 
+        /**
+         * Field which is responsible for storage current driverManager of the application
+         */
         private DriverManager driverManager;
 
         RunCommandComponent(DriverManager driverManager) {
