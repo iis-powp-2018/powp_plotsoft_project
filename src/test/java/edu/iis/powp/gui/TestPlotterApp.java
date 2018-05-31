@@ -17,10 +17,7 @@ import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
-import edu.iis.powp.inkDriver.InkController;
-import edu.iis.powp.inkDriver.InkControllerWithCriticalCharge;
-import edu.iis.powp.inkDriver.InkGui;
-import edu.iis.powp.inkDriver.InkGuiObserver;
+import edu.iis.powp.inkDriver.*;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -93,6 +90,10 @@ public class TestPlotterApp {
 		InkGui inkGui = InkGui.getInstance();
 		inkGui.setInitialInkLvl(initialInkLvl);
 		application.addWindowComponent("Ink controller", inkGui);
+
+		CommandEditor commandEditor = CommandEditor.getInstance();
+		commandEditor.setApplication(application);
+		application.addWindowComponent("Command Editor", commandEditor);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
