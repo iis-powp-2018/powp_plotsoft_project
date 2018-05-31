@@ -15,14 +15,16 @@ import java.util.List;
  */
 public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor {
 
-    List<IPlotterCommand> listOfCommands;
+    private List<IPlotterCommand> listOfCommands;
+    private final String name;
     
     /**
      * Constructor to create ComplexCommnad
      * @param listOfCommands List of commands to create
      */
-    public ComplexCommand(List<IPlotterCommand> listOfCommands) {
+    public ComplexCommand(List<IPlotterCommand> listOfCommands, String name) {
 		this.listOfCommands = listOfCommands;
+		this.name = name;
 	}
 
     @Override
@@ -49,5 +51,9 @@ public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor 
 	public void changeCommand(int index, IPlotterCommand command) {
 		removeCommand(index);
 		listOfCommands.add(index,command);
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
