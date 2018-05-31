@@ -1,14 +1,11 @@
 package edu.iis.powp.command.manager;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.observer.Publisher;
 
 /**
@@ -16,17 +13,9 @@ import edu.iis.powp.observer.Publisher;
  */
 public class PlotterCommandManager {
 	private IPlotterCommand currentCommand = null;
-	
-	private Map<String, ICompoundCommand> loadedCommands = new HashMap<>(); 
 
 	private Publisher changePublisher = new Publisher();
 
-	
-	public synchronized void addCommand(ComplexCommand command) {
-		loadedCommands.put(command.getName(),command);
-		this.currentCommand = command;
-		changePublisher.notifyObservers();
-	}
 	/**
 	 * Set current command.
 	 * 

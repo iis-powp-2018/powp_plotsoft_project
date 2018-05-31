@@ -34,7 +34,7 @@ public class CommandFileIOStorage implements ICommandIOOperation {
     }
 
     @Override
-	public void save(ComplexCommand command) {
+	public void save(ICompoundCommand command) {
     	arrayOfCommands = new JSONArray();
     	
     	createJSONOutput(command);
@@ -71,8 +71,8 @@ public class CommandFileIOStorage implements ICommandIOOperation {
     }
 
     @Override
-	public ComplexCommand read() {
-    	ComplexCommand result = null;
+	public ICompoundCommand read() {
+    	ICompoundCommand result = null;
     	List<IPlotterCommand> commands = new ArrayList<>();
         JSONParser jParser = new JSONParser();
         
@@ -95,7 +95,7 @@ public class CommandFileIOStorage implements ICommandIOOperation {
         		
         		
         	}
-        	result = new ComplexCommand(commands, "Test Name To do");
+        	result = new ComplexCommand(commands);
         } catch(IOException|ParseException e) {
         	e.printStackTrace();
         }
