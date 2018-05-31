@@ -6,6 +6,7 @@ import java.util.List;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.observer.Publisher;
 
 /**
@@ -36,25 +37,7 @@ public class PlotterCommandManager {
 	 *            name of the command.
 	 */
 	public synchronized void setCurrentCommand(List<IPlotterCommand> commandList, String name) {
-		setCurrentCommand(new ICompoundCommand() {
-
-			List<IPlotterCommand> plotterCommands = commandList;
-
-			@Override
-			public void execute(IPlotter plotter) {
-				plotterCommands.forEach((c) -> c.execute(plotter));
-			}
-
-			@Override
-			public Iterator<IPlotterCommand> iterator() {
-				return plotterCommands.iterator();
-			}
-
-			@Override
-			public String toString() {
-				return name;
-			}
-		});
+		setCurrentCommand(new ComplexCommand(commandList));
 
 	}
 
