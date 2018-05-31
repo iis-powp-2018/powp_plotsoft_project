@@ -1,10 +1,9 @@
 package edu.iis.powp.command.io;
 
-import edu.iis.powp.command.complex.ComplexCommand;
+import edu.iis.powp.command.ICompoundCommand;
 
 /**
  * Input output operation for commands
- * 
  */
 public interface ICommandIOOperation {
 
@@ -13,13 +12,13 @@ public interface ICommandIOOperation {
 	 *
 	 * @param command Command to save
 	 */
-	void save(ComplexCommand command);
+	void save(ICompoundCommand command);
 
 	/**
 	 * Read complex command from disk
 	 *
 	 * @return command from disk
 	 */
-	ComplexCommand read();
+	ICompoundCommand read();
 
 }
