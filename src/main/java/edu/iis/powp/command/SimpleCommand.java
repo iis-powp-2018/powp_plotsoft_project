@@ -6,7 +6,7 @@ import edu.iis.client.plottermagic.IPlotter;
  * Simple command which contains coordinates
  */
 public abstract class SimpleCommand implements IPlotterCommand {
-	protected Coordinates coordinates;
+	private Coordinates coordinates;
 	
 	protected SimpleCommand(Coordinates coordinates){
 		this.coordinates = coordinates;

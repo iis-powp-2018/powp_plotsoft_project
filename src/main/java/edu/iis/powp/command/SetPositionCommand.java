@@ -17,7 +17,7 @@ public class SetPositionCommand extends SimpleCommand {
 
 	@Override
 	public void execute(IPlotter plotter) {
-		plotter.setPosition(coordinates.getPosX(), coordinates.getPosY());
+		plotter.setPosition(super.getCoordinates().getPosX(), super.getCoordinates().getPosY());
 	}
 
 }

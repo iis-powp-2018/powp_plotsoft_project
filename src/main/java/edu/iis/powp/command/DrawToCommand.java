@@ -17,7 +17,7 @@ public class DrawToCommand extends SimpleCommand {
 
 	@Override
 	public void execute(IPlotter plotter) {
-		plotter.drawTo(coordinates.getPosX(), coordinates.getPosY());
+		plotter.drawTo(super.getCoordinates().getPosX(), super.getCoordinates().getPosY());
 	}
 
 }
