@@ -101,7 +101,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		fileChooser.showOpenDialog(this);
 		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
 		ICompoundCommand compoundCommand = storage.read();
-//		TODO: Do sth with compoundCommande
+		commandManager.setCurrentCommand(compoundCommand);
 	}
 
 	private void clearCommand() {
