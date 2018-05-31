@@ -29,7 +29,7 @@ public class PlotterCommandManager {
 	}
 
 	/**
-	 * Set current command.
+	 * Set current command. Changed anonymous implementation to ComplexCommand
 	 * 
 	 * @param commandList
 	 *            list of commands representing a compound command.

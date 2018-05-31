@@ -73,6 +73,11 @@ public class TestPlotterApp {
 		application.updateDriverInfo();
 	}
 
+	/**
+	 * Load Window Menu to manage commands
+	 * 
+	 * @param application
+	 */
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
@@ -81,7 +86,7 @@ public class TestPlotterApp {
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
 		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
-		
+
 		CommandEditWindow commandedit = new CommandEditWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Current Command Edit", commandedit);
 	}

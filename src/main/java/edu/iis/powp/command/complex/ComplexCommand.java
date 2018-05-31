@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Complex command containg IPlotterCommand
+ * Complex command implements IPlotterCommand
  */
 public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor {
 
