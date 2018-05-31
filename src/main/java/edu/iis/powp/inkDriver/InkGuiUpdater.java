@@ -1,4 +1,4 @@
-package edu.iis.powp.adapter;
+package edu.iis.powp.inkDriver;
 
 public interface InkGuiUpdater {
     void updateValue(float value);
