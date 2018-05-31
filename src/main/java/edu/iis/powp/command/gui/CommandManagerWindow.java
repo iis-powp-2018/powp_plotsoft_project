@@ -94,7 +94,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 	
 	private void exportCommand() {
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.showOpenDialog(this);
+		fileChooser.showSaveDialog(this);
 		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
 		storage.save((ICompoundCommand)commandManager.getCurrentCommand());
 	}
