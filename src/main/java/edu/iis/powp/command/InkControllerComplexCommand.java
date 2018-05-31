@@ -6,9 +6,9 @@ import edu.iis.powp.adapter.InkGuiUpdater;
 
 import java.util.ArrayList;
 
-public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, InkControllerCommand {
+public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, IPlotterCommand {
 
-    private ArrayList<InkControllerCommand> commandList = new ArrayList<>();
+    private ArrayList<IPlotterCommand> commandList = new ArrayList<>();
     private int executedCommands = 0;
 
     private InkController plotter;
@@ -22,7 +22,7 @@ public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, Ink
         if(plotter.isEnoughInk())
             plotter.setPosition(i,i1);
         else
-            commandList.add(new InkControllerSetPositionCommand(i,i1));
+            commandList.add(new SetPositionCommand(i,i1));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class InkControllerComplexCommand implements IPlotter, InkGuiUpdater, Ink
         if(plotter.isEnoughInk())
             plotter.drawTo(i,i1);
         else
-            commandList.add(new InkControllerDrawToCommand(i,i1));
+            commandList.add(new DrawToCommand(i,i1));
     }
 
     @Override
