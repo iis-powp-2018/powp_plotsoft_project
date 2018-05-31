@@ -93,7 +93,10 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 	}
 	
 	private void exportCommand() {
-//		TODO: implement this
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showOpenDialog(this);
+		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+		storage.save((ICompoundCommand)commandManager.getCurrentCommand());
 	}
 	
 	private void importCommand() {
