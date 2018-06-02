@@ -6,12 +6,13 @@ import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.model.PlotterMovementModel;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * The CommandDecorator specifies common behaviour for classes which extends action of IPlotterCommand
  */
-public abstract class CommandDecorator implements IPlotterCommand {
+public abstract class CommandDecorator implements ICompoundCommand {
     /**
      * Field which contains decorated commands
      */
@@ -42,6 +43,11 @@ public abstract class CommandDecorator implements IPlotterCommand {
     @Override
     public void execute(IPlotter plotter) {
         compoundCommand.execute(plotter);
+    }
+
+    @Override
+    public Iterator<IPlotterCommand> iterator() {
+        return compoundCommand.iterator();
     }
 
     /**
