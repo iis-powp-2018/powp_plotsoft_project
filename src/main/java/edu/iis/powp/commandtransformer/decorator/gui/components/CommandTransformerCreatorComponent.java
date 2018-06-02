@@ -79,4 +79,13 @@ public abstract class CommandTransformerCreatorComponent {
         panel.add(applyButton, constraints);
         return applyButton;
     }
+
+    /**
+     * Method which set action listener to apply button
+     *
+     * @param applyButton the button to which add listener
+     */
+    protected void setApplyButtonActionListeners(JButton applyButton) {
+
+    }
 }

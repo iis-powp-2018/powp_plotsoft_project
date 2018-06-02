@@ -40,7 +40,12 @@ public class MoveCommandComponent extends CommandTransformerCreatorComponent {
     protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
         JButton applyButton = super.addApplyButton(panel, constraints);
         applyButton.setText("Apply move command");
-        applyButton.addActionListener(new ApplyMoveCommandListener(moveXSpinner, moveYSpinner));
+        setApplyButtonActionListeners(applyButton);
         return applyButton;
+    }
+
+    @Override
+    protected void setApplyButtonActionListeners(JButton applyButton) {
+        applyButton.addActionListener(new ApplyMoveCommandListener(moveXSpinner, moveYSpinner));
     }
 }

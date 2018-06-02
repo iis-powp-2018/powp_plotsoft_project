@@ -25,7 +25,13 @@ public class FlipCommandComponent extends CommandTransformerCreatorComponent {
     protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
         JButton applyButton = super.addApplyButton(panel, constraints);
         applyButton.setText("Apply flip command");
-        applyButton.addActionListener(new ApplyFlipCommandListener(flipYCheckBox, flipXCheckBox));
+        setApplyButtonActionListeners(applyButton);
         return applyButton;
     }
+
+    @Override
+    protected void setApplyButtonActionListeners(JButton applyButton) {
+        applyButton.addActionListener(new ApplyFlipCommandListener(flipYCheckBox, flipXCheckBox));
+    }
+
 }
