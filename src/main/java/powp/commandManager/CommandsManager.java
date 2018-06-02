@@ -11,10 +11,12 @@ import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommandsManager implements ICommandsManager {
     @Override
-    public void sendMessage(String commandSequence) throws IllegalCommandArguments, IllegalCommandName, IllegalFactoryObjectName {
+    public final void sendMessage(final String commandSequence) throws IllegalCommandArguments, IllegalCommandName, IllegalFactoryObjectName {
         final  Iterable<String> iterable;
         final String[] arguments;
         final ICommand command;
@@ -22,6 +24,10 @@ public class CommandsManager implements ICommandsManager {
 
         if(commandsFactory == null) {
             throw new FactoryNullPointerException("");
+        }
+
+        if(!isCorrectCommandSequence(commandSequence)) {
+            throw new IllegalCommandArguments("");
         }
 
         iterable = splitter.split(commandSequence);
@@ -41,25 +47,27 @@ public class CommandsManager implements ICommandsManager {
         if(command == null) {
             throw new IllegalFactoryObjectName("");
         }
-
         command.execute(candidate, arguments);
     }
 
     @Override
-    public void registerObject(IReceiver receiver, String objectName) throws IllegalRegisteredObjectName {
-        if(keyIsBusy(objectName) || (!isCorrectName(objectName))) {
+    public void registerObject(IReceiver receiver, final String objectName) throws IllegalRegisteredObjectName {
+        if(keyIsBusy(objectName) || (!isCorrectCommandSequence(objectName))) {
             throw new IllegalRegisteredObjectName("");
         }
-
+        receiver.setTerminalHandle(this);
+        receiver.setObjectName(objectName);
         receivers.put(objectName, receiver);
     }
 
     @Override
-    public void unregisterObject(IReceiver command, String objectName) throws IllegalCommandArguments {
+    public void unregisterObject(IReceiver command, final String objectName) throws IllegalCommandArguments {
         IReceiver referenceToDeleteObject;
-        if(command == null || objectName == null) {
+
+        if(command == null || (!isCorrectCommandSequence(objectName))) {
             throw new IllegalCommandArguments("");
         }
+
         referenceToDeleteObject = receivers.get(objectName);
         if(referenceToDeleteObject == null || referenceToDeleteObject != command) {
             throw new IllegalCommandArguments("");
@@ -68,12 +76,12 @@ public class CommandsManager implements ICommandsManager {
     }
 
     @Override
-    public void addObjectToGroup(ICommand command, String groupName) throws IllegalRegisteredObjectName {
+    public void addObjectToGroup(IReceiver receiver, final String groupName) throws IllegalRegisteredObjectName {
 
     }
 
     @Override
-    public void destroyObjectsGroup(String groupName) throws IllegalRegisteredObjectName {
+    public void destroyObjectsGroup(final String groupName) throws IllegalRegisteredObjectName {
 
     }
 
@@ -82,22 +90,26 @@ public class CommandsManager implements ICommandsManager {
         commandsFactory = factory;
     }
 
-
-    private boolean keyIsBusy(String key) {
+    private boolean keyIsBusy(final String key) {
         return (receivers.get(key) != null);
     }
 
-    public CommandsManager()
-    {
+    public CommandsManager() {
         receivers = new HashMap<>();
     }
 
-    public boolean isCorrectName(String key) {
-
-        return true;
+    protected boolean isCorrectCommandSequence (final String key) {
+        if(key == null) {
+            return false;
+        }
+        matcher = pattern.matcher(key);
+        return matcher.matches();
     }
 
+    private static String patterSequence = "[a-zA-Z0-9_\\s]*";
+    private static Pattern pattern = Pattern.compile(patterSequence);
     private static Splitter splitter = Splitter.on(' ').trimResults().omitEmptyStrings();
     private ICommandsFactory commandsFactory;
     private Map<String, IReceiver> receivers;
+    private Matcher matcher;
 }

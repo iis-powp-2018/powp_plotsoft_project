@@ -1,5 +1,8 @@
 package powp.CommandsManager;
 
+import org.assertj.core.api.Assert;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -18,7 +21,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class CommandsManagerTest {
 
     final ICommand command = new CommandTestSystemOut();
-
 
     @Test
     public void shouldThrowExceptionWrongObjectName() throws IllegalRegisteredObjectName, IllegalFactoryObjectName {
@@ -70,8 +72,22 @@ public class CommandsManagerTest {
         assertThat(thrown).isInstanceOf(Exception.class);
     }
 
-    public void shouldThrowExceptionWhenObjectIsUnregistered() throws IllegalRegisteredObjectName {
+    @ParameterizedTest
+    @ValueSource(strings = {"$","//  //", "##"})
+    public void shouldThrowWhenTextPatternIsWrong(String wrongPattern) {
 
+        CommandsManager terminal = new CommandsManager();
+        Throwable thrown;
+        IReceiver receiver = new ExampleReceiver();
+
+        thrown = catchThrowable(() -> { terminal.registerObject(receiver, null);});
+        AssertionsForClassTypes.assertThat(thrown).isInstanceOf(Exception.class);
+
+        thrown = catchThrowable(() -> { terminal.registerObject(receiver, wrongPattern);});
+        AssertionsForClassTypes.assertThat(thrown).isInstanceOf(Exception.class);
+    }
+
+    public void shouldThrowExceptionWhenObjectIsUnregistered() throws IllegalRegisteredObjectName {
         CommandsManager terminal = new CommandsManager();
         IReceiver receiver = new ExampleReceiver();
         terminal.registerObject(new ExampleReceiver(),"ObjectName");

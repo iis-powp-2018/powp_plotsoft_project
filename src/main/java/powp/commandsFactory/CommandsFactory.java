@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class CommandsFactory implements  ICommandsFactory {
     @Override
-    public ICommand getCommand(String key) throws IllegalFactoryObjectName {
+    public ICommand getCommand(final String key) throws IllegalFactoryObjectName {
         ICommand candidate = commandsCollection.get(key);
         if (candidate == null) {
             throw new IllegalFactoryObjectName("");
@@ -17,12 +17,12 @@ public class CommandsFactory implements  ICommandsFactory {
     }
 
     @Override
-    public ICommand cloneCommand(String key) throws IllegalFactoryObjectName {
+    public ICommand cloneCommand(final String key) throws IllegalFactoryObjectName {
         return null;
     }
 
     @Override
-    public void addCommandToFactory(ICommand command, String key) throws IllegalFactoryObjectName {
+    public void addCommandToFactory(ICommand command, final String key) throws IllegalFactoryObjectName {
         ICommand candidate = commandsCollection.get(key);
         if (candidate != null) {
             throw new IllegalFactoryObjectName("");
@@ -32,7 +32,7 @@ public class CommandsFactory implements  ICommandsFactory {
     }
 
     @Override
-    public void deleteObject(String key) throws IllegalFactoryObjectName {
+    public void deleteObject(final String key) throws IllegalFactoryObjectName {
         ICommand candidate = commandsCollection.get(key);
         if(candidate == null) {
             throw new IllegalFactoryObjectName("");
