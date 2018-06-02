@@ -1,4 +1,4 @@
-package edu.iis.powp.model;
+package edu.iis.powp.commandtransformer.model;
 
 public class PlotterMovementModel {
     private int posX;

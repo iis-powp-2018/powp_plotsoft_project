@@ -4,7 +4,7 @@ import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.commandtransformer.adapter.InterceptCoordinatesAdapterPlotterDriver;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.model.PlotterMovementModel;
+import edu.iis.powp.commandtransformer.model.PlotterMovementModel;
 
 import java.util.Iterator;
 import java.util.List;

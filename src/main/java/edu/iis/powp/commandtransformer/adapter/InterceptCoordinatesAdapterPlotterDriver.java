@@ -1,7 +1,7 @@
 package edu.iis.powp.commandtransformer.adapter;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.model.PlotterMovementModel;
+import edu.iis.powp.commandtransformer.model.PlotterMovementModel;
 
 import java.util.LinkedList;
 import java.util.List;
