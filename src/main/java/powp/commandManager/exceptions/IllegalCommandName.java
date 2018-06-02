@@ -1,7 +1,9 @@
 package powp.commandManager.exceptions;
 
+import java.io.IOException;
+
 public class IllegalCommandName extends IOException {
-    IllegalCommandName(String message) {
+    public IllegalCommandName(String message) {
         super(message);
     }
 }

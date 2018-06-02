@@ -1,7 +1,9 @@
-package powp.commandManager.exceptions;
+package powp.commandsFactory.exceptions;
+
+import java.io.IOException;
 
 public class IllegalFactoryObjectName extends IOException {
-    IllegalRegisteredObjectName(String message) {
+    public IllegalFactoryObjectName(String message) {
         super(message);
     }
 }

@@ -1,7 +1,9 @@
 package powp.commandManager.exceptions;
 
+import java.io.IOException;
+
 public class IllegalRegisteredObjectName extends IOException {
-    IllegalRegisteredObjectName(String message) {
+    public IllegalRegisteredObjectName(String message) {
         super(message);
     }
 }
