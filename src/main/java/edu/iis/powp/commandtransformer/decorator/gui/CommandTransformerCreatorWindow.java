@@ -3,7 +3,7 @@ package edu.iis.powp.commandtransformer.decorator.gui;
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.commandtransformer.decorator.gui.components.CommandTransformerCreatorComponent;
-import edu.iis.powp.commandtransformer.decorator.gui.events.RunCommandListener;
+import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,7 +88,7 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
             JButton runCommandButton = super.addApplyButton(panel, constraints);
             runCommandButton.setText("Run command");
-            runCommandButton.addActionListener(new RunCommandListener(driverManager));
+            runCommandButton.addActionListener(new SelectRunCurrentCommandOptionListener(driverManager));
             return runCommandButton;
         }
     }
