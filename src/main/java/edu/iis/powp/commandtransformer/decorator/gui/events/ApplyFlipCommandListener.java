@@ -1,8 +1,8 @@
-package edu.iis.powp.decorator.gui.events;
+package edu.iis.powp.commandtransformer.decorator.gui.events;
 
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
-import edu.iis.powp.decorator.FlipCommandDecorator;
+import edu.iis.powp.commandtransformer.decorator.FlipCommandDecorator;
 import edu.iis.powp.features.CommandsFeature;
 
 import javax.swing.*;

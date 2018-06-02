@@ -1,6 +1,8 @@
-package edu.iis.powp.command;
+package edu.iis.powp.commandtransformer.command;
 
 import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.IPlotterCommand;
 
 import java.util.Iterator;
 import java.util.LinkedList;

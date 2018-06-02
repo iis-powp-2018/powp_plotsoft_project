@@ -1,7 +1,7 @@
-package edu.iis.powp.decorator;
+package edu.iis.powp.commandtransformer.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.InterceptCoordinatesAdapterPlotterDriver;
+import edu.iis.powp.commandtransformer.adapter.InterceptCoordinatesAdapterPlotterDriver;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.model.PlotterMovementModel;

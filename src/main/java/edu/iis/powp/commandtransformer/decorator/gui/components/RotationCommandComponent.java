@@ -1,6 +1,6 @@
-package edu.iis.powp.decorator.gui.components;
+package edu.iis.powp.commandtransformer.decorator.gui.components;
 
-import edu.iis.powp.decorator.gui.events.ApplyRotationCommandListener;
+import edu.iis.powp.commandtransformer.decorator.gui.events.ApplyRotationCommandListener;
 
 import javax.swing.*;
 import java.awt.*;

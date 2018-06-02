@@ -1,6 +1,6 @@
-package edu.iis.powp.decorator.gui.components;
+package edu.iis.powp.commandtransformer.decorator.gui.components;
 
-import edu.iis.powp.decorator.gui.events.ApplyMoveCommandListener;
+import edu.iis.powp.commandtransformer.decorator.gui.events.ApplyMoveCommandListener;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package edu.iis.powp.decorator.gui.components;
+package edu.iis.powp.commandtransformer.decorator.gui.components;
 
 import javax.swing.*;
 import java.awt.*;

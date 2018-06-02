@@ -1,7 +1,7 @@
-edu.iis.powp.adapter
+edu.iis.powp.commandtransformer.adapter
 edu.iis.powp.commandtransformer
-edu.iis.powp.decorator
-edu.iis.powp.decorator.gui
-edu.iis.powp.decorator.gui.components
-edu.iis.powp.decorator.gui.events
+edu.iis.powp.commandtransformer.decorator
+edu.iis.powp.commandtransformer.decorator.gui
+edu.iis.powp.commandtransformer.decorator.gui.components
+edu.iis.powp.commandtransformer.decorator.gui.events
 edu.iis.powp.model

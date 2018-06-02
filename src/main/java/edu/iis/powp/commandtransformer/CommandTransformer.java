@@ -1,8 +1,8 @@
 package edu.iis.powp.commandtransformer;
 
 import edu.iis.powp.app.Application;
-import edu.iis.powp.decorator.gui.CommandTransformerCreatorWindow;
-import edu.iis.powp.decorator.gui.components.*;
+import edu.iis.powp.commandtransformer.decorator.gui.CommandTransformerCreatorWindow;
+import edu.iis.powp.commandtransformer.decorator.gui.components.*;
 
 /**
  * This class is used to setup CommandTransformerCreatorWindow

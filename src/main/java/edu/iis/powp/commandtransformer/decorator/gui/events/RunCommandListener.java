@@ -1,4 +1,4 @@
-package edu.iis.powp.decorator.gui.events;
+package edu.iis.powp.commandtransformer.decorator.gui.events;
 
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.command.IPlotterCommand;

@@ -1,4 +1,4 @@
-package edu.iis.powp.adapter;
+package edu.iis.powp.commandtransformer.adapter;
 
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.model.PlotterMovementModel;
