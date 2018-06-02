@@ -33,7 +33,6 @@ public class GraduationCommandComponent extends CommandTransformerCreatorCompone
     protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
         JButton applyButton = super.addApplyButton(panel, constraints);
         applyButton.setText("Apply graduation command");
-        setApplyButtonActionListeners(applyButton);
         return applyButton;
     }
 

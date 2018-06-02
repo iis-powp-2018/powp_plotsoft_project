@@ -32,7 +32,6 @@ public class RotationCommandComponent extends CommandTransformerCreatorComponent
     protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
         JButton applyButton = super.addApplyButton(panel, constraints);
         applyButton.setText("Apply rotation command");
-        setApplyButtonActionListeners(applyButton);
         return applyButton;
     }
 

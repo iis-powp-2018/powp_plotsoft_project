@@ -16,7 +16,8 @@ public abstract class CommandTransformerCreatorComponent {
     public final JPanel buildComponent() {
         JPanel panel = constructJPanel();
         addContent(panel, constructElementGridBagConstraints());
-        addApplyButton(panel, constructApplyButtonGridBagConstraints());
+        JButton applyButton = addApplyButton(panel, constructApplyButtonGridBagConstraints());
+        setApplyButtonActionListeners(applyButton);
         return panel;
     }
 
