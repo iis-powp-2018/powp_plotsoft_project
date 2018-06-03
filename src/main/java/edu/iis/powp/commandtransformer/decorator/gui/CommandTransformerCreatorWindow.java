@@ -88,8 +88,13 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
             JButton runCommandButton = super.addApplyButton(panel, constraints);
             runCommandButton.setText("Run command");
-            runCommandButton.addActionListener(new SelectRunCurrentCommandOptionListener(driverManager));
             return runCommandButton;
+        }
+
+        @Override
+        protected void setApplyButtonActionListeners(JButton runCommandButton) {
+            super.setApplyButtonActionListeners(runCommandButton);
+            runCommandButton.addActionListener(new SelectRunCurrentCommandOptionListener(driverManager));
         }
     }
 }
