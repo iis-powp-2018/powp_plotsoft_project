@@ -1,5 +1,9 @@
 package edu.iis.powp.commandtransformer.model;
 
+/**
+ * Model used to recreate plotter movement from ICompoundCommand object using 
+ * @see edu.iis.powp.commandtransformer.adapter.InterceptCoordinatesAdapterPlotterDriver
+ */
 public class PlotterMovementModel {
     private int posX;
     private int posY;

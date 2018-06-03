@@ -14,7 +14,7 @@ public class CommandTransformer {
     /**
      * This method adds CommandTransformerCreatorWindow to Application passed as parameter
      *
-     * @param application the application which CommandTransformerCreatorWindow will be attached
+     * @param application the application which CommandTransformerCreatorWindow will be attached to
      */
     public static void setupCommandTransformer(Application application) {
         commandTransformerCreatorWindow = new CommandTransformerCreatorWindow(application.getDriverManager());
@@ -23,7 +23,7 @@ public class CommandTransformer {
     }
 
     /**
-     * This method adds components to commandTransformerCreatorWindow
+     * Setup window components that comes with vanilla CommandTransformer
      */
     private static void setupBasicWindowComponents() {
         commandTransformerCreatorWindow.addComponent("Flip", new FlipCommandComponent());
@@ -34,6 +34,8 @@ public class CommandTransformer {
     }
 
     /**
+     * Method used to retrieve CommandTransformerCreator window. You can use it to attach your own components to it
+     *
      * @return CommandTransformerCreatorWindow
      */
     public static CommandTransformerCreatorWindow getCommandTransformerCreatorWindow() {

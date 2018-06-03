@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class CommandDecorator implements ICompoundCommand {
     /**
-     * Field which contains decorated commands
+     * Result of decoration
      */
     protected ICompoundCommand compoundCommand;
     /**
@@ -22,12 +22,12 @@ public abstract class CommandDecorator implements ICompoundCommand {
      */
     protected List<PlotterMovementModel> coordinates;
     /**
-     * This field is used to know what command is set in plotter
+     * Command that will be decorated
      */
     protected IPlotterCommand baseCommand;
 
     /**
-     * @param baseCommand command which is set in plotter
+     * @param baseCommand command to decorate
      */
     public CommandDecorator(IPlotterCommand baseCommand) {
         InterceptCoordinatesAdapterPlotterDriver plotterDriver = new InterceptCoordinatesAdapterPlotterDriver();
@@ -37,7 +37,7 @@ public abstract class CommandDecorator implements ICompoundCommand {
     }
 
     /**
-     * Method which invoke execute method from compoundCommand field
+     * Execute decorated command
      * @param plotter the plotter which is used to draw figure
      */
     @Override
@@ -51,9 +51,9 @@ public abstract class CommandDecorator implements ICompoundCommand {
     }
 
     /**
-     * Method which creates extended commands
-     * @param coordinates list of coordinates of plotter head movement
-     * @return ICompoundCommand
+     * Method which constructs decorated ICompoundCommand from given base command coordinates
+     * @param coordinates list of coordinates taken from base command
+     * @return ICompoundCommand decorated compound command
      */
     protected abstract ICompoundCommand constructTransformedCompoundCommand(List<PlotterMovementModel> coordinates);
 }

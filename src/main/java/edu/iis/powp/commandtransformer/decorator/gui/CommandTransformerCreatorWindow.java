@@ -9,23 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Class which provides simple interface for adding new tranformed commands to GUI
+ * Class which provides simple GUI for CommandTransformer plugin
  */
 public class CommandTransformerCreatorWindow extends JFrame implements WindowComponent {
     /**
-     * Field which indicates width of the window
+     * Initial width of the CommandTransformerCreator window
      */
     private static final int WINDOW_WIDTH = 400;
     /**
-     * Field which indicates height of the window
+     * Initial height of the CommandTransformerCreator window
      */
     private static final int WINDOW_HEIGHT = 600;
     /**
-     * Field which handles number of rows
+     * Last rendered row coordinate
      */
     private int gridY;
     /**
-     * Container for included components
+     * Container for GUI components
      */
     private final JPanel content;
 
@@ -44,9 +44,9 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
     }
 
     /**
-     * Method which add new component
+     * Method used to add new GUI component
      * @param title title of the new added component
-     * @param component specific component to add
+     * @param component component to be added
      */
     public void addComponent(String title, CommandTransformerCreatorComponent component) {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -71,13 +71,10 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
     }
 
     /**
-     * Inner class which is responsible for run added components
+     * Built-in component which provides "run current command" button
      */
     private class RunCommandComponent extends CommandTransformerCreatorComponent {
 
-        /**
-         * Field which is responsible for storage current driverManager of the application
-         */
         private DriverManager driverManager;
 
         RunCommandComponent(DriverManager driverManager) {

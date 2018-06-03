@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Define common methods for building components which manage transformation's commands
+ * Base class that defines GUI single component for CommandTransformerCreator window
  */
 public abstract class CommandTransformerCreatorComponent {
 
     /**
-     * Final method which returns JPanel with content set in addContent method and one button
+     * Template method that builds GUI component
      *
-     * @return JPanel
+     * @return JPanel built component
      */
     public final JPanel buildComponent() {
         JPanel panel = constructJPanel();
@@ -22,9 +22,9 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method which return JPanel with set layout as GridBagLayout.
+     * Prepare basic container for component.
      *
-     * @return JPanel
+     * @return JPanel component container
      */
     protected JPanel constructJPanel() {
         JPanel panel = new JPanel();
@@ -33,7 +33,7 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method which specifies constrains for single element
+     * Method which specifies constraints for single element
      * @return GridBagConstraints
      */
     protected GridBagConstraints constructElementGridBagConstraints() {
@@ -45,7 +45,7 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method which specifies constrains for apply button
+     * Method which specifies constraints for apply button
      * @return GridBagConstraints
      */
     protected GridBagConstraints constructApplyButtonGridBagConstraints() {
@@ -61,19 +61,19 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method which add new component
-     * @param panel the panel to which add new component
-     * @param constraints the constraints for added component
+     * Method used to inject main content of component
+     * @param panel container for newly added content
+     * @param constraints the constraints used to build elements
      */
     protected void addContent(JPanel panel, GridBagConstraints constraints) {
 
     }
 
     /**
-     * Method which add button with text set to "Apply command"
-     * @param panel the panel to which add button
-     * @param constraints the constraints for added button
-     * @return JButton
+     * Method used to create and configure apply button (only its GUI)
+     * @param panel container for newly added content
+     * @param constraints the constraints used to build button
+     * @return JButton apply button
      */
     protected JButton addApplyButton(JPanel panel, GridBagConstraints constraints) {
         JButton applyButton = new JButton("Apply command");
@@ -82,9 +82,9 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method which set action listener to apply button
+     * Method used to configure apply button listeners
      *
-     * @param applyButton the button to which add listener
+     * @param applyButton the button to which listeners will be added
      */
     protected void setApplyButtonActionListeners(JButton applyButton) {
 
