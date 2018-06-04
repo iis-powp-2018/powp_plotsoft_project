@@ -1,16 +1,21 @@
 package edu.iis.powp.controllers.ink;
 
+import java.util.ArrayList;
+
 /**
  * Implementation of Ink Controller for simulation.
  * Singleton design pattern. One unit of ink can be used to draw line of one unit length.
  */
-public class SimmulationInkController implements InkControllerInterface {
+public class SimmulationInkController implements InkControllerInterface, Observed {
     private static SimmulationInkController instance = null;
     private float inkLevel;
     private float MAX_LEVEL_INK = 1000;
+    private ArrayList<Observator> observators;
 
     private SimmulationInkController(){
         inkLevel = MAX_LEVEL_INK;
+        observators = new ArrayList<>();
+        addObservator(new InkInformer());
     };
 
     /**
@@ -46,8 +51,25 @@ public class SimmulationInkController implements InkControllerInterface {
             return true;
         }
         else {
+            notifyObservators();
             return false;
         }
     }
 
+    @Override
+    public void addObservator(Observator o) {
+        observators.add(o);
+    }
+
+    @Override
+    public void removeObservator(Observator o) {
+        observators.remove(observators.indexOf(o));
+    }
+
+    @Override
+    public void notifyObservators() {
+        for(Observator o : observators){
+            o.inform(inkLevel);
+        }
+    }
 }
