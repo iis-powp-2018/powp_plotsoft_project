@@ -11,6 +11,8 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
+import edu.iis.powp.controllers.ink.InkControllerInterface;
+import edu.iis.powp.controllers.ink.SimmulationInkController;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
@@ -103,6 +105,20 @@ public class TestPlotterApp {
 	}
 
 	/**
+	 * Setup menu for ink control.
+	 *
+	 * @param application
+	 *            Application context.
+	 */
+	private static void setupInkControllerMenu(Application application) {
+		application.addComponentMenu(InkControllerInterface.class, "Ink Control", 2);
+		application.addComponentMenuElement(InkControllerInterface.class, "Refill",
+				(ActionEvent e) -> SimmulationInkController.getInstance().fillInk());
+		application.addComponentMenuElement(InkControllerInterface.class, "Log ink level",
+				(ActionEvent e) -> SimmulationInkController.getInstance().notifyObservators());
+	}
+
+	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -116,6 +132,7 @@ public class TestPlotterApp {
 				setupPresetTests(app);
 				setupCommandTests(app);
 				setupLogger(app);
+				setupInkControllerMenu(app);
 				setupWindows(app);
 
 				app.setVisibility(true);
