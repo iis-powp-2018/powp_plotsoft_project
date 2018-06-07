@@ -11,6 +11,7 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
+import edu.iis.powp.command.gui.ControlsManagerWindow;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
@@ -75,7 +76,9 @@ public class TestPlotterApp {
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
+		ControlsManagerWindow controlsManager = new ControlsManagerWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
+		application.addWindowComponent("Controls Manager", controlsManager);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
