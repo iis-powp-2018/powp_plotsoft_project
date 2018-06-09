@@ -4,16 +4,16 @@ import edu.iis.powp.observer.Subscriber;
 
 public class InkGuiObserver implements Subscriber {
 
-    private InkGui inkGuiWindow;
+    private IGuiLogic guiLogic;
 
-    public InkGuiObserver(InkGui inkGuiWindow) {
+    public InkGuiObserver(IGuiLogic inkGuiWindow) {
         super();
-        this.inkGuiWindow = inkGuiWindow;
+        this.guiLogic = inkGuiWindow;
     }
 
     @Override
     public void update() {
-        inkGuiWindow.changePlotter();
+        guiLogic.injectInkControl();
     }
 
 }

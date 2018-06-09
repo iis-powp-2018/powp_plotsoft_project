@@ -23,7 +23,6 @@ import edu.kis.powp.drawer.shape.LineFactory;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-	private final static float INITIAL_INK_LVL = 400f;
 
 	/**
 	 * Setup test concerning preset figures in context.
@@ -62,22 +61,14 @@ public class TestPlotterApp {
 	 */
 	private static void setupDrivers(Application application) {
 		IPlotter clientPlotter = new ClientPlotter();
-		//Plotter with ink controll and critical recharging
-		//drawing with the InkController is impossible due to the change of line style when ink is low
-		clientPlotter = new InkControllerWithCriticalCharge(clientPlotter, INITIAL_INK_LVL);
 		application.addDriver("Client Plotter", clientPlotter);
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-
-		// Plotter with ink controll, will change line style when ink is low, we can add 3rd parameter as true, then we have a InkAlert with stopping
-		plotter = new InkController(plotter, INITIAL_INK_LVL);
 		application.addDriver("Line Simulator", plotter);
 		application.getDriverManager().setCurrentPlotter(plotter);
 
 		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
-		//Plotter with ink controll and critical recharging, button "fill ink" will resume drawing
-		plotter = new InkControllerWithCriticalCharge(plotter, INITIAL_INK_LVL);
 		application.addDriver("Special line Simulator", plotter);
 		application.updateDriverInfo();
 	}
@@ -87,21 +78,9 @@ public class TestPlotterApp {
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
 
-		InkGui inkGui = InkGui.getInstance();
-		inkGui.setInitialInkLvl(INITIAL_INK_LVL);
-		application.addWindowComponent("Ink controller", inkGui);
-
-		CommandEditor commandEditor = CommandEditor.getInstance();
-		commandEditor.setApplication(application);
-		application.addWindowComponent("Command Editor", commandEditor);
-
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
 		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
-
-		InkGuiObserver inkGuiObserver = new InkGuiObserver(inkGui);
-		application.getDriverManager().getChangePublisher().addSubscriber(inkGuiObserver);
-		inkGui.setApplication(application);
 	}
 
 	/**
@@ -134,12 +113,17 @@ public class TestPlotterApp {
 				DrawerFeature.setupDrawerPlugin(app);
 				CommandsFeature.setupCommandManager();
 
-				setupDrivers(app);
-				setupPresetTests(app);
-				setupCommandTests(app);
-				setupLogger(app);
-				setupWindows(app);
-
+				try {
+					setupDrivers(app);
+					setupPresetTests(app);
+					setupCommandTests(app);
+					setupLogger(app);
+					setupWindows(app);
+					InkSetup.InkSetupDriver(app);
+				}
+				catch (Exception ex){
+					ex.printStackTrace();
+				}
 				app.setVisibility(true);
 			}
 		});
