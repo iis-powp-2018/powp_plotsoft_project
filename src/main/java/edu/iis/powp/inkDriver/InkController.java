@@ -6,10 +6,10 @@ import edu.kis.powp.drawer.shape.ILine;
 import edu.kis.powp.drawer.shape.LineFactory;
 
 
-public class InkController implements IPlotter, InkGuiUpdater {
+public class InkController implements IPlotter, IController {
 
     private IPlotter plotter;
-    private InkGui inkGui = InkGui.getInstance();
+    private IGuiLogic iGuiLogic;
     private ILine defaultLine;
 
     private float amountOfInk, tempAmountOfInk;
@@ -18,24 +18,26 @@ public class InkController implements IPlotter, InkGuiUpdater {
     private boolean isCriticalCharged = false;
 
     @Override
-    public void updateValue(float value) {
+    public void updateValueInController(float value) {
         amountOfInk = value;
         tempAmountOfInk = value;
-        inkGui.updateValue(amountOfInk);
+        iGuiLogic.updateValueInGui(amountOfInk);
         enoughInk = true;
     }
 
-    public InkController(IPlotter plotter, float amountOfInk){
+    public InkController(IPlotter plotter, float amountOfInk, IGuiLogic iGuiLogic){
         this.plotter = plotter;
         this.amountOfInk = amountOfInk;
         this.tempAmountOfInk = amountOfInk;
         defaultLine = ((LineAdapterPlotterDriver)plotter).getLine();
+        this.iGuiLogic = iGuiLogic;
     }
 
-    public InkController(IPlotter plotter, float amountOfInk, boolean forceStopAndAlert){
+    public InkController(IPlotter plotter, float amountOfInk, IGuiLogic iGuiLogic, boolean forceStopAndAlert){
         this.plotter = plotter;
         this.amountOfInk = amountOfInk;
         this.tempAmountOfInk = amountOfInk;
+        this.iGuiLogic = iGuiLogic;
         this.isCriticalCharged = forceStopAndAlert;
     }
 
@@ -67,9 +69,9 @@ public class InkController implements IPlotter, InkGuiUpdater {
 
     public boolean isEnoughInk(int x, int y){
         if((tempAmountOfInk - Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2)))<0){
-            inkGui.informationPopUp();
+            iGuiLogic.informationPopUp();
             enoughInk = false;
-            inkGui.updateValue(amountOfInk);
+            iGuiLogic.updateValueInGui(amountOfInk);
         }
         return enoughInk;
     }
@@ -79,13 +81,13 @@ public class InkController implements IPlotter, InkGuiUpdater {
         {
             amountOfInk = tempAmountOfInk;
             plotter.drawTo(x, y);
-            inkGui.updateValue(amountOfInk);
+            iGuiLogic.updateValueInGui(amountOfInk);
         }
         else
         {
-            inkGui.informationPopUp();
+            iGuiLogic.informationPopUp();
             enoughInk = false;
-            inkGui.updateValue(amountOfInk);
+            iGuiLogic.updateValueInGui(amountOfInk);
         }
     }
 
@@ -95,13 +97,13 @@ public class InkController implements IPlotter, InkGuiUpdater {
             ((LineAdapterPlotterDriver)plotter).setLine(defaultLine);
             amountOfInk = tempAmountOfInk;
             plotter.drawTo(x, y);
-            inkGui.updateValue(amountOfInk);
+            iGuiLogic.updateValueInGui(amountOfInk);
         }
         else
         {
             ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getDottedLine());
             plotter.drawTo(x, y);
-            inkGui.updateValue(amountOfInk);
+            iGuiLogic.updateValueInGui(amountOfInk);
         }
     }
 

@@ -7,29 +7,31 @@ import edu.iis.powp.command.SetPositionCommand;
 
 import java.util.ArrayList;
 
-public class InkControllerWithCriticalCharge implements IPlotter, InkGuiUpdater, IPlotterCommand {
+public class InkControllerWithCriticalCharge implements IPlotter, IController, IPlotterCommand {
 
     private ArrayList<IPlotterCommand> commandList = new ArrayList<>();
     private ArrayList<IPlotterCommand> executedCommandList = new ArrayList<>();
 
-    private InkController plotter;
+    private InkController inkController;
+    private InkGuiLogic inkGuiLogic;
 
-    public InkControllerWithCriticalCharge(IPlotter plotter, float amountOfInk){
-        this.plotter = new InkController(plotter, amountOfInk, true);
+    public InkControllerWithCriticalCharge(IPlotter plotter, float amountOfInk, InkGuiLogic inkGuiLogic){
+        this.inkGuiLogic = inkGuiLogic;
+        this.inkController = new InkController(plotter, amountOfInk, inkGuiLogic,true);
     }
 
     @Override
     public void setPosition(int x, int y) {
-        if(plotter.isEnoughInk())
-            plotter.setPosition(x,y);
+        if(inkController.isEnoughInk())
+            inkController.setPosition(x,y);
         else
             commandList.add(new SetPositionCommand(x,y));
     }
 
     @Override
     public void drawTo(int x, int y) {
-        if(plotter.isEnoughInk(x,y))
-            plotter.drawTo(x,y);
+        if(inkController.isEnoughInk(x,y))
+            inkController.drawTo(x,y);
         else
             commandList.add(new DrawToCommand(x,y));
     }
@@ -39,7 +41,7 @@ public class InkControllerWithCriticalCharge implements IPlotter, InkGuiUpdater,
         for(IPlotterCommand command : commandList){
             command.execute(driver);
             executedCommandList.add(command);
-            if(!plotter.isEnoughInk()) {
+            if(!inkController.isEnoughInk()) {
                 executedCommandList.remove(command);
                 break;
             }
@@ -49,8 +51,8 @@ public class InkControllerWithCriticalCharge implements IPlotter, InkGuiUpdater,
     }
 
     @Override
-    public void updateValue(float value) {
-        plotter.updateValue(value);
-        this.execute(plotter);
+    public void updateValueInController(float value) {
+        inkController.updateValueInController(value);
+        this.execute(inkController);
     }
 }

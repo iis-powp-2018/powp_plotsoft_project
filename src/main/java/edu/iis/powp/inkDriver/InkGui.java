@@ -9,19 +9,14 @@ import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.app.gui.WindowComponent;
 
-public class InkGui extends JFrame implements WindowComponent{
+public class InkGui extends JFrame implements WindowComponent, IGui{
 
-    private static InkGui ourInstance = new InkGui();
-
-    private InkGuiUpdater inkGuiUpdater;
-    private Application application;
     private JTextField inkAmount;
-    private IPlotter currentPlotter;
     private JProgressBar progressBar;
 
-    boolean isShowedAlert = false;
+    public InkGui(IGuiLogic guiLogic) {
 
-    private InkGui() {
+        guiLogic.setGui(this);
         this.setTitle("Ink controller");
         this.setSize(400, 200);
         Container content = this.getContentPane();
@@ -48,7 +43,7 @@ public class InkGui extends JFrame implements WindowComponent{
         content.add(progressBar,c);
 
         JButton btnClearCommand = new JButton("Fill up");
-        btnClearCommand.addActionListener((ActionEvent e) -> fillInk());
+        btnClearCommand.addActionListener((ActionEvent e) -> guiLogic.fillInk());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
@@ -65,41 +60,14 @@ public class InkGui extends JFrame implements WindowComponent{
         }
     }
 
-    public void updateValue(float dane){
-        inkAmount.setText("Ink value:" + String.valueOf(dane));
-        progressBar.setValue((int)dane);
-    }
-
-    public void changePlotter(){
-        currentPlotter = application.getDriverManager().getCurrentPlotter();
-        inkGuiUpdater = (InkGuiUpdater) currentPlotter;
-    }
-
-    public void setApplication(Application application){
-        this.application = application;
-        currentPlotter = application.getDriverManager().getCurrentPlotter();
-        inkGuiUpdater = (InkGuiUpdater) currentPlotter;
-    }
-
-    public static InkGui getInstance() {
-        return ourInstance;
-    }
-
-    public void setInitialInkLvl(double initialInkLvl){
-        progressBar.setValue((int)initialInkLvl);
-        inkAmount.setText("Ink value:" + String.valueOf(initialInkLvl));
-    }
-
+    @Override
     public void informationPopUp(){
-        if(!isShowedAlert) {
-            JOptionPane.showMessageDialog(ourInstance, "Low Ink Level!", "Ink Level Warning", JOptionPane.WARNING_MESSAGE);
-            isShowedAlert = true;
-        }
+        JOptionPane.showMessageDialog(this, "Low Ink Level!", "Ink Level Warning", JOptionPane.WARNING_MESSAGE);
     }
 
-    public void fillInk(){
-        isShowedAlert = false;
-        inkGuiUpdater.updateValue(500);
+    @Override
+    public void updateValueInGui(float value) {
+        inkAmount.setText("Ink value:" + String.valueOf(value));
+        progressBar.setValue((int)value);
     }
-
 }
