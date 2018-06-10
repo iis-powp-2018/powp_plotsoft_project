@@ -81,6 +81,8 @@ public class InkGuiLogic implements IGuiLogic {
     public void changeInkLevel(int value)
     {
         this.maximumInkLevel += value;
+        if(maximumInkLevel < 300)
+            maximumInkLevel = 300;
         updateValueInGui(remainingInkLevel, maximumInkLevel);
         fillInk();
     }

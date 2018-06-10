@@ -10,7 +10,7 @@ import edu.iis.powp.app.gui.WindowComponent;
 
 public class InkGui extends JFrame implements WindowComponent, IGui{
 
-    private JTextField inkAmount, inkAmountTextField;
+    private JTextField inkAmount;
     private JProgressBar progressBar;
 
     public InkGui(IGuiLogic guiLogic) {
@@ -22,27 +22,6 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         content.setLayout(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
-
-        /*
-        Action action = new AbstractAction()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                guiLogic.updateMaxInkLevel(2500);
-                System.out.println(inkAmountTextField.getText());
-            }
-        };
-        inkAmountTextField = new JTextField("Input maximum ink value here...");
-        inkAmountTextField.setEditable(true);
-        inkAmountTextField.setHorizontalAlignment(JTextField.CENTER);
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.gridx = 0;
-        c.weighty = 1;
-        content.add(inkAmountTextField, c);
-        inkAmountTextField.addActionListener( action );
-        */
 
         JButton btnIncreaseMaxInkValue = new JButton("Add 100 to ink level");
         btnIncreaseMaxInkValue.addActionListener((ActionEvent e) -> guiLogic.changeInkLevel(100));
@@ -60,7 +39,6 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         c.weighty = 1;
         content.add(btnDecreaseMaxInkValue, c);
 
-
         inkAmount = new JTextField("");
         inkAmount.setEditable(false);
         inkAmount.setHorizontalAlignment(JTextField.CENTER);
@@ -69,7 +47,6 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         c.gridx = 0;
         c.weighty = 1;
         content.add(inkAmount, c);
-
 
         progressBar = new JProgressBar(0, 1000);
         progressBar.setStringPainted(true);
