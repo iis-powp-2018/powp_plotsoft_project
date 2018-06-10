@@ -9,31 +9,38 @@ public class InkGuiLogic implements IGuiLogic {
     private Application application;
     private IPlotter currentPlotter;
     private IGui gui;
-    private boolean isShowedAlert = false;
-    private float initialInkLvl;
+    private boolean isShowedAlert = false, setup = true;
+    private float maximumInkLevel = 500;
+    private float remainingInkLevel = 500;
 
     @Override
     public void updateValueInGui(float value) {
-        gui.updateValueInGui(value);
+        gui.updateValueInGui(value, maximumInkLevel);
+    }
+
+    @Override
+    public void updateValueInGui(float value, float value2) {
+        gui.updateValueInGui(value, value2);
     }
 
     @Override
     public void fillInk(){
         isShowedAlert = false;
-        IController.updateValueInController(500);//TO FIX STATIC VALUE
-        gui.updateValueInGui(500);
+        this.remainingInkLevel = maximumInkLevel;
+        IController.updateValueInController(remainingInkLevel);
+        gui.updateValueInGui(remainingInkLevel, maximumInkLevel);
     }
 
     @Override
     public void injectInkControl(){
         try {
-            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), initialInkLvl, this);
+            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this);
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
         catch (ClassCastException ex){
             //user probably want assign controller for real plotter
-            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), initialInkLvl, this, true);
+            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this, true);
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
@@ -52,10 +59,16 @@ public class InkGuiLogic implements IGuiLogic {
         this.gui = gui;
     }
 
-    public void setInitialInkLvl(float initialInkLvl){
-        this.initialInkLvl = initialInkLvl;
-        updateValueInGui(initialInkLvl);
+    @Override
+    public void updateMaxInkLevel(float value) {
+        this.maximumInkLevel = value;
+        updateValueInGui(remainingInkLevel, maximumInkLevel);
+        if(setup == true)
+            setup = false;
+        else
+            fillInk();
     }
+
 
     public void setApplication(Application application){
         this.application = application;
@@ -63,4 +76,13 @@ public class InkGuiLogic implements IGuiLogic {
         currentPlotter = application.getDriverManager().getCurrentPlotter();
         application.getDriverManager().setCurrentPlotter(currentPlotter);
     }
+
+    @Override
+    public void changeInkLevel(int value)
+    {
+        this.maximumInkLevel += value;
+        updateValueInGui(remainingInkLevel, maximumInkLevel);
+        fillInk();
+    }
+
 }
