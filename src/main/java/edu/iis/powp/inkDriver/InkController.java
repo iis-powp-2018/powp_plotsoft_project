@@ -63,6 +63,7 @@ public class InkController implements IPlotter, IController {
             drawWithoutCriticalCharge(x,y);
     }
 
+    
     public boolean isEnoughInk(){
         return enoughInk;
     }
@@ -75,6 +76,7 @@ public class InkController implements IPlotter, IController {
         }
         return enoughInk;
     }
+
 
     public void drawWithCriticalCharge(int x, int y){
         if (tempAmountOfInk > 0)

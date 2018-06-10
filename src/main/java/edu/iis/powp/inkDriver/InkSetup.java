@@ -5,13 +5,13 @@ import edu.iis.powp.app.Application;
 
 public class InkSetup {
 
-    private final static float INITIAL_INK_LVL = 400f;
+    private final static float INITIAL_INK_LVL = 500f;
 
     public static void InkSetupDriver(Application application){
         InkGuiLogic inkGuiLogic = new InkGuiLogic();
 
         InkGui inkGui = new InkGui(inkGuiLogic);
-        inkGuiLogic.setInitialInkLvl(INITIAL_INK_LVL);
+        inkGuiLogic.updateMaxInkLevel(INITIAL_INK_LVL);
         application.addWindowComponent("Ink controller", inkGui);
 
         InkGuiObserver inkGuiObserver = new InkGuiObserver(inkGuiLogic);

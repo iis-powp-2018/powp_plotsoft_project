@@ -5,8 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.app.Application;
+
 import edu.iis.powp.app.gui.WindowComponent;
 
 public class InkGui extends JFrame implements WindowComponent, IGui{
@@ -24,6 +23,22 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
 
         GridBagConstraints c = new GridBagConstraints();
 
+        JButton btnIncreaseMaxInkValue = new JButton("Add 100 to ink level");
+        btnIncreaseMaxInkValue.addActionListener((ActionEvent e) -> guiLogic.changeInkLevel(100));
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnIncreaseMaxInkValue, c);
+
+        JButton btnDecreaseMaxInkValue = new JButton("Subtract 100 from ink level");
+        btnDecreaseMaxInkValue.addActionListener((ActionEvent e) -> guiLogic.changeInkLevel(-100));
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnDecreaseMaxInkValue, c);
+
         inkAmount = new JTextField("");
         inkAmount.setEditable(false);
         inkAmount.setHorizontalAlignment(JTextField.CENTER);
@@ -33,7 +48,6 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         c.weighty = 1;
         content.add(inkAmount, c);
 
-
         progressBar = new JProgressBar(0, 1000);
         progressBar.setStringPainted(true);
         c.fill = GridBagConstraints.BOTH;
@@ -42,7 +56,7 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         c.weighty = 1;
         content.add(progressBar,c);
 
-        JButton btnClearCommand = new JButton("Fill up");
+        JButton btnClearCommand = new JButton("Refill");
         btnClearCommand.addActionListener((ActionEvent e) -> guiLogic.fillInk());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
@@ -66,8 +80,9 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
     }
 
     @Override
-    public void updateValueInGui(float value) {
-        inkAmount.setText("Ink value:" + String.valueOf(value));
-        progressBar.setValue((int)value);
+    public void updateValueInGui(float value, float maxInkLevel) {
+        inkAmount.setText("Ink value:" + String.valueOf(value) + " out of " + String.valueOf(maxInkLevel));
+        int pb = (int) ((value/maxInkLevel)*1000);
+        progressBar.setValue(pb);
     }
 }
