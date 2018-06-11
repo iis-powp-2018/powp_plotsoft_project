@@ -3,40 +3,20 @@ package edu.iis.powp.commandtransformer.decorator.gui.events;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.commandtransformer.decorator.MoveCommandDecorator;
-import edu.iis.powp.features.CommandsFeature;
+import edu.iis.powp.commandtransformer.model.MoveCommandComponentModel;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class ApplyMoveCommandListener extends ApplyCommandListener<MoveCommandComponentModel> {
+    public ApplyMoveCommandListener(MoveCommandComponentModel dataModel) {
+        super(dataModel);
+    }
 
-public class ApplyMoveCommandListener implements ActionListener {
-
-    private JSpinner moveYSpinner;
-    private JSpinner moveXSpinner;
-
-    public ApplyMoveCommandListener(JSpinner moveXSpinner, JSpinner moveYSpinner) {
-        this.moveYSpinner = moveYSpinner;
-        this.moveXSpinner = moveXSpinner;
+    public ApplyMoveCommandListener() {
+        this(new MoveCommandComponentModel());
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
-        PlotterCommandManager commandManager = CommandsFeature.getPlotterCommandManager();
-        IPlotterCommand currentCommand = commandManager.getCurrentCommand();
-        int moveX;
-        int moveY;
-        try {
-            moveX = (Integer) moveXSpinner.getValue();
-            moveY = (Integer) moveYSpinner.getValue();
-        } catch (ClassCastException f) {
-            return;
-        }
-        if (currentCommand != null) {
-            MoveCommandDecorator newCommand = new MoveCommandDecorator(currentCommand, moveX, moveY);
-            commandManager.setCurrentCommand(newCommand);
-            moveXSpinner.setValue(0);
-            moveYSpinner.setValue(0);
-        }
-
+    protected void applyCommand(PlotterCommandManager commandManager, IPlotterCommand currentCommand) {
+        MoveCommandDecorator newCommand = new MoveCommandDecorator(currentCommand, dataModel.getMovementX(), dataModel.getMovementY());
+        commandManager.setCurrentCommand(newCommand);
     }
 }

@@ -3,6 +3,7 @@ package edu.iis.powp.commandtransformer;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.commandtransformer.decorator.gui.CommandTransformerCreatorWindow;
 import edu.iis.powp.commandtransformer.decorator.gui.components.*;
+import edu.iis.powp.commandtransformer.decorator.gui.events.*;
 
 /**
  * This class is used to setup CommandTransformerCreatorWindow
@@ -26,11 +27,11 @@ public class CommandTransformer {
      * Setup window components that comes with vanilla CommandTransformer
      */
     private static void setupBasicWindowComponents() {
-        commandTransformerCreatorWindow.addComponent("Flip", new FlipCommandComponent());
-        commandTransformerCreatorWindow.addComponent("Move", new MoveCommandComponent());
-        commandTransformerCreatorWindow.addComponent("Graduate", new GraduationCommandComponent());
-        commandTransformerCreatorWindow.addComponent("Stretch", new StretchingCommandComponent());
-        commandTransformerCreatorWindow.addComponent("Rotate", new RotationCommandComponent());
+        commandTransformerCreatorWindow.addComponent("Flip", new FlipCommandComponent(new ApplyFlipCommandListener()));
+        commandTransformerCreatorWindow.addComponent("Move", new MoveCommandComponent(new ApplyMoveCommandListener()));
+        commandTransformerCreatorWindow.addComponent("Graduate", new GraduationCommandComponent(new ApplyGraduationCommandListener()));
+        commandTransformerCreatorWindow.addComponent("Stretch", new StretchingCommandComponent(new ApplyStretchingCommandListener()));
+        commandTransformerCreatorWindow.addComponent("Rotate", new RotationCommandComponent(new ApplyRotationCommandListener()));
     }
 
     /**

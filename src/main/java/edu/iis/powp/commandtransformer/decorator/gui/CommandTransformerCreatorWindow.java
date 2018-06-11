@@ -7,6 +7,7 @@ import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Class which provides simple GUI for CommandTransformer plugin
@@ -74,11 +75,10 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
      * Built-in component which provides "run current command" button
      */
     private class RunCommandComponent extends CommandTransformerCreatorComponent {
-
-        private DriverManager driverManager;
+        private SelectRunCurrentCommandOptionListener listener;
 
         RunCommandComponent(DriverManager driverManager) {
-            this.driverManager = driverManager;
+            listener = new SelectRunCurrentCommandOptionListener(driverManager);
         }
 
         @Override
@@ -89,9 +89,9 @@ public class CommandTransformerCreatorWindow extends JFrame implements WindowCom
         }
 
         @Override
-        protected void setApplyButtonActionListeners(JButton runCommandButton) {
-            super.setApplyButtonActionListeners(runCommandButton);
-            runCommandButton.addActionListener(new SelectRunCurrentCommandOptionListener(driverManager));
+        protected void setApplyButtonActions(ActionEvent e) {
+            super.setApplyButtonActions(e);
+            listener.actionPerformed(e);
         }
     }
 }
