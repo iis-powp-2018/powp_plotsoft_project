@@ -1,14 +1,18 @@
 package edu.iis.powp.commandtransformer.decorator.gui.components;
 
-import edu.iis.powp.commandtransformer.decorator.gui.events.ApplyFlipCommandListener;
 import edu.iis.powp.commandtransformer.decorator.gui.events.ApplyGraduationCommandListener;
+import edu.iis.powp.commandtransformer.model.GraduationCommandComponentModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
-public class GraduationCommandComponent extends CommandTransformerCreatorComponent {
-
+public class GraduationCommandComponent extends CommandTransformerCreatorComponent<ApplyGraduationCommandListener> {
     private JSpinner graduationSpinner;
+
+    public GraduationCommandComponent(ApplyGraduationCommandListener applyButtonClickListener) {
+        super(applyButtonClickListener);
+    }
 
     @Override
     protected GridBagConstraints constructApplyButtonGridBagConstraints() {
@@ -20,9 +24,11 @@ public class GraduationCommandComponent extends CommandTransformerCreatorCompone
     @Override
     protected void addContent(JPanel panel, GridBagConstraints constraints) {
         super.addContent(panel, constraints);
+        GraduationCommandComponentModel model = applyButtonClickListener.getDataModel();
 
         JLabel graduationLabel = new JLabel("Graduation:");
         graduationSpinner = new JSpinner(new SpinnerNumberModel(0, null, null, 1));
+        graduationSpinner.addChangeListener(e -> model.setGraduation((Integer) graduationSpinner.getValue()));
         constraints.gridx = 0;
         panel.add(graduationLabel, constraints);
         constraints.gridy = 1;
@@ -37,7 +43,8 @@ public class GraduationCommandComponent extends CommandTransformerCreatorCompone
     }
 
     @Override
-    protected void setApplyButtonActionListeners(JButton applyButton) {
-        applyButton.addActionListener(new ApplyGraduationCommandListener(graduationSpinner));
+    protected void setApplyButtonActions(ActionEvent e) {
+        super.setApplyButtonActions(e);
+        graduationSpinner.setValue(0);
     }
 }

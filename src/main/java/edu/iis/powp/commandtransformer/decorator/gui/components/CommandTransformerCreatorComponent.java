@@ -1,12 +1,23 @@
 package edu.iis.powp.commandtransformer.decorator.gui.components;
 
+import edu.iis.powp.commandtransformer.decorator.gui.events.ApplyCommandListener;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Base class that defines GUI single component for CommandTransformerCreator window
  */
-public abstract class CommandTransformerCreatorComponent {
+public abstract class CommandTransformerCreatorComponent<T extends ApplyCommandListener> {
+    protected T applyButtonClickListener;
+
+    public CommandTransformerCreatorComponent(T applyButtonClickListener) {
+        this.applyButtonClickListener = applyButtonClickListener;
+    }
+
+    protected CommandTransformerCreatorComponent() {
+    }
 
     /**
      * Template method that builds GUI component
@@ -17,7 +28,7 @@ public abstract class CommandTransformerCreatorComponent {
         JPanel panel = constructJPanel();
         addContent(panel, constructElementGridBagConstraints());
         JButton applyButton = addApplyButton(panel, constructApplyButtonGridBagConstraints());
-        setApplyButtonActionListeners(applyButton);
+        applyButton.addActionListener(this::setApplyButtonActions);
         return panel;
     }
 
@@ -82,11 +93,13 @@ public abstract class CommandTransformerCreatorComponent {
     }
 
     /**
-     * Method used to configure apply button listeners
+     * Add actions to perform after click on apply button (i.e. fire listener, reset components state)
      *
-     * @param applyButton the button to which listeners will be added
+     * @param e event that fired the listener
      */
-    protected void setApplyButtonActionListeners(JButton applyButton) {
-
+    protected void setApplyButtonActions(ActionEvent e) {
+        if (applyButtonClickListener != null) {
+            applyButtonClickListener.actionPerformed(e);
+        }
     }
 }
