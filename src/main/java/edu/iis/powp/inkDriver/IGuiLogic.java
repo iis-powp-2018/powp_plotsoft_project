@@ -1,5 +1,7 @@
 package edu.iis.powp.inkDriver;
 
+import java.awt.event.ActionEvent;
+
 public interface IGuiLogic {
     void updateValueInGui(float value);
     void updateValueInGui(float value, float value2);
@@ -9,4 +11,5 @@ public interface IGuiLogic {
     void setGui(IGui gui);
     void updateMaxInkLevel(float value);
     void changeInkLevel(int i);
+    void useCriticalCharge(ActionEvent e);
 }

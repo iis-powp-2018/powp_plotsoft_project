@@ -3,13 +3,17 @@ package edu.iis.powp.inkDriver;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.app.Application;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+
 public class InkGuiLogic implements IGuiLogic {
 
     private IController IController;
     private Application application;
     private IPlotter currentPlotter;
     private IGui gui;
-    private boolean isShowedAlert = false, setup = true;
+    private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false;
     private float maximumInkLevel = 500;
     private float remainingInkLevel = 500;
 
@@ -34,13 +38,21 @@ public class InkGuiLogic implements IGuiLogic {
     @Override
     public void injectInkControl(){
         try {
-            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this);
+            IPlotter plotter;
+            if (!isCriticalChargeUsed)
+                plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this);
+            else
+                plotter = new InkControllerWithCriticalCharge(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this);
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
         catch (ClassCastException ex){
             //user probably want assign controller for real plotter
-            IPlotter plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this, true);
+            IPlotter plotter;
+            if (!isCriticalChargeUsed)
+                plotter = new InkController(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this, true);
+            else
+                plotter = new InkControllerWithCriticalCharge(application.getDriverManager().getCurrentPlotter(), remainingInkLevel, this);
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
@@ -87,4 +99,10 @@ public class InkGuiLogic implements IGuiLogic {
         fillInk();
     }
 
+    @Override
+    public void useCriticalCharge(ActionEvent e){
+        JCheckBox checkBox = (JCheckBox)e.getSource();
+        isCriticalChargeUsed=checkBox.isSelected();
+        injectInkControl();
+    }
 }

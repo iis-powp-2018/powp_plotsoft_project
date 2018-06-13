@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import javax.accessibility.AccessibleRelation;
 import javax.swing.*;
 
 import edu.iis.powp.app.gui.WindowComponent;
@@ -22,6 +23,13 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
         content.setLayout(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
+
+        JCheckBox criticalChargeCheckBox = new JCheckBox("Use Critical Charge", false);
+        criticalChargeCheckBox.addActionListener((ActionEvent e) -> guiLogic.useCriticalCharge(e));
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(criticalChargeCheckBox,c);
 
         JButton btnIncreaseMaxInkValue = new JButton("Add 100 to ink level");
         btnIncreaseMaxInkValue.addActionListener((ActionEvent e) -> guiLogic.changeInkLevel(100));
