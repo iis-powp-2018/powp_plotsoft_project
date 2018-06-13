@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 public class SelectTestFigure2OptionListener implements ActionListener {
 
 	private DriverManager driverManager;
-	CommandsFeature commandsFeature = new CommandsFeature();
 
 	public SelectTestFigure2OptionListener(DriverManager driverManager) {
 		this.driverManager = driverManager;
@@ -19,6 +18,6 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		FiguresJoe.figureScript2(driverManager.getCurrentPlotter());
-		commandsFeature.commandList.add("figureScript2");
+		CommandsFeature.commandList.add("figureScript2");
 	}
 }
