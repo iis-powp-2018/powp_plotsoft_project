@@ -82,9 +82,61 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnFlipHorizontal, c);
+
+        JButton btnMoveRight = new JButton("Move Right");
+        btnMoveRight.addActionListener((ActionEvent e) -> this.moveRightWindow());
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnMoveRight, c);
+
+        JButton btnMoveLeft = new JButton("Move Left");
+        btnMoveLeft.addActionListener((ActionEvent e) -> this.moveLeftWindow());
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnMoveLeft, c);
+
+        JButton btnMoveUp = new JButton("Move Up");
+        btnMoveUp.addActionListener((ActionEvent e) -> this.moveUpWindow());
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnMoveUp, c);
+
+        JButton btnMoveDown = new JButton("Move Down");
+        btnMoveDown.addActionListener((ActionEvent e) -> this.moveDownWindow());
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(btnMoveDown, c);
 	}
 
-	private void flipHorizontalWindow() {
+    private void moveDownWindow() {
+        newPlotter = new MoveDownPlotterDecorator(application.getDriverManager().getCurrentPlotter());
+        application.getDriverManager().setCurrentPlotter(newPlotter);
+    }
+
+    private void moveUpWindow() {
+        newPlotter = new MoveUpPlotterDecorator(application.getDriverManager().getCurrentPlotter());
+        application.getDriverManager().setCurrentPlotter(newPlotter);
+    }
+
+    private void moveLeftWindow() {
+        newPlotter = new MoveLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
+        application.getDriverManager().setCurrentPlotter(newPlotter);
+    }
+
+    private void moveRightWindow() {
+        newPlotter = new MoveRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
+        application.getDriverManager().setCurrentPlotter(newPlotter);
+    }
+
+    private void flipHorizontalWindow() {
         newPlotter = new FlipHorizontalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
