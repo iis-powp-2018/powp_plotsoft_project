@@ -1,11 +1,11 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class FlipVerticalPlotterFactory extends PlotterFactory {
+public class FlipVerticalPlotterDecorator extends PlotterDecorator {
     private float scale = -1;
 
-    public FlipVerticalPlotterFactory(IPlotter originalPlotter) {
+    public FlipVerticalPlotterDecorator(IPlotter originalPlotter) {
         super(originalPlotter);
     }
 
@@ -18,6 +18,6 @@ public class FlipVerticalPlotterFactory extends PlotterFactory {
     @Override
     public void setPosition(int i, int i1) {
         i1 *= scale;
-        originalPlotter.drawTo(i, i1);
+        originalPlotter.setPosition(i, i1);
     }
 }

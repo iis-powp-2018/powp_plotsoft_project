@@ -1,11 +1,11 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public abstract class PlotterFactory implements IPlotter{
+public abstract class PlotterDecorator implements IPlotter{
     protected IPlotter originalPlotter;
 
-    public PlotterFactory(IPlotter originalPlotter) {
+    public PlotterDecorator(IPlotter originalPlotter) {
         this.originalPlotter = originalPlotter;
     }
 
