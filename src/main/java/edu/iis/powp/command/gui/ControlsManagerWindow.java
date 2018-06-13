@@ -118,21 +118,29 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
     private void moveDownWindow() {
         newPlotter = new MoveDownPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+        DrawerFeature.getDrawerController().clearPanel();
+        commandhistory();
     }
 
     private void moveUpWindow() {
         newPlotter = new MoveUpPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+        DrawerFeature.getDrawerController().clearPanel();
+        commandhistory();
     }
 
     private void moveLeftWindow() {
         newPlotter = new MoveLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+        DrawerFeature.getDrawerController().clearPanel();
+        commandhistory();
     }
 
     private void moveRightWindow() {
         newPlotter = new MoveRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+        DrawerFeature.getDrawerController().clearPanel();
+        commandhistory();
     }
 
     private void flipHorizontalWindow() {
