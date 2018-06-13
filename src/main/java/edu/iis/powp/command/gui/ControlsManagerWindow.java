@@ -1,8 +1,11 @@
 package edu.iis.powp.command.gui;
 
 import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
+import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.features.DrawerFeature;
 import edu.iis.powp.features.PlotterDecorator;
 
@@ -93,9 +96,13 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 
 	private void zoomInWindow() {
 		IPlotter newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
+
 		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() * (float)1.5);
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
+
+		FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
+
 	}
 
 
