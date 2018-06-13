@@ -33,5 +33,7 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 
 		PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
 		manager.setCurrentCommand(commands, "TopSecretCommand");
+
+		CommandsFeature.commandList.add("secretCommand");
 	}
 }

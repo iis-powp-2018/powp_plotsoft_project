@@ -5,11 +5,10 @@ import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
-
+import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.decorator.*;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
-import edu.iis.powp.decorator.*;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,28 +117,28 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
     private void moveDownWindow() {
         newPlotter = new MoveDownPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
+		DrawerFeature.getDrawerController().clearPanel();
         commandhistory();
     }
 
     private void moveUpWindow() {
         newPlotter = new MoveUpPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
+		DrawerFeature.getDrawerController().clearPanel();
         commandhistory();
     }
 
     private void moveLeftWindow() {
         newPlotter = new MoveLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
+		DrawerFeature.getDrawerController().clearPanel();
         commandhistory();
     }
 
     private void moveRightWindow() {
         newPlotter = new MoveRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
+		DrawerFeature.getDrawerController().clearPanel();
         commandhistory();
     }
 
@@ -186,13 +185,16 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void commandhistory() {
-
 		for (String command: CommandsFeature.commandList) {
 			if (command.equals("figureScript1")) {
 				FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
 			}
 			if (command.equals("figureScript2")) {
 				FiguresJoe.figureScript2(application.getDriverManager().getCurrentPlotter());
+			}
+			if (command.equals("secretCommand")) {
+				IPlotterCommand iPlotterCommand = CommandsFeature.getPlotterCommandManager().getCurrentCommand();
+				iPlotterCommand.execute(application.getDriverManager().getCurrentPlotter());
 			}
 		}
 	}
