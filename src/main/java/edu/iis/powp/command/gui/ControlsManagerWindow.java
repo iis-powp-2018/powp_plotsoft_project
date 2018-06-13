@@ -18,7 +18,6 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	private static final long serialVersionUID = 9204679248304669948L;
 	private Application application;
 	private IPlotter newPlotter;
-	CommandsFeature commandsFeature = new CommandsFeature();
 	private DriverManager driverManager;
 
 	public ControlsManagerWindow(Application application) {
@@ -122,17 +121,16 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
-		FiguresJoe.figureScript1(driverManager.getCurrentPlotter());
 	}
 
 	private void commandhistory() {
 
-		for (String command: commandsFeature.commandList) {
+		for (String command: CommandsFeature.commandList) {
 			if (command.equals("figureScript1")) {
-				FiguresJoe.figureScript1(driverManager.getCurrentPlotter());
+				FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
 			}
 			if (command.equals("figureScript2")) {
-				FiguresJoe.figureScript2(driverManager.getCurrentPlotter());
+				FiguresJoe.figureScript2(application.getDriverManager().getCurrentPlotter());
 			}
 		}
 	}
