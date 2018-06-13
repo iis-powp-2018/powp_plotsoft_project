@@ -1,0 +1,11 @@
+edu.iis.powp.adapter
+edu.iis.powp.command
+edu.iis.powp.command.gui
+edu.iis.powp.command.manager
+edu.iis.powp.decorator
+edu.iis.powp.drawer
+edu.iis.powp.events
+edu.iis.powp.events.predefine
+edu.iis.powp.features
+edu.iis.powp.gui
+edu.iis.powp.iplotter
