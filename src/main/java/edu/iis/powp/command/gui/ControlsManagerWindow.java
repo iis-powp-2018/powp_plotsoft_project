@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class ControlsManagerWindow extends JFrame implements WindowComponent {
 
+
 	private static final long serialVersionUID = 9204679248304669948L;
 	private Application application;
 	private IPlotter newPlotter;
@@ -115,77 +116,110 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
         content.add(btnMoveDown, c);
 	}
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
     private void moveDownWindow() {
         newPlotter = new MoveDownPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
         DrawerFeature.getDrawerController().clearPanel();
-        commandhistory();
+        commandHistory();
     }
 
-    private void moveUpWindow() {
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
+	private void moveUpWindow() {
         newPlotter = new MoveUpPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
         DrawerFeature.getDrawerController().clearPanel();
-        commandhistory();
+        commandHistory();
     }
 
-    private void moveLeftWindow() {
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
+	private void moveLeftWindow() {
         newPlotter = new MoveLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
         DrawerFeature.getDrawerController().clearPanel();
-        commandhistory();
+        commandHistory();
     }
 
-    private void moveRightWindow() {
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
+	private void moveRightWindow() {
         newPlotter = new MoveRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
         DrawerFeature.getDrawerController().clearPanel();
-        commandhistory();
+        commandHistory();
     }
 
-    private void flipHorizontalWindow() {
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
+	private void flipHorizontalWindow() {
         newPlotter = new FlipHorizontalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
 	}
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
 	private void flipVerticalWindow() {
 		newPlotter = new FlipVerticalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
     }
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
 	private void rotateRightWindow() {
         newPlotter = new RotateRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
     }
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
 	private void rotateLeftWindow() {
         newPlotter = new RotateLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
 	}
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
 	private void zoomOutWindow() {
 		newPlotter = new ZoomOutPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
     }
 
+	/**
+	 * This method changes data injected into actual IPlotter to change its behaviour.
+	 */
 	private void zoomInWindow() {
 		newPlotter = new ZoomInPlotterDecorator(application.getDriverManager().getCurrentPlotter());
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-		commandhistory();
+		commandHistory();
 	}
 
-	private void commandhistory() {
+	/**
+	 * This method holds information about currently drawn simulation.
+	 */
+	private void commandHistory() {
 
 		for (String command: CommandsFeature.commandList) {
 			if (command.equals("figureScript1")) {
@@ -198,6 +232,9 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 
+	/**
+	 *
+	 */
 	@Override
 	public void HideIfVisibleAndShowIfHidden() {
 		if (this.isVisible()) {
