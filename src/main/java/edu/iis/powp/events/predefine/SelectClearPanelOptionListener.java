@@ -1,9 +1,9 @@
 package edu.iis.powp.events.predefine;
 
+import edu.iis.powp.features.DrawerFeature;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import edu.iis.powp.features.DrawerFeature;
 
 public class SelectClearPanelOptionListener implements ActionListener {
 	@Override
