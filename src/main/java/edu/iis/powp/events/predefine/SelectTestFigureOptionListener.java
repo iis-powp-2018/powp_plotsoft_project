@@ -20,6 +20,5 @@ public class SelectTestFigureOptionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		FiguresJoe.figureScript1(driverManager.getCurrentPlotter());
 		CommandsFeature.commandList.add("figureScript1");
-
 	}
 }
