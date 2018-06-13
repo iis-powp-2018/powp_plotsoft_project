@@ -1,11 +1,11 @@
 package edu.iis.powp.events;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.features.CommandsFeature;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SelectRunCurrentCommandOptionListener implements ActionListener {
 
