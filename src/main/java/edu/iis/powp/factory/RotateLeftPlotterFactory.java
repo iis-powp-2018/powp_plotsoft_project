@@ -10,11 +10,19 @@ public class RotateLeftPlotterFactory extends PlotterFactory {
 
     @Override
     public void drawTo(int i, int i1) {
-
+        int x = i;
+        int y = i1;
+        i = (int) (i * Math.cos(Math.toRadians(-45)) - i1 * Math.sin(Math.toRadians(-45)));
+        i1 = (int) (y * Math.cos(Math.toRadians(-45)) + x * Math.sin(Math.toRadians(-45)));
+        originalPlotter.drawTo(i, i1);
     }
 
     @Override
     public void setPosition(int i, int i1) {
-
+        int x = i;
+        int y = i1;
+        i = (int) (i * Math.cos(Math.toRadians(45)) - i1 * Math.sin(Math.toRadians(-45)));
+        i1 = (int) (y * Math.cos(Math.toRadians(45)) + x * Math.sin(Math.toRadians(45)));
+        originalPlotter.setPosition(i, i1);
     }
 }

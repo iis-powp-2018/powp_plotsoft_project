@@ -13,14 +13,14 @@ public class ZoomInPlotterFactory extends PlotterFactory {
     public void drawTo(int i, int i1) {
         i *= scale;
         i1 *= scale;
-        super.originalPlotter.drawTo(i, i1);
+        originalPlotter.drawTo(i, i1);
     }
 
     @Override
     public void setPosition(int i, int i1) {
         i *= scale;
         i1 *= scale;
-        super.originalPlotter.drawTo(i, i1);
+        originalPlotter.drawTo(i, i1);
     }
 
 }
