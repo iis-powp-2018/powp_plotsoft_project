@@ -1,9 +1,12 @@
 package edu.iis.powp.command.gui;
 
 import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
+import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.factory.*;
+import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
 
 import javax.swing.*;
@@ -15,6 +18,8 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	private static final long serialVersionUID = 9204679248304669948L;
 	private Application application;
 	private IPlotter newPlotter;
+	CommandsFeature commandsFeature = new CommandsFeature();
+	private DriverManager driverManager;
 
 	public ControlsManagerWindow(Application application) {
 
@@ -80,31 +85,56 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	private void flipHorizontalWindow() {
         newPlotter = new FlipHorizontalPlotterFactory(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
 	}
 
 	private void flipVerticalWindow() {
 		newPlotter = new FlipVerticalPlotterFactory(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
     }
 
 	private void rotateRightWindow() {
         newPlotter = new RotateRightPlotterFactory(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
     }
 
 	private void rotateLeftWindow() {
         newPlotter = new RotateLeftPlotterFactory(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
 	}
 
 	private void zoomOutWindow() {
 		newPlotter = new ZoomOutPlotterFactory(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
     }
 
 	private void zoomInWindow() {
 		newPlotter = new ZoomInPlotterFactory(application.getDriverManager().getCurrentPlotter());
 		application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
+		commandhistory();
+		FiguresJoe.figureScript1(driverManager.getCurrentPlotter());
+	}
+
+	private void commandhistory() {
+
+		for (String command: commandsFeature.commandList) {
+			if (command.equals("figureScript1")) {
+				FiguresJoe.figureScript1(driverManager.getCurrentPlotter());
+			}
+			if (command.equals("figureScript2")) {
+				FiguresJoe.figureScript2(driverManager.getCurrentPlotter());
+			}
+		}
 	}
 
 
