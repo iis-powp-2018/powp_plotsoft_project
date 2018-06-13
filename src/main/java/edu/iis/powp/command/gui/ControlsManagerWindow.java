@@ -1,13 +1,13 @@
 package edu.iis.powp.command.gui;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
-import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
-import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
+import edu.iis.powp.factory.FlipHorizontalPlotterFactory;
+import edu.iis.powp.factory.FlipVerticalPlotterFactory;
+import edu.iis.powp.factory.ZoomInPlotterFactory;
+import edu.iis.powp.factory.ZoomOutPlotterFactory;
 import edu.iis.powp.features.DrawerFeature;
-import edu.iis.powp.features.PlotterDecorator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,9 +81,15 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void flipHorizontalWindow() {
+		newPlotter = new FlipHorizontalPlotterFactory(application.getDriverManager().getCurrentPlotter());
+		application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
 	}
 
 	private void flipVerticalWindow() {
+		newPlotter = new FlipVerticalPlotterFactory(application.getDriverManager().getCurrentPlotter());
+		application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
 	}
 
 	private void rotateRightWindow() {
@@ -93,15 +99,13 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void zoomOutWindow() {
-		newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
-		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() / (float)1.5);
+		newPlotter = new ZoomOutPlotterFactory(application.getDriverManager().getCurrentPlotter());
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 	}
 
 	private void zoomInWindow() {
-		newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
-		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() * (float)1.5);
+		newPlotter = new ZoomInPlotterFactory(application.getDriverManager().getCurrentPlotter());
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 	}
