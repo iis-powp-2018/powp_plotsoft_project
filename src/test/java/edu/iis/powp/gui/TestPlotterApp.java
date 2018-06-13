@@ -1,10 +1,5 @@
 package edu.iis.powp.gui;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
@@ -20,6 +15,11 @@ import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -76,7 +76,7 @@ public class TestPlotterApp {
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
-		ControlsManagerWindow controlsManager = new ControlsManagerWindow(CommandsFeature.getPlotterCommandManager());
+		ControlsManagerWindow controlsManager = new ControlsManagerWindow(application);
 		application.addWindowComponent("Command Manager", commandManager);
 		application.addWindowComponent("Controls Manager", controlsManager);
 

@@ -1,19 +1,24 @@
 package edu.iis.powp.command.gui;
 
+import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.powp.app.Application;
 import edu.iis.powp.app.gui.WindowComponent;
-import edu.iis.powp.command.manager.PlotterCommandManager;
-import edu.iis.powp.observer.Subscriber;
+import edu.iis.powp.features.DrawerFeature;
+import edu.iis.powp.features.PlotterDecorator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.List;
 
 public class ControlsManagerWindow extends JFrame implements WindowComponent {
 
 	private static final long serialVersionUID = 9204679248304669948L;
+	private Application application;
 
-	public ControlsManagerWindow(PlotterCommandManager commandManager) {
+	public ControlsManagerWindow(Application application) {
+
+		this.application = application;
+
 		this.setTitle("Controls Manager");
 		this.setSize(400, 400);
 		Container content = this.getContentPane();
@@ -87,6 +92,10 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void zoomInWindow() {
+		IPlotter newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
+		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() * (float)1.5);
+		application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
 	}
 
 
