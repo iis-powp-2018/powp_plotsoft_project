@@ -17,6 +17,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 
 	private static final long serialVersionUID = 9204679248304669948L;
 	private Application application;
+	private IPlotter newPlotter;
 
 	public ControlsManagerWindow(Application application) {
 
@@ -92,17 +93,17 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void zoomOutWindow() {
+		newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
+		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() / (float)1.5);
+		application.getDriverManager().setCurrentPlotter(newPlotter);
+		DrawerFeature.getDrawerController().clearPanel();
 	}
 
 	private void zoomInWindow() {
-		IPlotter newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
-
+		newPlotter = new PlotterDecorator(application.getDriverManager().getCurrentPlotter());
 		((PlotterDecorator) newPlotter).setScale( ((PlotterDecorator) newPlotter).getScale() * (float)1.5);
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
-
-		FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
-
 	}
 
 

@@ -19,16 +19,16 @@ public class PlotterDecorator implements IPlotter {
     }
 
     @Override
-    public void setPosition(int i, int i1) {
-        i *= scale;
-        i1 *= scale;
-        originalPlotter.setPosition(i, i1);
-    }
-
-    @Override
     public void drawTo(int i, int i1) {
         i *= scale;
         i1 *= scale;
         originalPlotter.drawTo(i, i1);
+    }
+
+    @Override
+    public void setPosition(int i, int i1) {
+        i *= scale;
+        i1 *= scale;
+        originalPlotter.setPosition(i, i1);
     }
 }
