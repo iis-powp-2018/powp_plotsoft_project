@@ -1,10 +1,10 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class RotateRightPlotterFactory extends PlotterFactory {
+public class RotateRightPlotterDecorator extends PlotterDecorator {
 
-    public RotateRightPlotterFactory(IPlotter originalPlotter) {
+    public RotateRightPlotterDecorator(IPlotter originalPlotter) {
         super(originalPlotter);
     }
 

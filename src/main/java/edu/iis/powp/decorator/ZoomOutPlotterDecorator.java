@@ -1,11 +1,11 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class ZoomOutPlotterFactory extends PlotterFactory {
+public class ZoomOutPlotterDecorator extends PlotterDecorator {
     private float scale = (float) 1.5;
 
-    public ZoomOutPlotterFactory(IPlotter originalPlotter) {
+    public ZoomOutPlotterDecorator(IPlotter originalPlotter) {
         super(originalPlotter);
     }
 
@@ -20,6 +20,6 @@ public class ZoomOutPlotterFactory extends PlotterFactory {
     public void setPosition(int i, int i1) {
         i /= scale;
         i1 /= scale;
-        originalPlotter.drawTo(i, i1);
+        originalPlotter.setPosition(i, i1);
     }
 }

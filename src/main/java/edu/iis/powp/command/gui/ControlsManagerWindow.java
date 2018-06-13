@@ -5,9 +5,12 @@ import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
+
 import edu.iis.powp.factory.*;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
+import edu.iis.powp.decorator.*;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,42 +85,42 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 	}
 
 	private void flipHorizontalWindow() {
-        newPlotter = new FlipHorizontalPlotterFactory(application.getDriverManager().getCurrentPlotter());
+        newPlotter = new FlipHorizontalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
 	}
 
 	private void flipVerticalWindow() {
-		newPlotter = new FlipVerticalPlotterFactory(application.getDriverManager().getCurrentPlotter());
+		newPlotter = new FlipVerticalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
     }
 
 	private void rotateRightWindow() {
-        newPlotter = new RotateRightPlotterFactory(application.getDriverManager().getCurrentPlotter());
+        newPlotter = new RotateRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
     }
 
 	private void rotateLeftWindow() {
-        newPlotter = new RotateLeftPlotterFactory(application.getDriverManager().getCurrentPlotter());
+        newPlotter = new RotateLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
 	}
 
 	private void zoomOutWindow() {
-		newPlotter = new ZoomOutPlotterFactory(application.getDriverManager().getCurrentPlotter());
+		newPlotter = new ZoomOutPlotterDecorator(application.getDriverManager().getCurrentPlotter());
         application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();
     }
 
 	private void zoomInWindow() {
-		newPlotter = new ZoomInPlotterFactory(application.getDriverManager().getCurrentPlotter());
+		newPlotter = new ZoomInPlotterDecorator(application.getDriverManager().getCurrentPlotter());
 		application.getDriverManager().setCurrentPlotter(newPlotter);
 		DrawerFeature.getDrawerController().clearPanel();
 		commandhistory();

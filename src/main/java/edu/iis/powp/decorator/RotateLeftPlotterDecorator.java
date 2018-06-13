@@ -1,10 +1,10 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class RotateLeftPlotterFactory extends PlotterFactory {
+public class RotateLeftPlotterDecorator extends PlotterDecorator {
 
-    public RotateLeftPlotterFactory(IPlotter originalPlotter) {
+    public RotateLeftPlotterDecorator(IPlotter originalPlotter) {
         super(originalPlotter);
     }
 
@@ -21,8 +21,8 @@ public class RotateLeftPlotterFactory extends PlotterFactory {
     public void setPosition(int i, int i1) {
         int x = i;
         int y = i1;
-        i = (int) (i * Math.cos(Math.toRadians(45)) - i1 * Math.sin(Math.toRadians(-45)));
-        i1 = (int) (y * Math.cos(Math.toRadians(45)) + x * Math.sin(Math.toRadians(45)));
+        i = (int) (i * Math.cos(Math.toRadians(-45)) - i1 * Math.sin(Math.toRadians(-45)));
+        i1 = (int) (y * Math.cos(Math.toRadians(-45)) + x * Math.sin(Math.toRadians(-45)));
         originalPlotter.setPosition(i, i1);
     }
 }
