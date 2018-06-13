@@ -6,7 +6,7 @@ import edu.iis.powp.app.Application;
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 
-import edu.iis.powp.factory.*;
+
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
 import edu.iis.powp.decorator.*;
