@@ -1,23 +1,26 @@
-package edu.iis.powp.factory;
+package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class FlipHorizontalPlotterFactory extends PlotterFactory {
-    private float scale = -1;
+public class ZoomInPlotterDecorator extends PlotterDecorator {
+    private float scale = (float) 1.5;
 
-    public FlipHorizontalPlotterFactory(IPlotter originalPlotter) {
+    public ZoomInPlotterDecorator(IPlotter originalPlotter) {
         super(originalPlotter);
     }
 
     @Override
     public void drawTo(int i, int i1) {
         i *= scale;
+        i1 *= scale;
         originalPlotter.drawTo(i, i1);
     }
 
     @Override
     public void setPosition(int i, int i1) {
         i *= scale;
-        originalPlotter.drawTo(i, i1);
+        i1 *= scale;
+        originalPlotter.setPosition(i, i1);
     }
+
 }
