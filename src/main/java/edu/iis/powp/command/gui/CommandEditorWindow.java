@@ -21,12 +21,12 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
 
 
     public CommandEditorWindow(){
-        this.setSize(600, 400);
+        setSize(600, 400);
         setContentPane(mainPanel);
         basicCommands = new DefaultListModel<>();
         basicCommandsList.setModel(basicCommands);
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 40; i++){
             basicCommands.addElement(String.valueOf(i));
         }
 
@@ -40,6 +40,10 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
 
         removeButton.addActionListener(e -> {
             newCommands.remove(newCommandList.getSelectedIndex());
+        });
+
+        clearButton.addActionListener(e -> {
+            newCommands.clear();
         });
     }
 
