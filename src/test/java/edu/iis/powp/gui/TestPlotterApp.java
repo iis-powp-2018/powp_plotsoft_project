@@ -82,7 +82,7 @@ public class TestPlotterApp {
                 commandManager);
         CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
 
-		CommandEditorWindow commandEditor = new CommandEditorWindow(CommandsFeature.getPlotterCommandManager());
+		CommandEditorWindow commandEditor = new CommandEditorWindow();
 		application.addWindowComponent("Command Editor", commandEditor);
 
 
