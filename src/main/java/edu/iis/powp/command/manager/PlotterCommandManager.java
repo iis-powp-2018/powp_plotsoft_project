@@ -49,7 +49,7 @@ public class PlotterCommandManager {
 	 * 
 	 * @return Current command.
 	 */
-	public synchronized IPlotterCommand getCurrentCommand() {
+	public synchronized ICompoundCommand getCurrentCommand() {
 		return currentCommand;
 	}
 

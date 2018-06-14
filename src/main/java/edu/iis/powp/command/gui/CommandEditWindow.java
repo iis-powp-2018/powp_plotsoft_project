@@ -106,7 +106,7 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 	 */
 	private void loadCurrentSubCommands(PlotterCommandManager commandManager) {
 		model.removeAllElements();
-		ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+		ICompoundCommand currentCommand =commandManager.getCurrentCommand();
 		if (currentCommand != null) {
 			int counter = 0;
 			subCommandCounter = 0;
