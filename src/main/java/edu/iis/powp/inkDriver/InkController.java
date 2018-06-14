@@ -70,9 +70,9 @@ public class InkController implements IPlotter, IController {
 
     public boolean isEnoughInk(int x, int y){
         if((tempAmountOfInk - Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2)))<0){
-            iGuiLogic.informationPopUp();
             enoughInk = false;
             iGuiLogic.updateValueInGui(amountOfInk);
+            iGuiLogic.informationPopUp();
         }
         return enoughInk;
     }
@@ -87,9 +87,9 @@ public class InkController implements IPlotter, IController {
         }
         else
         {
-            iGuiLogic.informationPopUp();
             enoughInk = false;
             iGuiLogic.updateValueInGui(amountOfInk);
+            iGuiLogic.informationPopUp();
         }
     }
 
