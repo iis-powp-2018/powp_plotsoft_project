@@ -1,5 +1,6 @@
 package powp.commandManager;
 
+import java.util.List;
 import powp.commandManager.exceptions.FactoryNullPointerException;
 import powp.commandManager.exceptions.IllegalCommandArguments;
 import powp.commandManager.exceptions.IllegalCommandName;
@@ -14,4 +15,6 @@ public interface ICommandsManager {
     public void addObjectToGroup(IReceiver receiver, final String groupName) throws IllegalRegisteredObjectName;
     public void destroyObjectsGroup(final String groupName) throws IllegalRegisteredObjectName;
     public void registerCommandsFactory(ICommandsFactory factory);
+    public List<String> getRegisteredCommands() throws FactoryNullPointerException;
+
 }

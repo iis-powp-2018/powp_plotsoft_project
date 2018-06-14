@@ -10,6 +10,7 @@ import powp.commandsFactory.ICommandsFactory;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,6 +107,12 @@ public class CommandsManager implements ICommandsManager {
         return matcher.matches();
     }
 
+    public List<String> getRegisteredCommands () throws FactoryNullPointerException {
+        if(commandsFactory == null) {
+            throw new FactoryNullPointerException("");
+        }
+        return commandsFactory.getRegisteredCommands();
+    }
     private static String patterSequence = "[a-zA-Z0-9_\\s]*";
     private static Pattern pattern = Pattern.compile(patterSequence);
     private static Splitter splitter = Splitter.on(' ').trimResults().omitEmptyStrings();

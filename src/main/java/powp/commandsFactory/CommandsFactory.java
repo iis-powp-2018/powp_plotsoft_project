@@ -1,9 +1,11 @@
 package powp.commandsFactory;
 
+import java.util.ArrayList;
 import powp.commandManager.ICommand;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CommandsFactory implements  ICommandsFactory {
@@ -47,5 +49,8 @@ public class CommandsFactory implements  ICommandsFactory {
         commandsCollection = new HashMap<>();
     }
 
+    public List<String> getRegisteredCommands() {
+         return new ArrayList<>(commandsCollection.keySet());
+    }
     private Map<String, ICommand> commandsCollection;
 }
