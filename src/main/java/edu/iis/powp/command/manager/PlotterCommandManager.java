@@ -13,7 +13,9 @@ import edu.iis.powp.observer.Publisher;
  * Driver Manager.
  */
 public class PlotterCommandManager {
-	private IPlotterCommand currentCommand = null;
+	private ICompoundCommand currentCommand = null;
+	private String commandName;
+	
 
 	private Publisher changePublisher = new Publisher();
 
@@ -23,7 +25,7 @@ public class PlotterCommandManager {
 	 * @param commandList
 	 *            Set the command as current.
 	 */
-	public synchronized void setCurrentCommand(IPlotterCommand commandList) {
+	public synchronized void setCurrentCommand(ICompoundCommand commandList) {
 		this.currentCommand = commandList;
 		changePublisher.notifyObservers();
 	}
@@ -36,8 +38,9 @@ public class PlotterCommandManager {
 	 * @param name
 	 *            name of the command.
 	 */
-	public synchronized void setCurrentCommand(List<IPlotterCommand> commandList, String name) {
-		setCurrentCommand(new ComplexCommand(commandList));
+	public synchronized void setCurrentCommand(ICompoundCommand command, String name) {
+		setCurrentCommand(command);
+		commandName= name;
 
 	}
 
@@ -58,7 +61,7 @@ public class PlotterCommandManager {
 		if (getCurrentCommand() == null) {
 			return "No command loaded";
 		} else
-			return getCurrentCommand().toString();
+			return commandName;
 	}
 
 	public Publisher getChangePublisher() {

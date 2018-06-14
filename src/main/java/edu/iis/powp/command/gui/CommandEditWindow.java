@@ -104,7 +104,7 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 	 * 
 	 * @param commandManager
 	 */
-	private void loadCurrentCommand(PlotterCommandManager commandManager) {
+	private void loadCurrentSubCommands(PlotterCommandManager commandManager) {
 		model.removeAllElements();
 		ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
 		if (currentCommand != null) {
@@ -139,7 +139,7 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			loadCurrentCommand(commandManager);
+			loadCurrentSubCommands(commandManager);
 		}
 	}
 
