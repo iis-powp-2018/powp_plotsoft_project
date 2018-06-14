@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -63,19 +64,8 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 		list = new JList(model);
 		JScrollPane pane = new JScrollPane(list);
 		JButton loadButton = new JButton("Load Current Command");
-		JButton moveDownButton = new JButton("Move Down");
 		JButton removeButton = new JButton("Remove Element");
 
-		moveDownButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = list.getSelectedIndex();
-				if (selectedIndex < subCommandCounter - 1) {
-					ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
-					currentCommand.changeSequence(selectedIndex, selectedIndex + 1);
-					// not implemented yet
-				}
-			}
-		});
 
 		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +85,6 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 		});
 
 		add(pane, BorderLayout.CENTER);
-		add(moveDownButton, BorderLayout.WEST);
 		add(loadButton, BorderLayout.NORTH);
 		add(removeButton, BorderLayout.SOUTH);
 
