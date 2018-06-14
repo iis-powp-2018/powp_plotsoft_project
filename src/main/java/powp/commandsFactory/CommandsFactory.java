@@ -3,9 +3,8 @@ package powp.commandsFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonWriter;
 import powp.commandManager.ICommand;
-import powp.commandManager.exceptions.InterfaceAdapter;
+import powp.InterfaceAdapter;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 import java.io.FileReader;

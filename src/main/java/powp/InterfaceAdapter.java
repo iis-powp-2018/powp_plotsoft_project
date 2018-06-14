@@ -1,4 +1,4 @@
-package powp.commandManager.exceptions;
+package powp;
 
 import com.google.gson.*;
 
