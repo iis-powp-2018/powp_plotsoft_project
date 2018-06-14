@@ -5,12 +5,8 @@ import edu.iis.powp.app.gui.WindowComponent;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class CommandEditorWindow extends JFrame implements WindowComponent{
@@ -63,7 +59,6 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
             @Override
             public void mousePressed(MouseEvent e) {
                 argumentsTextField.setText(arguments.get(newCommandList.getSelectedIndex()));
-                argumentsTextField.setText(arguments.get(newCommandList.getSelectedIndex()));
             }
         });
 
@@ -90,9 +85,16 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
             }
         });
 
-        removeButton.addActionListener(e -> newCommands.remove(newCommandList.getSelectedIndex()));
+        removeButton.addActionListener(e -> {
+            argumentsTextField.setText("");
+            arguments.remove(newCommandList.getSelectedIndex());
+            newCommands.remove(newCommandList.getSelectedIndex());
+        });
 
-        clearButton.addActionListener(e -> newCommands.clear());
+        clearButton.addActionListener(e -> {
+            newCommands.clear();
+            arguments.clear();
+        });
 
         saveButton.addActionListener(e -> {
             saveCommands();
