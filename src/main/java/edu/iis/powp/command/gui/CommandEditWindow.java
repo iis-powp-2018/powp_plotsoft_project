@@ -36,15 +36,15 @@ import edu.iis.powp.observer.Subscriber;
  */
 public class CommandEditWindow extends JFrame implements WindowComponent {
 
-	private PlotterCommandManager commandManager;
-
-	private JList list;
-	private int subCommandCounter = 0;
-	private DefaultListModel model;
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9204679248304669948L;
+	
+	private final PlotterCommandManager commandManager;
+	
+	private JList list;
+	private DefaultListModel model;
+	private int subCommandCounter = 0;
+	
+	
 
 	/**
 	 * Tworzenie okienka z layoutem i podstawowymi guzikami. Wczytanie komendy na
@@ -53,41 +53,50 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 	 * @param commandManager
 	 */
 	public CommandEditWindow(PlotterCommandManager commandManager) {
+		this.commandManager = commandManager;
+		setupContainerUIComponents();
+
+	}
+
+	/**
+	 * Ustawienie komponentów w oknie
+	 */
+	private void setupContainerUIComponents() {
 		this.setTitle("Command Edit");
 		this.setSize(400, 400);
 		Container content = this.getContentPane();
 		content.setLayout(new BorderLayout());
-
-		this.commandManager = commandManager;
-
 		model = new DefaultListModel();
 		list = new JList(model);
 		JScrollPane pane = new JScrollPane(list);
-		JButton loadButton = new JButton("Load Current Command");
-		JButton removeButton = new JButton("Remove Element");
-
-
-		loadButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				loadCurrentCommand(commandManager);
-			}
-		});
-
-		removeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = list.getSelectedIndex();
-				model.remove(selectedIndex);
-				ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
-				currentCommand.removeCommand(selectedIndex);
-				subCommandCounter--;
-
-			}
-		});
-
 		add(pane, BorderLayout.CENTER);
-		add(loadButton, BorderLayout.NORTH);
-		add(removeButton, BorderLayout.SOUTH);
+		setupButtonWithActions();
+	}
 
+	/**
+	 * skonfugirowanie guzików z akcjami
+	 */
+	private void setupButtonWithActions() {
+		setupLoadCommandItemListButton();
+		setupRemoveItemFromListButton();
+	}
+
+	/**
+	 * Stworznie guzika do usuwania elementu
+	 */
+	private void setupRemoveItemFromListButton() {
+		JButton removeButton = new JButton("Remove Element");
+		removeButton.addActionListener(new RemoveButtonListener(commandManager));
+		add(removeButton, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * Stworzenie guzika do ladowania komendy
+	 */
+	private void setupLoadCommandItemListButton() {
+		JButton loadButton = new JButton("Load Current Command");
+		loadButton.addActionListener(new LoadActionListener(commandManager));
+		add(loadButton, BorderLayout.NORTH);
 	}
 
 	/**
@@ -119,6 +128,35 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 			this.setVisible(false);
 		} else {
 			this.setVisible(true);
+		}
+	}
+
+	private final class LoadActionListener implements ActionListener {
+		private final PlotterCommandManager commandManager;
+
+		private LoadActionListener(PlotterCommandManager commandManager) {
+			this.commandManager = commandManager;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			loadCurrentCommand(commandManager);
+		}
+	}
+
+	private final class RemoveButtonListener implements ActionListener {
+		private final PlotterCommandManager commandManager;
+
+		private RemoveButtonListener(PlotterCommandManager commandManager) {
+			this.commandManager = commandManager;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			int selectedIndex = list.getSelectedIndex();
+			model.remove(selectedIndex);
+			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+			currentCommand.removeCommand(selectedIndex);
+			subCommandCounter--;
+
 		}
 	}
 
