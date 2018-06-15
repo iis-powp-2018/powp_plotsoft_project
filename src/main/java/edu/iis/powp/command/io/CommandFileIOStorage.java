@@ -22,12 +22,11 @@ public class CommandFileIOStorage implements ICommandIOOperation {
 
     private final String commandPath;
     private JSONArray arrayOfCommands;
+
     /**
      * Constructor with command name
-     *
-     * @param path
+     * @param path path to save or read
      */
-
     public CommandFileIOStorage(String path) {
         commandPath = path;
     }
