@@ -1,4 +1,4 @@
-package edu.iis.powp.command.complex;
+package edu.iis.powp.command.editor;
 
 import edu.iis.powp.command.IPlotterCommand;
 

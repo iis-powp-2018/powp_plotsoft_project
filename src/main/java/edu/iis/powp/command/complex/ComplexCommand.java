@@ -3,6 +3,7 @@ package edu.iis.powp.command.complex;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.editor.ICompoundCommandEditor;
 
 import java.util.ArrayList;
 import java.util.Collection;
