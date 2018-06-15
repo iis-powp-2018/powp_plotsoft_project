@@ -5,19 +5,19 @@ import edu.iis.client.plottermagic.IPlotter;
 /**
  * Implementation of IPlotterCommand for setPosition command functionality.
  */
-public class SetPositionCommand extends SimpleCommand {
+public class SetPositionCommand implements IPlotterCommand {
+
+	private int posX, posY;
 
 	public SetPositionCommand(int posX, int posY) {
-		super(new Coordinates(posX, posY));
-	}
-	
-	public SetPositionCommand(Coordinates coordinates) {
-		super(coordinates);
+		super();
+		this.posX = posX;
+		this.posY = posY;
 	}
 
 	@Override
 	public void execute(IPlotter plotter) {
-		plotter.setPosition(super.getCoordinates().getPosX(), super.getCoordinates().getPosY());
+		plotter.setPosition(posX, posY);
 	}
 
 }
