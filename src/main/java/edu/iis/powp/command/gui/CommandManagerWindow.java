@@ -7,10 +7,13 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.io.CommandFileIOStorage;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
@@ -55,7 +58,23 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(currentCommandField, c);
 		updateCurrentCommandField();
+		
+		JButton btnImportCommands = new JButton("Import commands");
+		btnImportCommands.addActionListener((ActionEvent e) -> this.importCommand());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnImportCommands, c);
 
+		JButton btnExportCommands = new JButton("Export commands");
+		btnExportCommands.addActionListener((ActionEvent e) -> this.exportCommand());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnExportCommands, c);
+		
 		JButton btnClearCommand = new JButton("Clear command");
 		btnClearCommand.addActionListener((ActionEvent e) -> this.clearCommand());
 		c.fill = GridBagConstraints.BOTH;
@@ -71,6 +90,21 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnClearObservers, c);
+	}
+	
+	private void exportCommand() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showSaveDialog(this);
+		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+		storage.save((ICompoundCommand)commandManager.getCurrentCommand());
+	}
+	
+	private void importCommand() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showOpenDialog(this);
+		CommandFileIOStorage storage = new CommandFileIOStorage(fileChooser.getSelectedFile().getAbsolutePath());
+		ICompoundCommand compoundCommand = storage.read();
+		commandManager.setCurrentCommand(compoundCommand);
 	}
 
 	private void clearCommand() {

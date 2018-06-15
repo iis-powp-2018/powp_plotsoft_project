@@ -6,13 +6,16 @@ import java.util.List;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.observer.Publisher;
 
 /**
  * Driver Manager.
  */
 public class PlotterCommandManager {
-	private IPlotterCommand currentCommand = null;
+	private ICompoundCommand currentCommand = null;
+	private String commandName;
+	
 
 	private Publisher changePublisher = new Publisher();
 
@@ -22,39 +25,22 @@ public class PlotterCommandManager {
 	 * @param commandList
 	 *            Set the command as current.
 	 */
-	public synchronized void setCurrentCommand(IPlotterCommand commandList) {
+	public synchronized void setCurrentCommand(ICompoundCommand commandList) {
 		this.currentCommand = commandList;
 		changePublisher.notifyObservers();
 	}
 
 	/**
-	 * Set current command.
+	 * Set current command. Changed anonymous implementation to ComplexCommand
 	 * 
 	 * @param commandList
 	 *            list of commands representing a compound command.
 	 * @param name
 	 *            name of the command.
 	 */
-	public synchronized void setCurrentCommand(List<IPlotterCommand> commandList, String name) {
-		setCurrentCommand(new ICompoundCommand() {
-
-			List<IPlotterCommand> plotterCommands = commandList;
-
-			@Override
-			public void execute(IPlotter plotter) {
-				plotterCommands.forEach((c) -> c.execute(plotter));
-			}
-
-			@Override
-			public Iterator<IPlotterCommand> iterator() {
-				return plotterCommands.iterator();
-			}
-
-			@Override
-			public String toString() {
-				return name;
-			}
-		});
+	public synchronized void setCurrentCommand(ICompoundCommand command, String name) {
+		setCurrentCommand(command);
+		commandName= name;
 
 	}
 
@@ -63,7 +49,7 @@ public class PlotterCommandManager {
 	 * 
 	 * @return Current command.
 	 */
-	public synchronized IPlotterCommand getCurrentCommand() {
+	public synchronized ICompoundCommand getCurrentCommand() {
 		return currentCommand;
 	}
 
@@ -75,7 +61,7 @@ public class PlotterCommandManager {
 		if (getCurrentCommand() == null) {
 			return "No command loaded";
 		} else
-			return getCurrentCommand().toString();
+			return commandName;
 	}
 
 	public Publisher getChangePublisher() {
