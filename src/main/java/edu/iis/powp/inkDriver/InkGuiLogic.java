@@ -1,5 +1,6 @@
 package edu.iis.powp.inkDriver;
 
+import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.app.Application;
 import javax.swing.*;
@@ -39,29 +40,24 @@ public class InkGuiLogic implements IGuiLogic {
         if(!(application.getDriverManager().getCurrentPlotter() instanceof  InkController || application.getDriverManager().getCurrentPlotter() instanceof InkControllerWithCriticalCharge))
             rawIPlotter = application.getDriverManager().getCurrentPlotter();
 
-        if(isInkControlUsed) {
-            try {
-                defaultLineKeeper.checkLine(rawIPlotter);
-                IPlotter plotter;
-                if (!isCriticalChargeUsed)
-                    plotter = new InkController(rawIPlotter, remainingInkLevel, this);
-                else
-                    plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
-                application.getDriverManager().setCurrentPlotter(plotter);
-                IController = (IController) plotter;
-            } catch (ClassCastException ex) {
-                //user probably want assign controller for real plotter
-                IPlotter plotter;
-                if (!isCriticalChargeUsed)
-                    plotter = new InkController(rawIPlotter, remainingInkLevel, this, true);
-                else
-                    plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
-                application.getDriverManager().setCurrentPlotter(plotter);
-                IController = (IController) plotter;
-            }
-        } else {
+        try {
             defaultLineKeeper.checkLine(rawIPlotter);
-            application.getDriverManager().setCurrentPlotter(rawIPlotter);
+            IPlotter plotter;
+            if (!isCriticalChargeUsed)
+                plotter = new InkController(rawIPlotter, remainingInkLevel, this);
+            else
+                plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
+            application.getDriverManager().setCurrentPlotter(plotter);
+            IController = (IController) plotter;
+        } catch (ClassCastException ex) {
+            //user probably want assign controller for real plotter
+            IPlotter plotter;
+            if (!isCriticalChargeUsed)
+                plotter = new InkController(rawIPlotter, remainingInkLevel, this, true);
+            else
+                plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
+            application.getDriverManager().setCurrentPlotter(plotter);
+            IController = (IController) plotter;
         }
     }
 
@@ -111,13 +107,15 @@ public class InkGuiLogic implements IGuiLogic {
         JCheckBox checkBox = (JCheckBox)e.getSource();
         if(checkBox.isSelected()) {
             isInkControlUsed = true;
+            currentPlotter = application.getDriverManager().getCurrentPlotter();
+            application.getDriverManager().setCurrentPlotter(currentPlotter);
 
         } else {
             isInkControlUsed = false;
+            if(!(rawIPlotter instanceof ClientPlotter))
+                defaultLineKeeper.checkLine(rawIPlotter);
+            application.getDriverManager().setCurrentPlotter(rawIPlotter);
         }
-        //hack to run injectInkControl()
-        currentPlotter = application.getDriverManager().getCurrentPlotter();
-        application.getDriverManager().setCurrentPlotter(currentPlotter);
     }
 
     @Override
