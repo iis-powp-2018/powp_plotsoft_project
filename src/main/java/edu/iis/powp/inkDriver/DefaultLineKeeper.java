@@ -11,14 +11,11 @@ public class DefaultLineKeeper {
     HashMap<IPlotter, ILine> lineHashMap = new HashMap<>();
 
     public void checkLine(IPlotter rawIPlotter) {
-
         if(!lineHashMap.containsKey(rawIPlotter)){
             lineHashMap.put(rawIPlotter, ((LineAdapterPlotterDriver)rawIPlotter).getLine());
         } else {
             ILine tmp = lineHashMap.get(rawIPlotter);
             ((LineAdapterPlotterDriver)rawIPlotter).setLine(tmp);
         }
-
-        System.out.println(lineHashMap);
     }
 }
