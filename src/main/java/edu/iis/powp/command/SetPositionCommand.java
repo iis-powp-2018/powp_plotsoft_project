@@ -20,4 +20,13 @@ public class SetPositionCommand implements IPlotterCommand {
 		plotter.setPosition(posX, posY);
 	}
 
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	
 }

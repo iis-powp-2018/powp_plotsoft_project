@@ -11,13 +11,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import edu.iis.powp.command.Coordinates;
+import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.command.SimpleCommand;
+import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
-import edu.iis.powp.command.factory.DrawToCommandFactory;
-import edu.iis.powp.command.factory.SetPositionCommandFactory;
+import edu.iis.powp.command.factory.IPlotterCommandFactory;
 
 public class CommandFileIOStorage implements ICommandIOOperation {
 
@@ -55,14 +54,27 @@ public class CommandFileIOStorage implements ICommandIOOperation {
     			createJSONOutput((ICompoundCommand)buff);
     		}
     		
-    		if(buff instanceof SimpleCommand) {
+    		if(buff instanceof SetPositionCommand) {
     	    	JSONObject obj = new JSONObject();
     			
     			obj.put("Class", buff.getClass().getSimpleName());
     			
         		JSONArray coordinates = new JSONArray();
-        		coordinates.add(((SimpleCommand) buff).getCoordinates().getPosX());
-        		coordinates.add(((SimpleCommand) buff).getCoordinates().getPosY());
+        		coordinates.add(((SetPositionCommand) buff).getPosX());
+        		coordinates.add(((SetPositionCommand) buff).getPosY());
+        		obj.put("Coordinates", coordinates);
+        		
+        		arrayOfCommands.add(obj);
+    		}
+    		
+    		if(buff instanceof DrawToCommand) {
+    	    	JSONObject obj = new JSONObject();
+    			
+    			obj.put("Class", buff.getClass().getSimpleName());
+    			
+        		JSONArray coordinates = new JSONArray();
+        		coordinates.add(((DrawToCommand) buff).getPosX());
+        		coordinates.add(((DrawToCommand) buff).getPosY());
         		obj.put("Coordinates", coordinates);
         		
         		arrayOfCommands.add(obj);
@@ -85,12 +97,15 @@ public class CommandFileIOStorage implements ICommandIOOperation {
         		String className = (String) obj.get("Class");
         		
         		JSONArray coordinatesArray = (JSONArray) obj.get("Coordinates");
-        		Coordinates coordinates = new Coordinates((int)((long) coordinatesArray.get(0)),(int)((long) coordinatesArray.get(1)));
+        		int posX = (int)((long) coordinatesArray.get(0));
+        		int posY = (int)((long) coordinatesArray.get(1));
+        		
+        		IPlotterCommandFactory factory = new IPlotterCommandFactory();
         		
         		if(className.equals("SetPositionCommand")) {
-        			commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(coordinates));
+        			commands.add(factory.makeSetPositionCommand(posX, posY));
         		} else if(className.equals("DrawToCommand")) {
-        			commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(coordinates));
+        			commands.add(factory.makeDrawToCommand(posX, posY));
         		}
         		
         		
