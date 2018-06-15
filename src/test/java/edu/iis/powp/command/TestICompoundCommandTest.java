@@ -10,25 +10,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iis.powp.command.complex.ComplexCommand;
-import edu.iis.powp.command.factory.DrawToCommandFactory;
-import edu.iis.powp.command.factory.SetPositionCommandFactory;
+import edu.iis.powp.command.factory.IPlotterCommandFactory;
 import junit.framework.Assert;
 
 public class TestICompoundCommandTest {
 	ComplexCommand command;
 	List<IPlotterCommand> commands;
+	IPlotterCommandFactory factory;
 	
 	@Before
 	public void setUp() throws Exception {
 		commands = new ArrayList<>();
-		commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(new Coordinates(2, 2)));
-		commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(2, 4)));
-		commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(new Coordinates(2, 4)));
-		commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(4, 4)));
-		commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(new Coordinates(4, 4)));
-		commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(4, 2)));
-		commands.add(SetPositionCommandFactory.getInstance().makeSimpleCommand(new Coordinates(4, 2)));
-		commands.add(DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(2, 2)));
+		factory = new IPlotterCommandFactory();
+		commands.add(factory.makeSetPositionCommand(2, 2));
+		commands.add(factory.makeDrawToCommand(2, 4));
+		commands.add(factory.makeSetPositionCommand(2, 4));
+		commands.add(factory.makeDrawToCommand(4, 4));
+		commands.add(factory.makeSetPositionCommand(4, 4));
+		commands.add(factory.makeDrawToCommand(4, 2));
+		commands.add(factory.makeSetPositionCommand(4, 2));
+		commands.add(factory.makeDrawToCommand(2, 2));
 		
 		command = new ComplexCommand(commands);
 		}
@@ -73,7 +74,7 @@ public class TestICompoundCommandTest {
 	
 	@Test
 	public void changeCommandTest() {
-		IPlotterCommand commandToChange = DrawToCommandFactory.getInstance().makeSimpleCommand(new Coordinates(5, 15));
+		IPlotterCommand commandToChange = factory.makeDrawToCommand(5, 15);
 		command.changeCommand(3, commandToChange);
 		int i=0;
 		Iterator<IPlotterCommand> iterator = command.iterator();
