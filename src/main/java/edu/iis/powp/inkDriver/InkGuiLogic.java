@@ -14,6 +14,7 @@ public class InkGuiLogic implements IGuiLogic {
     private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false;
     private float maximumInkLevel = 500;
     private float remainingInkLevel = 500;
+    private DefaultLineKeeper defaultLineKeeper = new DefaultLineKeeper();
 
     @Override
     public void updateValueInGui(float value) {
@@ -39,6 +40,7 @@ public class InkGuiLogic implements IGuiLogic {
             rawIPlotter = application.getDriverManager().getCurrentPlotter();
 
         try {
+            defaultLineKeeper.checkLine(rawIPlotter);
             IPlotter plotter;
             if (!isCriticalChargeUsed)
                 plotter = new InkController(rawIPlotter, remainingInkLevel, this);
