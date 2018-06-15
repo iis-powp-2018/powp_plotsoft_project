@@ -113,17 +113,13 @@ public class TestPlotterApp {
 				DrawerFeature.setupDrawerPlugin(app);
 				CommandsFeature.setupCommandManager();
 
-				try {
-					setupDrivers(app);
-					setupPresetTests(app);
-					setupCommandTests(app);
-					setupLogger(app);
-					setupWindows(app);
-					InkSetup.InkSetupDriver(app);
-				}
-				catch (Exception ex){
-					ex.printStackTrace();
-				}
+				setupDrivers(app);
+				setupPresetTests(app);
+				setupCommandTests(app);
+				setupLogger(app);
+				setupWindows(app);
+				InkSetup.InkSetupDriver(app);
+
 				app.setVisibility(true);
 			}
 		});

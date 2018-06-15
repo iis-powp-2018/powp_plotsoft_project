@@ -61,6 +61,8 @@ public class InkController implements IPlotter, IController {
             drawWithCriticalCharge(x,y);
         else
             drawWithoutCriticalCharge(x,y);
+
+        iGuiLogic.updateValueInGui(amountOfInk);
     }
 
     
@@ -70,9 +72,8 @@ public class InkController implements IPlotter, IController {
 
     public boolean isEnoughInk(int x, int y){
         if((tempAmountOfInk - Math.sqrt(Math.pow((posX - x), 2) + Math.pow(posY - y, 2)))<0){
-            iGuiLogic.informationPopUp();
             enoughInk = false;
-            iGuiLogic.updateValueInGui(amountOfInk);
+            iGuiLogic.informationPopUp();
         }
         return enoughInk;
     }
@@ -83,13 +84,10 @@ public class InkController implements IPlotter, IController {
         {
             amountOfInk = tempAmountOfInk;
             plotter.drawTo(x, y);
-            iGuiLogic.updateValueInGui(amountOfInk);
         }
         else
         {
-            iGuiLogic.informationPopUp();
             enoughInk = false;
-            iGuiLogic.updateValueInGui(amountOfInk);
         }
     }
 
@@ -99,13 +97,11 @@ public class InkController implements IPlotter, IController {
             ((LineAdapterPlotterDriver)plotter).setLine(defaultLine);
             amountOfInk = tempAmountOfInk;
             plotter.drawTo(x, y);
-            iGuiLogic.updateValueInGui(amountOfInk);
         }
         else
         {
             ((LineAdapterPlotterDriver)plotter).setLine(LineFactory.getDottedLine());
             plotter.drawTo(x, y);
-            iGuiLogic.updateValueInGui(amountOfInk);
         }
     }
 
