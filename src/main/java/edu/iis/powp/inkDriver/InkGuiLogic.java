@@ -11,7 +11,7 @@ public class InkGuiLogic implements IGuiLogic {
     private Application application;
     private IPlotter currentPlotter, rawIPlotter;
     private IGui gui;
-    private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false;
+    private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false, isInkControlUsed = false;
     private float maximumInkLevel = 500;
     private float remainingInkLevel = 500;
     private DefaultLineKeeper defaultLineKeeper = new DefaultLineKeeper();
@@ -39,24 +39,29 @@ public class InkGuiLogic implements IGuiLogic {
         if(!(application.getDriverManager().getCurrentPlotter() instanceof  InkController || application.getDriverManager().getCurrentPlotter() instanceof InkControllerWithCriticalCharge))
             rawIPlotter = application.getDriverManager().getCurrentPlotter();
 
-        try {
+        if(isInkControlUsed) {
+            try {
+                defaultLineKeeper.checkLine(rawIPlotter);
+                IPlotter plotter;
+                if (!isCriticalChargeUsed)
+                    plotter = new InkController(rawIPlotter, remainingInkLevel, this);
+                else
+                    plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
+                application.getDriverManager().setCurrentPlotter(plotter);
+                IController = (IController) plotter;
+            } catch (ClassCastException ex) {
+                //user probably want assign controller for real plotter
+                IPlotter plotter;
+                if (!isCriticalChargeUsed)
+                    plotter = new InkController(rawIPlotter, remainingInkLevel, this, true);
+                else
+                    plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
+                application.getDriverManager().setCurrentPlotter(plotter);
+                IController = (IController) plotter;
+            }
+        } else {
             defaultLineKeeper.checkLine(rawIPlotter);
-            IPlotter plotter;
-            if (!isCriticalChargeUsed)
-                plotter = new InkController(rawIPlotter, remainingInkLevel, this);
-            else
-                plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
-            application.getDriverManager().setCurrentPlotter(plotter);
-            IController = (IController) plotter;
-        } catch (ClassCastException ex) {
-            //user probably want assign controller for real plotter
-            IPlotter plotter;
-            if (!isCriticalChargeUsed)
-                plotter = new InkController(rawIPlotter, remainingInkLevel, this, true);
-            else
-                plotter = new InkControllerWithCriticalCharge(rawIPlotter, remainingInkLevel, this);
-            application.getDriverManager().setCurrentPlotter(plotter);
-            IController = (IController) plotter;
+            application.getDriverManager().setCurrentPlotter(rawIPlotter);
         }
     }
 
@@ -102,11 +107,30 @@ public class InkGuiLogic implements IGuiLogic {
     }
 
     @Override
+    public void useInkController(ActionEvent e){
+        JCheckBox checkBox = (JCheckBox)e.getSource();
+        if(checkBox.isSelected()) {
+            isInkControlUsed = true;
+
+        } else {
+            isInkControlUsed = false;
+        }
+        //hack to run injectInkControl()
+        currentPlotter = application.getDriverManager().getCurrentPlotter();
+        application.getDriverManager().setCurrentPlotter(currentPlotter);
+    }
+
+    @Override
     public void useCriticalCharge(ActionEvent e){
         JCheckBox checkBox = (JCheckBox)e.getSource();
         isCriticalChargeUsed=checkBox.isSelected();
         //hack to run injectInkControl()
         currentPlotter = application.getDriverManager().getCurrentPlotter();
         application.getDriverManager().setCurrentPlotter(currentPlotter);
+    }
+
+    @Override
+    public boolean checkIfInkControlUsed(){
+        return isInkControlUsed;
     }
 }

@@ -1,6 +1,5 @@
 package edu.iis.powp.inkDriver;
 
-import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.app.Application;
 
 public class InkSetup {
