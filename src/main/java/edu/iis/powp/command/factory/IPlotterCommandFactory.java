@@ -9,24 +9,25 @@ import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 
 /**
- * Abstract factory for commands containing coordinates 
+ * Factory for IPlotterCommands
  */
 public class IPlotterCommandFactory {
 	private static HashMap<String,IPlotterCommand> commandsPool = new HashMap<>();
 	
 	/**
-	 *  Checking if passed coordinates are in coordinates pool, if not they are add to pool
-	 * @param coordinates Coordinates to check
-	 * @return pointer to coordinates from pool
+	 *  Checking if passed command is in commands pool, if not it returns null
+	 * @param commandId string which describe command
+	 * @return pointer to command from pool
 	 */
 	private IPlotterCommand checkPool(String commandId) {
 		return commandsPool.get(commandId);			
 	}
 	
 	/**
-	 * Create IPlotterCommand using coordinates from pool
-	 * @param coordinates which we want to have in returning object
-	 * @return IPlotterCommand using coordinates form pool
+	 * Create SetPositionCommand using command from pool, if it is not existing in pool it is created
+	 * @param x x position
+	 * @param y y position
+	 * @return instance of SetPositionCommand
 	 */
 	public SetPositionCommand makeSetPositionCommand(int x, int y) {
 		String commandId = "SetPositionCommand" + String.valueOf(x) + String.valueOf(y);
@@ -40,6 +41,12 @@ public class IPlotterCommandFactory {
 		return instance;	
 	}
 	
+	/**
+	 * Create DrawToCommand using command from pool, if it is not existing in pool it is created
+	 * @param x x position
+	 * @param y y position
+	 * @return instance of DrawToCommand
+	 */
 	public DrawToCommand makeDrawToCommand(int x, int y) {
 		String commandId = "DrawToCommand" + String.valueOf(x) + String.valueOf(y);
 		

@@ -103,7 +103,9 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 		add(loadButton, BorderLayout.NORTH);
 	}
 	
-	
+	/**
+	 * Stworzenie guzikow od zmiany pozycji komend
+	 */
 	private void setupMoveItemsButtons() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
