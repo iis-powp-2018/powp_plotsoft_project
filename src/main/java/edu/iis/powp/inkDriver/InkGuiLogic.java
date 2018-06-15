@@ -30,8 +30,8 @@ public class InkGuiLogic implements IGuiLogic {
     public void fillInk(){
         isShowedAlert = false;
         this.remainingInkLevel = maximumInkLevel;
-        IController.updateValueInController(remainingInkLevel);
         gui.updateValueInGui(remainingInkLevel, maximumInkLevel);
+        IController.updateValueInController(remainingInkLevel);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class InkGuiLogic implements IGuiLogic {
     public void updateMaxInkLevel(float value) {
         this.maximumInkLevel = value;
         updateValueInGui(remainingInkLevel, maximumInkLevel);
-        if(setup == true)
+        if(setup)
             setup = false;
         else
             fillInk();

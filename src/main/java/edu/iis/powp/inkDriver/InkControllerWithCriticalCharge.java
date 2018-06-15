@@ -42,6 +42,7 @@ public class InkControllerWithCriticalCharge implements IPlotter, IController, I
             command.execute(driver);
             executedCommandList.add(command);
             if(!inkController.isEnoughInk()) {
+                inkGuiLogic.informationPopUp();
                 executedCommandList.remove(command);
                 break;
             }
