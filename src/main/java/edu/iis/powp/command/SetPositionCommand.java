@@ -28,5 +28,10 @@ public class SetPositionCommand implements IPlotterCommand {
 		return posY;
 	}
 
+	@Override
+	public String toString() {
+		return "SetPositionCommand [posX=" + posX + ", posY=" + posY + "]";
+	}
+
 	
 }

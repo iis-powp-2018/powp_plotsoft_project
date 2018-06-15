@@ -6,9 +6,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -79,6 +82,7 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 	private void setupButtonWithActions() {
 		setupLoadCommandItemListButton();
 		setupRemoveItemFromListButton();
+		setupMoveItemsButtons();
 	}
 
 	/**
@@ -98,6 +102,22 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 		loadButton.addActionListener(new LoadActionListener(commandManager));
 		add(loadButton, BorderLayout.NORTH);
 	}
+	
+	
+	private void setupMoveItemsButtons() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		JButton moveUpButton = new JButton("Move up");
+		moveUpButton.addActionListener(new MoveUpButtonListener(commandManager));
+		panel.add(moveUpButton);
+		
+		JButton moveDownButton = new JButton("Move down");
+		moveDownButton.addActionListener(new MoveDownButtonListener(commandManager));
+		panel.add(moveDownButton);
+		
+		add(panel, BorderLayout.WEST);
+	}
 
 	/**
 	 * Ladowanie sub polecen na liste
@@ -112,8 +132,8 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 			subCommandCounter = 0;
 			Iterator<IPlotterCommand> iterator = currentCommand.iterator();
 			while (iterator.hasNext()) {
-				iterator.next();
-				model.addElement("Sub command " + counter);
+				IPlotterCommand buff = iterator.next();
+				model.addElement("Sub command " + counter + " " + buff.toString());
 				counter++;
 				subCommandCounter++;
 
@@ -156,6 +176,50 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
 			currentCommand.removeCommand(selectedIndex);
 			subCommandCounter--;
+
+		}
+	}
+	
+	private final class MoveUpButtonListener implements ActionListener {
+		private final PlotterCommandManager commandManager;
+
+		private MoveUpButtonListener(PlotterCommandManager commandManager) {
+			this.commandManager = commandManager;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			int selectedIndex = list.getSelectedIndex();
+			if(selectedIndex > 0) {
+				list.setSelectedIndex(selectedIndex - 1);
+				Object objOne = model.getElementAt(selectedIndex - 1);
+				Object objTwo = model.getElementAt(selectedIndex);
+				model.set(selectedIndex - 1, objTwo);
+				model.set(selectedIndex, objOne);
+				ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+				currentCommand.changeSequence(selectedIndex - 1, selectedIndex);
+			}
+
+		}
+	}
+	
+	private final class MoveDownButtonListener implements ActionListener {
+		private final PlotterCommandManager commandManager;
+
+		private MoveDownButtonListener(PlotterCommandManager commandManager) {
+			this.commandManager = commandManager;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			int selectedIndex = list.getSelectedIndex();
+			if(selectedIndex < model.size() - 1) {
+				list.setSelectedIndex(selectedIndex + 1);
+				Object objOne = model.getElementAt(selectedIndex + 1);
+				Object objTwo = model.getElementAt(selectedIndex);
+				model.set(selectedIndex + 1, objTwo);
+				model.set(selectedIndex, objOne);
+				ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+				currentCommand.changeSequence(selectedIndex + 1, selectedIndex);
+			}
 
 		}
 	}
