@@ -11,5 +11,7 @@ public interface IGuiLogic {
     void setGui(IGui gui);
     void updateMaxInkLevel(float value);
     void changeInkLevel(int i);
+    void useInkController(ActionEvent e);
     void useCriticalCharge(ActionEvent e);
+    boolean checkIfInkControlUsed();
 }

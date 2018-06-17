@@ -24,6 +24,13 @@ public class InkGui extends JFrame implements WindowComponent, IGui{
 
         GridBagConstraints c = new GridBagConstraints();
 
+        JCheckBox inkControlCheckBox = new JCheckBox("Use Ink Controller", false);
+        inkControlCheckBox.addActionListener((ActionEvent e) -> guiLogic.useInkController(e));
+        c.weightx = 1;
+        c.gridx = 0;
+        c.weighty = 1;
+        content.add(inkControlCheckBox,c);
+
         JCheckBox criticalChargeCheckBox = new JCheckBox("Use Critical Charge", false);
         criticalChargeCheckBox.addActionListener((ActionEvent e) -> guiLogic.useCriticalCharge(e));
         c.weightx = 1;

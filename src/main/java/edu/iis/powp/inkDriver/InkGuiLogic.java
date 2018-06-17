@@ -1,5 +1,6 @@
 package edu.iis.powp.inkDriver;
 
+import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.app.Application;
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class InkGuiLogic implements IGuiLogic {
     private Application application;
     private IPlotter currentPlotter, rawIPlotter;
     private IGui gui;
-    private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false;
+    private boolean isShowedAlert = false, setup = true, isCriticalChargeUsed = false, isInkControlUsed = false;
     private float maximumInkLevel = 500;
     private float remainingInkLevel = 500;
     private DefaultLineKeeper defaultLineKeeper = new DefaultLineKeeper();
@@ -36,8 +37,7 @@ public class InkGuiLogic implements IGuiLogic {
 
     @Override
     public void injectInkControl(){
-        if(!(application.getDriverManager().getCurrentPlotter() instanceof  InkController || application.getDriverManager().getCurrentPlotter() instanceof InkControllerWithCriticalCharge))
-            rawIPlotter = application.getDriverManager().getCurrentPlotter();
+        setUndecoratedPlotter(application.getDriverManager().getCurrentPlotter());
 
         try {
             defaultLineKeeper.checkLine(rawIPlotter);
@@ -58,6 +58,11 @@ public class InkGuiLogic implements IGuiLogic {
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
+    }
+
+    private void setUndecoratedPlotter(IPlotter plotter) {
+        if(!(plotter instanceof InkController || plotter instanceof InkControllerWithCriticalCharge))
+            rawIPlotter = plotter;
     }
 
     @Override
@@ -102,11 +107,32 @@ public class InkGuiLogic implements IGuiLogic {
     }
 
     @Override
+    public void useInkController(ActionEvent e){
+        JCheckBox checkBox = (JCheckBox)e.getSource();
+        if(checkBox.isSelected()) {
+            isInkControlUsed = true;
+            currentPlotter = application.getDriverManager().getCurrentPlotter();
+            application.getDriverManager().setCurrentPlotter(currentPlotter);
+
+        } else {
+            isInkControlUsed = false;
+            if(!(rawIPlotter instanceof ClientPlotter))
+                defaultLineKeeper.checkLine(rawIPlotter);
+            application.getDriverManager().setCurrentPlotter(rawIPlotter);
+        }
+    }
+
+    @Override
     public void useCriticalCharge(ActionEvent e){
         JCheckBox checkBox = (JCheckBox)e.getSource();
         isCriticalChargeUsed=checkBox.isSelected();
         //hack to run injectInkControl()
         currentPlotter = application.getDriverManager().getCurrentPlotter();
         application.getDriverManager().setCurrentPlotter(currentPlotter);
+    }
+
+    @Override
+    public boolean checkIfInkControlUsed(){
+        return isInkControlUsed;
     }
 }

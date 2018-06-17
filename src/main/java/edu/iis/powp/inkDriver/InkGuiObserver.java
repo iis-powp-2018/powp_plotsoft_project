@@ -13,7 +13,8 @@ public class InkGuiObserver implements Subscriber {
 
     @Override
     public void update() {
-        guiLogic.injectInkControl();
+        if(guiLogic.checkIfInkControlUsed())
+            guiLogic.injectInkControl();
     }
 
 }
