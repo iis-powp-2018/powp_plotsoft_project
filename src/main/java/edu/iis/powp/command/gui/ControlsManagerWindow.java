@@ -6,6 +6,7 @@ import edu.iis.powp.app.Application;
 import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.manager.PlotterControlsManager;
 import edu.iis.powp.decorator.*;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
@@ -18,13 +19,11 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 
 
 	private static final long serialVersionUID = 9204679248304669948L;
-	private Application application;
-	private IPlotter newPlotter;
-	private DriverManager driverManager;
+
+	private PlotterControlsManager controlsManager;
 
 	public ControlsManagerWindow(Application application) {
-
-		this.application = application;
+		controlsManager = new PlotterControlsManager(application);
 
 		this.setTitle("Controls Manager");
 		this.setSize(400, 400);
@@ -35,7 +34,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		GridBagConstraints c = new GridBagConstraints();
 
 		JButton btnZoomIn = new JButton("Zoom In");
-		btnZoomIn.addActionListener((ActionEvent e) -> this.zoomInWindow());
+		btnZoomIn.addActionListener((ActionEvent e) -> controlsManager.zoomInWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -43,7 +42,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnZoomIn, c);
 
 		JButton btnZoomOut = new JButton("Zoom Out");
-		btnZoomOut.addActionListener((ActionEvent e) -> this.zoomOutWindow());
+		btnZoomOut.addActionListener((ActionEvent e) -> controlsManager.zoomOutWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -51,7 +50,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnZoomOut, c);
 
 		JButton btnRotateLeft = new JButton("Rotate Left");
-		btnRotateLeft.addActionListener((ActionEvent e) -> this.rotateLeftWindow());
+		btnRotateLeft.addActionListener((ActionEvent e) -> controlsManager.rotateLeftWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -59,7 +58,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnRotateLeft, c);
 
 		JButton btnRotateRight = new JButton("Rotate Right");
-		btnRotateRight.addActionListener((ActionEvent e) -> this.rotateRightWindow());
+		btnRotateRight.addActionListener((ActionEvent e) -> controlsManager.rotateRightWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -67,7 +66,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnRotateRight, c);
 
 		JButton btnFlipVertical = new JButton("Flip Vertical");
-		btnFlipVertical.addActionListener((ActionEvent e) -> this.flipVerticalWindow());
+		btnFlipVertical.addActionListener((ActionEvent e) -> controlsManager.flipVerticalWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -75,7 +74,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnFlipVertical, c);
 
 		JButton btnFlipHorizontal = new JButton("Flip Horizontal");
-		btnFlipHorizontal.addActionListener((ActionEvent e) -> this.flipHorizontalWindow());
+		btnFlipHorizontal.addActionListener((ActionEvent e) -> controlsManager.flipHorizontalWindow());
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -83,7 +82,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		content.add(btnFlipHorizontal, c);
 
         JButton btnMoveRight = new JButton("Move Right");
-        btnMoveRight.addActionListener((ActionEvent e) -> this.moveRightWindow());
+        btnMoveRight.addActionListener((ActionEvent e) -> controlsManager.moveRightWindow());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
@@ -91,7 +90,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
         content.add(btnMoveRight, c);
 
         JButton btnMoveLeft = new JButton("Move Left");
-        btnMoveLeft.addActionListener((ActionEvent e) -> this.moveLeftWindow());
+        btnMoveLeft.addActionListener((ActionEvent e) -> controlsManager.moveLeftWindow());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
@@ -99,7 +98,7 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
         content.add(btnMoveLeft, c);
 
         JButton btnMoveUp = new JButton("Move Up");
-        btnMoveUp.addActionListener((ActionEvent e) -> this.moveUpWindow());
+        btnMoveUp.addActionListener((ActionEvent e) -> controlsManager.moveUpWindow());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
@@ -107,131 +106,13 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
         content.add(btnMoveUp, c);
 
         JButton btnMoveDown = new JButton("Move Down");
-        btnMoveDown.addActionListener((ActionEvent e) -> this.moveDownWindow());
+        btnMoveDown.addActionListener((ActionEvent e) -> controlsManager.moveDownWindow());
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.gridx = 0;
         c.weighty = 1;
         content.add(btnMoveDown, c);
 	}
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-    private void moveDownWindow() {
-        newPlotter = new MoveDownPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
-        commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void moveUpWindow() {
-        newPlotter = new MoveUpPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
-        commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void moveLeftWindow() {
-        newPlotter = new MoveLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
-        commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void moveRightWindow() {
-        newPlotter = new MoveRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-        DrawerFeature.getDrawerController().clearPanel();
-        commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void flipHorizontalWindow() {
-        newPlotter = new FlipHorizontalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-		    DrawerFeature.getDrawerController().clearPanel();
-		    commandHistory();
-	}
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void flipVerticalWindow() {
-		    newPlotter = new FlipVerticalPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-		    DrawerFeature.getDrawerController().clearPanel();
-		    commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void rotateRightWindow() {
-        newPlotter = new RotateRightPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-		    DrawerFeature.getDrawerController().clearPanel();
-		    commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void rotateLeftWindow() {
-        newPlotter = new RotateLeftPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-		    DrawerFeature.getDrawerController().clearPanel();
-		    commandHistory();
-	}
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void zoomOutWindow() {
-		    newPlotter = new ZoomOutPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-        application.getDriverManager().setCurrentPlotter(newPlotter);
-		    DrawerFeature.getDrawerController().clearPanel();
-		    commandHistory();
-    }
-
-	/**
-	 * This method changes data injected into actual IPlotter to change its behaviour.
-	 */
-	private void zoomInWindow() {
-		    newPlotter = new ZoomInPlotterDecorator(application.getDriverManager().getCurrentPlotter());
-		    application.getDriverManager().setCurrentPlotter(newPlotter);
-		DrawerFeature.getDrawerController().clearPanel();
-		commandHistory();
-	}
-	/**
-	 * This method holds information about currently drawn simulation.
-	 */
-	private void commandHistory() {
-		for (String command: CommandsFeature.commandList) {
-			if (command.equals("figureScript1")) {
-				FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
-			}
-			if (command.equals("figureScript2")) {
-				FiguresJoe.figureScript2(application.getDriverManager().getCurrentPlotter());
-			}
-			if (command.equals("secretCommand")) {
-				IPlotterCommand iPlotterCommand = CommandsFeature.getPlotterCommandManager().getCurrentCommand();
-				iPlotterCommand.execute(application.getDriverManager().getCurrentPlotter());
-			}
-		}
-	}
-
 
 	/**
 	 *
