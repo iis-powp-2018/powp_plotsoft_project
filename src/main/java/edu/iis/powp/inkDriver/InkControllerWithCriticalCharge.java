@@ -30,10 +30,12 @@ public class InkControllerWithCriticalCharge implements IPlotter, IController, I
 
     @Override
     public void drawTo(int x, int y) {
-        if(inkController.isEnoughInk(x,y))
+        if(inkController.isEnoughInkForDrawing(x,y))
             inkController.drawTo(x,y);
-        else
-            commandList.add(new DrawToCommand(x,y));
+        else {
+            commandList.add(new DrawToCommand(x, y));
+            inkGuiLogic.informationPopUp();
+        }
     }
 
     @Override

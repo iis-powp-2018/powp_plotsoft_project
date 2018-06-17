@@ -37,8 +37,7 @@ public class InkGuiLogic implements IGuiLogic {
 
     @Override
     public void injectInkControl(){
-        if(!(application.getDriverManager().getCurrentPlotter() instanceof  InkController || application.getDriverManager().getCurrentPlotter() instanceof InkControllerWithCriticalCharge))
-            rawIPlotter = application.getDriverManager().getCurrentPlotter();
+        setUndecoratedPlotter(application.getDriverManager().getCurrentPlotter());
 
         try {
             defaultLineKeeper.checkLine(rawIPlotter);
@@ -59,6 +58,11 @@ public class InkGuiLogic implements IGuiLogic {
             application.getDriverManager().setCurrentPlotter(plotter);
             IController = (IController) plotter;
         }
+    }
+
+    private void setUndecoratedPlotter(IPlotter plotter) {
+        if(!(plotter instanceof InkController || plotter instanceof InkControllerWithCriticalCharge))
+            rawIPlotter = plotter;
     }
 
     @Override
