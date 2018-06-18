@@ -4,8 +4,6 @@ import edu.iis.client.plottermagic.IPlotter;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.ILine;
 
-import java.util.ArrayList;
-
 /**
  * Line adapter - IPlotter with DrawPanelController object.
  */
@@ -13,7 +11,6 @@ public class LineAdapterPlotterDriver implements IPlotter {
 	private ILine line;
 	private int startX = 0, startY = 0;
 	private String name;
-
 
 	private DrawPanelController drawController;
 
