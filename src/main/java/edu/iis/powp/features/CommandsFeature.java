@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class CommandsFeature {
 
 	private static PlotterCommandManager commandManager;
-	public static ArrayList<String> commandList = new ArrayList<>();
+	//public static ArrayList<String> commandList = new ArrayList<>();
 
 	public static void setupCommandManager() {
 		commandManager = new PlotterCommandManager();
