@@ -3,16 +3,16 @@ package edu.iis.powp.decorator;
 import edu.iis.client.plottermagic.IPlotter;
 
 public abstract class PlotterDecorator implements IPlotter{
-
-
     protected IPlotter originalPlotter;
+    protected String transformation;
 
     /**
      * Default constructor.
      * @param originalPlotter instance of IPlotter object.
      */
-    public PlotterDecorator(IPlotter originalPlotter) {
+    public PlotterDecorator(IPlotter originalPlotter, String transformation) {
         this.originalPlotter = originalPlotter;
+        this.transformation = transformation;
     }
 
     /**
