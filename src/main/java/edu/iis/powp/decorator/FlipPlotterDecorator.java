@@ -2,7 +2,7 @@ package edu.iis.powp.decorator;
 
 import edu.iis.client.plottermagic.IPlotter;
 
-public class FlipHorizontalPlotterDecorator extends PlotterDecorator {
+public class FlipPlotterDecorator extends PlotterDecorator {
     /**
      * For inverting points horizontal.
      */
@@ -12,8 +12,8 @@ public class FlipHorizontalPlotterDecorator extends PlotterDecorator {
      * Default constructor.
      * @param originalPlotter instance of decorator.
      */
-    public FlipHorizontalPlotterDecorator(IPlotter originalPlotter) {
-        super(originalPlotter);
+    public FlipPlotterDecorator(IPlotter originalPlotter, String transformation) {
+        super(originalPlotter, transformation);
     }
 
     /**
@@ -23,7 +23,10 @@ public class FlipHorizontalPlotterDecorator extends PlotterDecorator {
      */
     @Override
     public void drawTo(int i, int i1) {
-        i *= scale;
+        if(super.transformation.equalsIgnoreCase("flipHorizontal"))
+            i *= scale;
+        else if (super.transformation.equalsIgnoreCase("flipVertical"))
+            i1 *= scale;
         originalPlotter.drawTo(i, i1);
     }
 
@@ -34,7 +37,10 @@ public class FlipHorizontalPlotterDecorator extends PlotterDecorator {
      */
     @Override
     public void setPosition(int i, int i1) {
-        i *= scale;
+        if(super.transformation.equalsIgnoreCase("flipHorizontal"))
+            i *= scale;
+        else if (super.transformation.equalsIgnoreCase("flipVertical"))
+            i1 *= scale;
         originalPlotter.setPosition(i, i1);
     }
 }
