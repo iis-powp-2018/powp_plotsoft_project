@@ -7,7 +7,7 @@ import static java.util.logging.Level.WARNING;
 public class InkInformer implements Observator {
     @Override
     public void inform(float inkLevel) {
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(WARNING, "Ink Level on too low level, impossible to draw." +
-                                                                        "\n\tOnly " + String.format("%.2f", inkLevel) + " units remaining");
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(WARNING, String.format("%.2f", inkLevel) +
+                                                                        " units of ink remaining.");
     }
 }
