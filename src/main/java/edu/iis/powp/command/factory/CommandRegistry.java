@@ -1,5 +1,6 @@
 package edu.iis.powp.command.factory;
 
+import edu.iis.powp.command.IPlotterCommand;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ public final class CommandRegistry {
     public CommandRegistry() {
     }
 
-    public void registerCommand(Class commandClass, Class<?> ... parameterTypes) throws Throwable {
+    public void registerCommand(Class<? extends IPlotterCommand> commandClass, Class ... parameterTypes) throws Throwable {
         Constructor constructor = commandClass.getConstructor(parameterTypes);
         registeredCommands.add(constructor);
     }
