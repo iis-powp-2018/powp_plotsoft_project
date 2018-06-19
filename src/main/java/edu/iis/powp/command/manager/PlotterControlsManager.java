@@ -14,9 +14,11 @@ public class PlotterControlsManager {
 
     private Application application;
     private IPlotter newPlotter;
+    private Boolean history;
 
     public PlotterControlsManager(Application application) {
         this.application = application;
+        history = true;
     }
 
     /**
@@ -119,12 +121,20 @@ public class PlotterControlsManager {
         commandHistory();
     }
 
+    /**
+     * This method is enabling / disabling use of commandHistory method
+     */
+    public void enableHistory(){
+        history = !history;
+    }
+
     public static ArrayList<String> commandList = new ArrayList<>();
 
     /**
      * This method holds information about currently drawn simulation.
      */
     private void commandHistory() {
+        if(history)
         for (String command: commandList) {
             if (command.equals("figureScript1")) {
                 FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
