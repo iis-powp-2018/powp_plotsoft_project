@@ -8,6 +8,8 @@ import edu.iis.powp.decorator.*;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
 
+import java.util.ArrayList;
+
 public class PlotterControlsManager {
 
     private Application application;
@@ -116,11 +118,14 @@ public class PlotterControlsManager {
         DrawerFeature.getDrawerController().clearPanel();
         commandHistory();
     }
+
+    public static ArrayList<String> commandList = new ArrayList<>();
+
     /**
      * This method holds information about currently drawn simulation.
      */
     private void commandHistory() {
-        for (String command: CommandsFeature.commandList) {
+        for (String command: commandList) {
             if (command.equals("figureScript1")) {
                 FiguresJoe.figureScript1(application.getDriverManager().getCurrentPlotter());
             }
