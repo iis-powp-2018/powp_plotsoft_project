@@ -13,6 +13,7 @@ import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.controllers.ink.LinePlotterInkControlDriver;
 import edu.iis.powp.controllers.ink.SetupInkControllerMenu;
+import edu.iis.powp.commandtransformer.CommandTransformer;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
@@ -75,7 +76,7 @@ public class TestPlotterApp {
 		application.addDriver("Special line Simulator", plotter);
 		application.updateDriverInfo();
 	}
-
+cc428dcb40ab5420b7357110551afb38959ff72f
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
@@ -93,7 +94,6 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupLogger(Application application) {
-
 		application.addComponentMenu(Logger.class, "Logger", 0);
 		application.addComponentMenuElement(Logger.class, "Clear log",
 				(ActionEvent e) -> application.flushLoggerOutput());
@@ -107,7 +107,7 @@ public class TestPlotterApp {
 	}
 
 	/**
-	 * Launch the application.
+	 * Launch the application.>>>>>>> master
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -119,6 +119,7 @@ public class TestPlotterApp {
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
+				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
 
 				SetupInkControllerMenu.setupInkControllerMenu(app);
