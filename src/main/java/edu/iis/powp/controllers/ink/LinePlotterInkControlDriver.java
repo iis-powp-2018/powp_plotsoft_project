@@ -15,6 +15,7 @@ public class LinePlotterInkControlDriver implements IPlotter {
     public LinePlotterInkControlDriver(LineAdapterPlotterDriver plotter) {
         this.plotter = plotter;
         this.inkController = SimmulationInkController.getInstance();
+        this.inkController.addObservator(new InkInformer());
     }
 
     @Override

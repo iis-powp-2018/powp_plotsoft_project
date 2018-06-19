@@ -15,7 +15,6 @@ public class SimmulationInkController implements InkControllerInterface, Observe
 	private SimmulationInkController() {
 		inkLevel = MAX_LEVEL_INK;
 		observators = new ArrayList<>();
-		addObservator(new InkInformer());
 	};
 
 	/**
