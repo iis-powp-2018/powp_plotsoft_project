@@ -5,6 +5,7 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 
 import java.util.logging.Logger;
 
+import static edu.iis.powp.controllers.ink.CalculateLineLength.calculateLineLength;
 import static java.util.logging.Level.WARNING;
 
 public class LinePlotterInkControlDriver implements IPlotter {
@@ -40,9 +41,5 @@ public class LinePlotterInkControlDriver implements IPlotter {
                                                             "Ink Level on too low level, impossible to draw.");
             inkController.notifyObservators();
         }
-    }
-
-    private float calculateLineLength(int startX, int startY, int x, int y) {
-        return (float) Math.sqrt((startX - x) * (startX - x) + (startY - y) * (startY - y));
     }
 }

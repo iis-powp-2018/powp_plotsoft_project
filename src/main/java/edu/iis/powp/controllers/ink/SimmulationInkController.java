@@ -49,7 +49,6 @@ public class SimmulationInkController implements InkControllerInterface, Observe
 		if (inkLevel >= level) {
 			return true;
 		} else {
-
 			return false;
 		}
 	}
