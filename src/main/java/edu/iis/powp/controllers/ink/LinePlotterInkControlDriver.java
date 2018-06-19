@@ -25,7 +25,7 @@ public class LinePlotterInkControlDriver implements IPlotter {
     @Override
     public void drawTo(int x, int y) {
         float lineLength = calculateLineLength(plotter.getStartX(), plotter.getStartY(), x, y);
-        boolean enoughInk = inkController.checkInkIsEnough(lineLength);
+        boolean enoughInk = inkController.isInkEnough(lineLength);
 
         if(enoughInk) {
             plotter.getLine().setStartCoordinates(plotter.getStartX(), plotter.getStartY());

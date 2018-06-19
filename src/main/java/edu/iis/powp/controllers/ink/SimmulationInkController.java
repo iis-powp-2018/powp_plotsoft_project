@@ -46,11 +46,11 @@ public class SimmulationInkController implements InkControllerInterface, Observe
 	}
 
 	@Override
-	public boolean checkInkIsEnough(float level) {
+	public boolean isInkEnough(float level) {
 		if (inkLevel >= level) {
 			return true;
 		} else {
-			notifyObservators();
+
 			return false;
 		}
 	}

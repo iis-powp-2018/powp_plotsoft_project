@@ -22,9 +22,9 @@ public interface InkControllerInterface {
     void fillInk();
 
     /**
-     * Checks if enough ink for drawin.
+     * Checks if enough ink for drawing.
      * @param level to check
      * @return true if there is enough ink, false if there is not
      */
-    boolean checkInkIsEnough(float level);
+    boolean isInkEnough(float level);
 }
