@@ -18,6 +18,7 @@ import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
+import edu.iis.powp.inkDriver.*;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -118,6 +119,7 @@ public class TestPlotterApp {
 				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
 				setupWindows(app);
+				InkSetup.InkSetupDriver(app);
 
 				app.setVisibility(true);
 			}
