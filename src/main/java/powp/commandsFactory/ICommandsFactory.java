@@ -1,10 +1,12 @@
 package powp.commandsFactory;
 
-import powp.commandManager.ICommand;
+import java.util.List;
+
+import edu.iis.powp.command.IPlotterCommand;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 public interface ICommandsFactory {
-    public ICommand getCommand(final String key) throws IllegalFactoryObjectName;
-    public ICommand cloneCommand(final String key) throws IllegalFactoryObjectName;
-    public void addCommandToFactory(ICommand command, final String key) throws IllegalFactoryObjectName;
-    public void deleteObject(final String key) throws IllegalFactoryObjectName;
+    IPlotterCommand getCommand(final String key) throws IllegalFactoryObjectName;
+    void addCommandToFactory(IPlotterCommand command, final String key) throws IllegalFactoryObjectName;
+    void deleteObject(final String key) throws IllegalFactoryObjectName;
+    List<String> getRegisteredCommands();
 }
