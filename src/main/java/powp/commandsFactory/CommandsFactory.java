@@ -1,7 +1,8 @@
 package powp.commandsFactory;
 
 import java.util.ArrayList;
-import powp.commandManager.ICommand;
+
+import edu.iis.powp.command.IPlotterCommand;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 import java.util.HashMap;
@@ -10,22 +11,18 @@ import java.util.Map;
 
 public class CommandsFactory implements  ICommandsFactory {
     @Override
-    public ICommand getCommand(final String key) throws IllegalFactoryObjectName {
-        ICommand candidate = commandsCollection.get(key);
+    public IPlotterCommand getCommand(final String key) throws IllegalFactoryObjectName {
+        IPlotterCommand candidate = commandsCollection.get(key);
         if (candidate == null) {
             throw new IllegalFactoryObjectName("");
         }
         return candidate;
     }
 
-    @Override
-    public ICommand cloneCommand(final String key) throws IllegalFactoryObjectName {
-        return null;
-    }
 
     @Override
-    public void addCommandToFactory(ICommand command, final String key) throws IllegalFactoryObjectName {
-        ICommand candidate = commandsCollection.get(key);
+    public void addCommandToFactory(IPlotterCommand command, final String key) throws IllegalFactoryObjectName {
+        IPlotterCommand candidate = commandsCollection.get(key);
         if (candidate != null) {
             throw new IllegalFactoryObjectName("");
         } else {
@@ -35,12 +32,11 @@ public class CommandsFactory implements  ICommandsFactory {
 
     @Override
     public void deleteObject(final String key) throws IllegalFactoryObjectName {
-        ICommand candidate = commandsCollection.get(key);
+        IPlotterCommand candidate = commandsCollection.get(key);
         if(candidate == null) {
             throw new IllegalFactoryObjectName("");
         } else {
             commandsCollection.remove(candidate);
-            // Sprawdzić czy zadziała w ogóle.
         }
 
     }
@@ -52,5 +48,5 @@ public class CommandsFactory implements  ICommandsFactory {
     public List<String> getRegisteredCommands() {
          return new ArrayList<>(commandsCollection.keySet());
     }
-    private Map<String, ICommand> commandsCollection;
+    private Map<String, IPlotterCommand> commandsCollection;
 }

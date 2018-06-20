@@ -1,6 +1,8 @@
 package powp.commandManager;
 
 import java.util.List;
+
+import edu.iis.client.plottermagic.IPlotter;
 import powp.commandManager.exceptions.FactoryNullPointerException;
 import powp.commandManager.exceptions.IllegalCommandArguments;
 import powp.commandManager.exceptions.IllegalCommandName;
@@ -9,12 +11,10 @@ import powp.commandsFactory.ICommandsFactory;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
 public interface ICommandsManager {
-    public void sendMessage(final String commandSequence) throws IllegalCommandArguments, IllegalCommandName, IllegalFactoryObjectName, FactoryNullPointerException;
-    public void registerObject (IReceiver receiver, final String objectName) throws IllegalRegisteredObjectName;
-    public void unregisterObject(IReceiver receiver, final String objectName) throws IllegalCommandArguments;
-    public void addObjectToGroup(IReceiver receiver, final String groupName) throws IllegalRegisteredObjectName;
-    public void destroyObjectsGroup(final String groupName) throws IllegalRegisteredObjectName;
-    public void registerCommandsFactory(ICommandsFactory factory);
-    public List<String> getRegisteredCommands() throws FactoryNullPointerException;
+    void sendMessage(final String commandSequence) throws IllegalCommandArguments, IllegalCommandName, IllegalFactoryObjectName, FactoryNullPointerException;
+    void registerObject (IPlotter receiver, final String objectName) throws IllegalRegisteredObjectName;
+    void unregisterObject(IPlotter receiver, final String objectName) throws IllegalCommandArguments;
+    void registerCommandsFactory(ICommandsFactory factory);
+    List<String> getRegisteredCommands() throws FactoryNullPointerException;
 
 }

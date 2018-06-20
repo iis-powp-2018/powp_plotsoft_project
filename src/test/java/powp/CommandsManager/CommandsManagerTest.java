@@ -1,14 +1,12 @@
 package powp.CommandsManager;
 
-import org.assertj.core.api.Assert;
-import org.assertj.core.api.Assertions;
+import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.powp.command.IPlotterCommand;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import powp.commandManager.CommandsManager;
-import powp.commandManager.ICommand;
-import powp.commandManager.IReceiver;
 import powp.commandManager.exceptions.IllegalCommandArguments;
 import powp.commandManager.exceptions.IllegalCommandName;
 import powp.commandManager.exceptions.IllegalRegisteredObjectName;
@@ -20,7 +18,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class CommandsManagerTest {
 
-    final ICommand command = new CommandTestSystemOut();
+    final IPlotterCommand command = new CommandTestSystemOut();
 
     @Test
     public void shouldThrowExceptionWrongObjectName() throws IllegalRegisteredObjectName, IllegalFactoryObjectName {
@@ -41,7 +39,7 @@ public class CommandsManagerTest {
 
         terminal.registerCommandsFactory(factory);
         factory.addCommandToFactory(command, "SystemOut");
-        terminal.registerObject(new ExampleReceiver(),"exampleObjectName");
+        terminal.registerObject(new ExamplePlotter(),"exampleObjectName");
 
         terminal.sendMessage(commandSequence);
 
@@ -65,8 +63,8 @@ public class CommandsManagerTest {
     public void shouldThrowExceptionWhenRedefinitionObjectName() throws IllegalRegisteredObjectName, IllegalFactoryObjectName {
         CommandsManager terminal = new CommandsManager();
 
-        terminal.registerObject(new ExampleReceiver(),"ExampleObjectName");
-        Throwable thrown = catchThrowable(() -> { terminal.registerObject(new ExampleReceiver(),"ExampleObjectName");});
+        terminal.registerObject(new ExamplePlotter(),"ExampleObjectName");
+        Throwable thrown = catchThrowable(() -> { terminal.registerObject(new ExamplePlotter(),"ExampleObjectName");});
 
         // when
         assertThat(thrown).isInstanceOf(Exception.class);
@@ -78,7 +76,7 @@ public class CommandsManagerTest {
 
         CommandsManager terminal = new CommandsManager();
         Throwable thrown;
-        IReceiver receiver = new ExampleReceiver();
+        IPlotter receiver = new ExamplePlotter();
 
         thrown = catchThrowable(() -> { terminal.registerObject(receiver, null);});
         AssertionsForClassTypes.assertThat(thrown).isInstanceOf(Exception.class);
@@ -89,8 +87,8 @@ public class CommandsManagerTest {
 
     public void shouldThrowExceptionWhenObjectIsUnregistered() throws IllegalRegisteredObjectName {
         CommandsManager terminal = new CommandsManager();
-        IReceiver receiver = new ExampleReceiver();
-        terminal.registerObject(new ExampleReceiver(),"ObjectName");
+        IPlotter receiver = new ExamplePlotter();
+        terminal.registerObject(new ExamplePlotter(),"ObjectName");
         Throwable thrown = catchThrowable(() -> { terminal.unregisterObject(receiver, "WrongCommandName");});
         // when
         assertThat(thrown).isInstanceOf(Exception.class);
@@ -105,7 +103,7 @@ public class CommandsManagerTest {
     public void shouldUnregisterObjectAndRegisterAgain() throws IllegalRegisteredObjectName, IllegalCommandArguments {
 
         CommandsManager terminal = new CommandsManager();
-        IReceiver receiver = new ExampleReceiver();
+        IPlotter receiver = new ExamplePlotter();
         terminal.registerObject(receiver,"ExampleObjectName");
         terminal.unregisterObject(receiver,"ExampleObjectName");
     }

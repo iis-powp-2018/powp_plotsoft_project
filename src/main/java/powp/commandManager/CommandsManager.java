@@ -2,6 +2,8 @@ package powp.commandManager;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.powp.command.IPlotterCommand;
 import powp.commandManager.exceptions.FactoryNullPointerException;
 import powp.commandManager.exceptions.IllegalCommandArguments;
 import powp.commandManager.exceptions.IllegalCommandName;
@@ -20,8 +22,8 @@ public class CommandsManager implements ICommandsManager {
     public final void sendMessage(final String commandSequence) throws IllegalCommandArguments, IllegalCommandName, IllegalFactoryObjectName {
         final  Iterable<String> iterable;
         final String[] arguments;
-        final ICommand command;
-        IReceiver candidate;
+        final IPlotterCommand command;
+        IPlotter candidate;
 
         if(commandsFactory == null) {
             throw new FactoryNullPointerException("");
@@ -39,7 +41,7 @@ public class CommandsManager implements ICommandsManager {
         }
 
         candidate = receivers.get(arguments[0]);
-        if(candidate == null || (!candidate.commandIsRegistered(arguments[1]))) {
+        if(candidate == null) { ////ndidate.commandIsRegistered(arguments[1]))) {
             throw new IllegalCommandName("");
         }
 
@@ -48,22 +50,22 @@ public class CommandsManager implements ICommandsManager {
         if(command == null) {
             throw new IllegalFactoryObjectName("");
         }
-        command.execute(candidate, arguments);
+        command.execute(candidate);
     }
 
     @Override
-    public void registerObject(IReceiver receiver, final String objectName) throws IllegalRegisteredObjectName {
+    public void registerObject(IPlotter receiver, final String objectName) throws IllegalRegisteredObjectName {
         if(keyIsBusy(objectName) || (!isCorrectCommandSequence(objectName))) {
             throw new IllegalRegisteredObjectName("");
         }
-        receiver.setTerminalHandle(this);
-        receiver.setObjectName(objectName);
+        //etTerminalHandle(this);
+        //ceiver.setObjectName(objectName);
         receivers.put(objectName, receiver);
     }
 
     @Override
-    public void unregisterObject(IReceiver command, final String objectName) throws IllegalCommandArguments {
-        IReceiver referenceToDeleteObject;
+    public void unregisterObject(IPlotter command, final String objectName) throws IllegalCommandArguments {
+        IPlotter referenceToDeleteObject;
 
         if(command == null || (!isCorrectCommandSequence(objectName))) {
             throw new IllegalCommandArguments("");
@@ -74,16 +76,6 @@ public class CommandsManager implements ICommandsManager {
             throw new IllegalCommandArguments("");
         }
         receivers.remove(objectName);
-    }
-
-    @Override
-    public void addObjectToGroup(IReceiver receiver, final String groupName) throws IllegalRegisteredObjectName {
-
-    }
-
-    @Override
-    public void destroyObjectsGroup(final String groupName) throws IllegalRegisteredObjectName {
-
     }
 
     @Override
@@ -117,6 +109,6 @@ public class CommandsManager implements ICommandsManager {
     private static Pattern pattern = Pattern.compile(patterSequence);
     private static Splitter splitter = Splitter.on(' ').trimResults().omitEmptyStrings();
     private ICommandsFactory commandsFactory;
-    private Map<String, IReceiver> receivers;
+    private Map<String, IPlotter> receivers;
     private Matcher matcher;
 }

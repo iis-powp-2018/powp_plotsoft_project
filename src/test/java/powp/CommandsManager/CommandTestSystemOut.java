@@ -1,15 +1,12 @@
 package powp.CommandsManager;
 
-import powp.commandManager.ICommand;
+import edu.iis.client.plottermagic.IPlotter;
+import edu.iis.powp.command.IPlotterCommand;
 
-public class CommandTestSystemOut implements ICommand {
-    @Override
-    public void execute(Object otherObject, String[] arguments) {
-        System.out.print("It's work.");
-    }
+public class CommandTestSystemOut implements IPlotterCommand {
 
     @Override
-    public ICommand clone() {
-        return null;
+    public void execute(IPlotter plotter) {
+        System.out.print("It works.");
     }
 }
