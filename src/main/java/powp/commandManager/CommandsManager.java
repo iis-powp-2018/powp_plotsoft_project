@@ -11,6 +11,7 @@ import powp.commandManager.exceptions.IllegalRegisteredObjectName;
 import powp.commandsFactory.ICommandsFactory;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,7 @@ public class CommandsManager implements ICommandsManager {
         receivers = new HashMap<>();
     }
 
-    protected boolean isCorrectCommandSequence (final String key) {
+    private boolean isCorrectCommandSequence (final String key) {
         if(key == null) {
             return false;
         }
@@ -99,11 +100,17 @@ public class CommandsManager implements ICommandsManager {
         return matcher.matches();
     }
 
+    @Override
     public List<String> getRegisteredCommands () throws FactoryNullPointerException {
         if(commandsFactory == null) {
             throw new FactoryNullPointerException("");
         }
         return commandsFactory.getRegisteredCommands();
+    }
+
+    @Override
+    public List<String> getRegisteredObjects () {
+        return new ArrayList<>(receivers.keySet());
     }
     private static String patterSequence = "[a-zA-Z0-9_\\s]*";
     private static Pattern pattern = Pattern.compile(patterSequence);

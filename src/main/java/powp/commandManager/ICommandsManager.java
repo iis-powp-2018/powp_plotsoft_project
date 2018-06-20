@@ -17,4 +17,5 @@ public interface ICommandsManager {
     void registerCommandsFactory(ICommandsFactory factory);
     List<String> getRegisteredCommands() throws FactoryNullPointerException;
 
+    List<String> getRegisteredObjects();
 }
