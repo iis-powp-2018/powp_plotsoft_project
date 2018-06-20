@@ -1,15 +1,8 @@
 package edu.iis.powp.command.gui;
 
-import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.app.Application;
-import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.app.gui.WindowComponent;
-import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.manager.PlotterControlsManager;
-import edu.iis.powp.decorator.*;
-import edu.iis.powp.features.CommandsFeature;
-import edu.iis.powp.features.DrawerFeature;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,38 +74,48 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(btnFlipHorizontal, c);
 
-        JButton btnMoveRight = new JButton("Move Right");
-        btnMoveRight.addActionListener((ActionEvent e) -> controlsManager.moveRightWindow());
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.gridx = 0;
-        c.weighty = 1;
-        content.add(btnMoveRight, c);
+		JButton btnMoveRight = new JButton("Move Right");
+		btnMoveRight.addActionListener((ActionEvent e) -> controlsManager.moveRightWindow());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnMoveRight, c);
 
-        JButton btnMoveLeft = new JButton("Move Left");
-        btnMoveLeft.addActionListener((ActionEvent e) -> controlsManager.moveLeftWindow());
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.gridx = 0;
-        c.weighty = 1;
-        content.add(btnMoveLeft, c);
+		JButton btnMoveLeft = new JButton("Move Left");
+		btnMoveLeft.addActionListener((ActionEvent e) -> controlsManager.moveLeftWindow());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnMoveLeft, c);
 
-        JButton btnMoveUp = new JButton("Move Up");
-        btnMoveUp.addActionListener((ActionEvent e) -> controlsManager.moveUpWindow());
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.gridx = 0;
-        c.weighty = 1;
-        content.add(btnMoveUp, c);
+		JButton btnMoveUp = new JButton("Move Up");
+		btnMoveUp.addActionListener((ActionEvent e) -> controlsManager.moveUpWindow());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnMoveUp, c);
 
-        JButton btnMoveDown = new JButton("Move Down");
-        btnMoveDown.addActionListener((ActionEvent e) -> controlsManager.moveDownWindow());
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.gridx = 0;
-        c.weighty = 1;
-        content.add(btnMoveDown, c);
+		JButton btnMoveDown = new JButton("Move Down");
+		btnMoveDown.addActionListener((ActionEvent e) -> controlsManager.moveDownWindow());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnMoveDown, c);
+
+
+		JButton btnHistory = new JButton("Enable / Disable history");
+		btnHistory.addActionListener((ActionEvent e) -> controlsManager.enableHistory());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnHistory, c);
 	}
+
 
 	/**
 	 *
@@ -125,5 +128,4 @@ public class ControlsManagerWindow extends JFrame implements WindowComponent {
 			this.setVisible(true);
 		}
 	}
-
 }
