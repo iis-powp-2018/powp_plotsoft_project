@@ -76,7 +76,7 @@ public class TestPlotterApp {
 		application.addDriver("Special line Simulator", plotter);
 		application.updateDriverInfo();
 	}
-cc428dcb40ab5420b7357110551afb38959ff72f
+
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
