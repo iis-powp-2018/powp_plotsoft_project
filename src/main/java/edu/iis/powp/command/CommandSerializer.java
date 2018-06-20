@@ -3,7 +3,6 @@ package edu.iis.powp.command;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import powp.InterfaceAdapter;
-import powp.commandManager.ICommand;
 
 import java.io.FileReader;
 import java.io.FileWriter;

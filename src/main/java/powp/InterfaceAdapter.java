@@ -2,7 +2,6 @@ package powp;
 
 import com.google.gson.*;
 import edu.iis.powp.command.IPlotterCommand;
-import powp.commandManager.ICommand;
 
 import java.lang.reflect.Type;
 import java.util.Map;

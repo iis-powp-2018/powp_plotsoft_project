@@ -1,6 +1,12 @@
 package edu.iis.powp.command.gui;
 
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.command.DrawToCommand;
+import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.SetPositionCommand;
+import edu.iis.powp.command.manager.PlotterCommandManager;
+import edu.iis.powp.features.CommandsFeature;
+import powp.commandsFactory.CommandsFactory;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -8,6 +14,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommandEditorWindow extends JFrame implements WindowComponent{
 
@@ -23,19 +30,28 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
     DefaultListModel<String> basicCommands;
     DefaultListModel<String> newCommands;
     ArrayList<String> arguments;
+    private  CommandsFactory commandsFactory;
+
+
+
+    public static List<IPlotterCommand> Commands = new ArrayList<>();
 
     public CommandEditorWindow(){
         setTitle("Command Editor");
         setSize(600, 400);
         setContentPane(mainPanel);
+        getAvailableCommands();
+
+       // commandsFactory.addCommandToFactory();
+       // <String,String> list =
 
         arguments = new ArrayList<>();
         basicCommands = new DefaultListModel<>();
         basicCommandsList.setModel(basicCommands);
 
-        for(int i = 0; i < 30; i++){
-            basicCommands.addElement(String.valueOf(i));
-        }
+            basicCommands.addElement("DrawTo");
+            basicCommands.addElement("SetPosition");
+
 
         newCommands = new DefaultListModel<>();
         newCommandList.setModel(newCommands);
@@ -64,7 +80,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
 
         argumentsTextField.getDocument().addDocumentListener(new DocumentListener() {
             private void saveArgument(){
-                if(newCommandList.getSelectedIndex() != -1) {
+                 if(newCommandList.getSelectedIndex() != -1) {
                     arguments.set(newCommandList.getSelectedIndex(), argumentsTextField.getText());
                 }
             }
@@ -89,7 +105,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
             argumentsTextField.setText("");
             arguments.remove(newCommandList.getSelectedIndex());
             newCommands.remove(newCommandList.getSelectedIndex());
-        });
+            });
 
         clearButton.addActionListener(e -> {
             newCommands.clear();
@@ -101,9 +117,36 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
         });
     }
 
+    private void getAvailableCommands() {
+
+        Commands.add(new DrawToCommand(0,0));
+        Commands.add(new SetPositionCommand(0,0));
+    }
+
     private boolean saveCommands(){
         // newCommands - nazwy nowych komend
         // arguments - lista argumentów do komend
+
+        List<IPlotterCommand> list = new ArrayList<>();
+
+        for (int i = 0; i < newCommands.getSize(); i++)
+        {
+           String[] args =  arguments.get(i).split(" ");
+
+            if(newCommands.get(i).equals("DrawTo"))
+            {
+                list.add(new DrawToCommand(Integer.parseInt(args[0]),Integer.parseInt(args[1])));
+
+            }
+            else
+            {
+                list.add(new SetPositionCommand(Integer.parseInt(args[0]),Integer.parseInt(args[1])));
+
+            }
+        }
+
+        PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
+        manager.setCurrentCommand(list, nameTextField.getText());
 
         return false;
     }
