@@ -131,8 +131,8 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
         // arguments - lista argumentów do komend
 
         factoryEditorAdapter.createNewCommand(newCommands,arguments,nameTextField.getText());
-        basicCommands.addElement(nameTextField.getText());
-        basicCommands.addElement(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().get(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().size()));
+//        basicCommands.addElement(nameTextField.getText());
+        basicCommands.addElement(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().get(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().size()-1));
 
         return false;
     }

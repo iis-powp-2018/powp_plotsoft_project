@@ -52,8 +52,8 @@ public class FactoryEditorAdapter {
             {
 
                 try {
-                    ICompoundCommand command = (ICompoundCommand) commandsFactory.getCommand(newCommands.get(i));
-                    executeCommand((newCommand) command);
+                    IPlotterCommand command = commandsFactory.getCommand(newCommands.get(i));
+                    executeCommand((newCommand) command, list);
                 } catch (IllegalFactoryObjectName illegalFactoryObjectName) {
                     illegalFactoryObjectName.printStackTrace();
                 }
@@ -73,7 +73,9 @@ public class FactoryEditorAdapter {
         }
     }
 
-    private void executeCommand(newCommand command) {
+    private void executeCommand(newCommand newCommand, List<IPlotterCommand> list) {
+        list.addAll(newCommand.list);
+
     }
 
     private class newCommand implements ICompoundCommand
