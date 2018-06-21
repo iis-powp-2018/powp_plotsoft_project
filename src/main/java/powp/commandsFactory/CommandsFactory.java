@@ -2,6 +2,7 @@ package powp.commandsFactory;
 
 import java.util.ArrayList;
 
+import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import powp.commandsFactory.exceptions.IllegalFactoryObjectName;
 
@@ -40,7 +41,6 @@ public class CommandsFactory implements  ICommandsFactory {
         }
 
     }
-
     public CommandsFactory() {
         commandsCollection = new HashMap<>();
     }

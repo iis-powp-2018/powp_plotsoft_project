@@ -1,5 +1,6 @@
 package edu.iis.powp.command.gui;
 
+import edu.iis.powp.adapter.FactoryEditorAdapter;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
@@ -30,7 +31,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
     DefaultListModel<String> basicCommands;
     DefaultListModel<String> newCommands;
     ArrayList<String> arguments;
-    private  CommandsFactory commandsFactory;
+    private FactoryEditorAdapter factoryEditorAdapter;
 
 
 
@@ -41,13 +42,14 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
         setSize(600, 400);
         setContentPane(mainPanel);
         getAvailableCommands();
-
+        factoryEditorAdapter = new FactoryEditorAdapter();
        // commandsFactory.addCommandToFactory();
        // <String,String> list =
 
         arguments = new ArrayList<>();
         basicCommands = new DefaultListModel<>();
         basicCommandsList.setModel(basicCommands);
+
 
             basicCommands.addElement("DrawTo");
             basicCommands.addElement("SetPosition");
@@ -127,26 +129,9 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
         // newCommands - nazwy nowych komend
         // arguments - lista argumentów do komend
 
-        List<IPlotterCommand> list = new ArrayList<>();
-
-        for (int i = 0; i < newCommands.getSize(); i++)
-        {
-           String[] args =  arguments.get(i).split(" ");
-
-            if(newCommands.get(i).equals("DrawTo"))
-            {
-                list.add(new DrawToCommand(Integer.parseInt(args[0]),Integer.parseInt(args[1])));
-
-            }
-            else
-            {
-                list.add(new SetPositionCommand(Integer.parseInt(args[0]),Integer.parseInt(args[1])));
-
-            }
-        }
-
-        PlotterCommandManager manager = CommandsFeature.getPlotterCommandManager();
-        manager.setCurrentCommand(list, nameTextField.getText());
+        factoryEditorAdapter.createNewCommand(newCommands,arguments,nameTextField.getText());
+        basicCommands.addElement(nameTextField.getText());
+        basicCommands.addElement(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().get(factoryEditorAdapter.getCommandsFactory().getRegisteredCommands().size()));
 
         return false;
     }
