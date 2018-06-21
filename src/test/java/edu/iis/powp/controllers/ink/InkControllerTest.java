@@ -23,7 +23,7 @@ public class InkControllerTest{
     private static ILine line;
     private static DrawPanelController controller;
     private static LineAdapterPlotterDriver linePlotterAdapter;
-    private static LinePlotterInkControlDriver linePlotter;
+    private static LinePlotterInkControlDriverDecorator linePlotter;
 
     @BeforeClass
     public static void setupSuite(){
@@ -32,7 +32,7 @@ public class InkControllerTest{
         line = LineFactory.getBasicLine();
         linePlotterAdapter = new LineAdapterPlotterDriver(
                 controller, line, "Ink controller tests");
-        linePlotter = new LinePlotterInkControlDriver(linePlotterAdapter);
+        linePlotter = new LinePlotterInkControlDriverDecorator(linePlotterAdapter);
         inkController = SimmulationInkController.getInstance();
     }
 

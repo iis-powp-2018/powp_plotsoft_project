@@ -8,13 +8,13 @@ import java.util.logging.Logger;
 import static edu.iis.powp.controllers.ink.CalculateLineLength.calculateLineLength;
 import static java.util.logging.Level.WARNING;
 
-public class LinePlotterInkControlDriver implements IPlotter {
+public class LinePlotterInkControlDriverDecorator implements IPlotter {
 
     private LineAdapterPlotterDriver plotter;
     private InkControllerInterface inkController;
     private Observed inkControllerObserved;
 
-    public LinePlotterInkControlDriver(LineAdapterPlotterDriver plotter) {
+    public LinePlotterInkControlDriverDecorator(LineAdapterPlotterDriver plotter) {
         this.plotter = plotter;
         this.inkController = SimmulationInkController.getInstance();
         this.inkControllerObserved = SimmulationInkController.getInstance();
