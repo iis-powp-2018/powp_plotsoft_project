@@ -38,7 +38,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent{
     public static List<IPlotterCommand> Commands = new ArrayList<>();
 
     public CommandEditorWindow(){
-        mainPanel = new JPanel();
+//        mainPanel = new JPanel();
         setTitle("Command Editor");
         setSize(600, 400);
         setContentPane(mainPanel);

@@ -35,7 +35,7 @@ public class FactoryEditorAdapter {
 
         for (int i = 0; i < newCommands.getSize(); i++)
         {
-            String[] args = null;
+            String[] args = new String[4];
             if(!arguments.get(i).equals(""))
                 args =  arguments.get(i).split(" ");
             if(newCommands.get(i).equals("DrawTo"))
