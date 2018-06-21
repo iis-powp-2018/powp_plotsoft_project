@@ -43,6 +43,29 @@ public class PlotterCommandManager {
 		commandName= name;
 
 	}
+	
+	public synchronized void setCurrentCommand(List<IPlotterCommand> commandList, String name) {
+		setCurrentCommand(new ICompoundCommand() {
+
+			List<IPlotterCommand> plotterCommands = commandList;
+
+			@Override
+			public void execute(IPlotter plotter) {
+				plotterCommands.forEach((c) -> c.execute(plotter));
+			}
+
+			@Override
+			public Iterator<IPlotterCommand> iterator() {
+				return plotterCommands.iterator();
+			}
+
+			@Override
+			public String toString() {
+				return name;
+			}
+		});
+
+	}
 
 	/**
 	 * Return current command.

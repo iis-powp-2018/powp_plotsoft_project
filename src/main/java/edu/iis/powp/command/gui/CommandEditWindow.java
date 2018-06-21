@@ -158,6 +158,7 @@ public class CommandEditWindow extends JFrame implements WindowComponent {
 
 		private LoadActionListener(PlotterCommandManager commandManager) {
 			this.commandManager = commandManager;
+			commandManager.setCurrentCommand(new ComplexCommand(commandManager.getCurrentCommand()));
 		}
 
 		public void actionPerformed(ActionEvent e) {
