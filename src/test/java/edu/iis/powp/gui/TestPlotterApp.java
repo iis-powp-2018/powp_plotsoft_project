@@ -9,6 +9,7 @@ import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
+import edu.iis.powp.command.gui.CommandEditorWindow;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
@@ -77,9 +78,14 @@ public class TestPlotterApp {
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
 
-		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
-				commandManager);
-		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
+        CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
+                commandManager);
+        CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
+
+		CommandEditorWindow commandEditor = new CommandEditorWindow();
+		application.addWindowComponent("Command Editor", commandEditor);
+
+
 	}
 
 	/**
