@@ -11,12 +11,14 @@ import static java.util.logging.Level.WARNING;
 public class LinePlotterInkControlDriver implements IPlotter {
 
     private LineAdapterPlotterDriver plotter;
-    private SimmulationInkController inkController;
+    private InkControllerInterface inkController;
+    private Observed inkControllerObserved;
 
     public LinePlotterInkControlDriver(LineAdapterPlotterDriver plotter) {
         this.plotter = plotter;
         this.inkController = SimmulationInkController.getInstance();
-        this.inkController.addObservator(new InkInformer());
+        this.inkControllerObserved = SimmulationInkController.getInstance();
+        this.inkControllerObserved.addObservator(new InkInformer());
     }
 
     @Override
@@ -39,7 +41,7 @@ public class LinePlotterInkControlDriver implements IPlotter {
         else {
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(WARNING,
                                                             "Ink Level on too low level, impossible to draw.");
-            inkController.notifyObservators();
+            inkControllerObserved.notifyObservators();
         }
     }
 }
