@@ -111,7 +111,8 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
                         for (Map.Entry<Parameter, JTextField> parameterJTextFieldEntry : textFields.entrySet()) {
                             Parameter param = parameterJTextFieldEntry.getKey();
                             JTextField value = parameterJTextFieldEntry.getValue();
-                            arguments.add(Integer.valueOf(value.getText()).intValue()); //FIXME
+                            Object paramValue = convertTextFieldValueToArgument(param, value.getText());
+                            arguments.add(paramValue); //FIXME
                         }
                         try {
                             IPlotterCommand element = constructor.newInstance(arguments.toArray());
@@ -217,6 +218,26 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
 
         drawPanelController.initialize(freePanel);
         lineAdapterPlotterDriver = new LineAdapterPlotterDriver(drawPanelController, LineFactory.getBasicLine(), "Command Factory Plotter");
+    }
+
+    private Object convertTextFieldValueToArgument(final Parameter param, final String text) {
+        switch (param.getType().getSimpleName()){
+            case "int":
+            case "Integer":
+                return Integer.valueOf(text);
+            case "double":
+            case "Double":
+                return Double.valueOf(text);
+            case "float":
+            case "Float":
+                return Float.valueOf(text);
+            case "String":
+                return text;
+            case "boolean":
+            case "Boolean":
+                return Boolean.valueOf(text);
+        }
+        return null;
     }
 
     @Override
