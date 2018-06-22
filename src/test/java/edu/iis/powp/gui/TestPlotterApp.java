@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.common.collect.Lists;
 import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
+import edu.iis.powp.command.ComplexCommand;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.factory.CommandFactoryWindow;
@@ -87,8 +89,12 @@ public class TestPlotterApp {
 
         CommandRegistry commandRegistry = new CommandRegistry();
         try {
-            commandRegistry.registerCommand(DrawToCommand.class, int.class, int.class);
-            commandRegistry.registerCommand(SetPositionCommand.class, int.class, int.class);
+            commandRegistry.registerBasicCommand(DrawToCommand.class, int.class, int.class);
+            commandRegistry.registerBasicCommand(SetPositionCommand.class, int.class, int.class);
+            commandRegistry.registerComplexCommand(new ComplexCommand(Lists.newArrayList(
+                                new SetPositionCommand(0,0),
+                                new DrawToCommand(10,10)
+            )), "Test command");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

@@ -7,8 +7,8 @@ final class TestFactory {
 
     public static void main(String[] args) throws Throwable {
         CommandRegistry cf = new CommandRegistry();
-        cf.registerCommand(DrawToCommand.class, int.class, int.class);
-        cf.registerCommand(SetPositionCommand.class, int.class, int.class);
-        System.out.println(cf.getRegisteredCommands().toString());
+        cf.registerBasicCommand(DrawToCommand.class, int.class, int.class);
+        cf.registerBasicCommand(SetPositionCommand.class, int.class, int.class);
+        System.out.println(cf.getRegisteredBasicCommands().toString());
     }
 }
