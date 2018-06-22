@@ -3,10 +3,11 @@ package edu.iis.powp.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.common.collect.Lists;
 import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
@@ -14,6 +15,7 @@ import edu.iis.powp.app.Application;
 import edu.iis.powp.command.ComplexCommand;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.factory.CommandFactoryWindow;
 import edu.iis.powp.command.factory.CommandRegistry;
@@ -108,10 +110,11 @@ public class TestPlotterApp {
         try {
             commandRegistry.registerBasicCommand(DrawToCommand.class, int.class, int.class);
             commandRegistry.registerBasicCommand(SetPositionCommand.class, int.class, int.class);
-            commandRegistry.registerComplexCommand(new ComplexCommand(Lists.newArrayList(
-                                new SetPositionCommand(0,0),
-                                new DrawToCommand(10,10)
-            ), "Test command"));
+            List<IPlotterCommand> commands = new ArrayList<>();
+            commands.add(new SetPositionCommand(0,0));
+            commands.add(new DrawToCommand(10,10));
+            commandRegistry.registerComplexCommand(new ComplexCommand(commands, "Test Command"));
+
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
