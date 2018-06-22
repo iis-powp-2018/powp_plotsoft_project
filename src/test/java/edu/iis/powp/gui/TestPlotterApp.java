@@ -2,6 +2,7 @@ package edu.iis.powp.gui;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.ComplexCommand;
 import edu.iis.powp.command.DrawToCommand;
+import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.factory.CommandFactoryWindow;
 import edu.iis.powp.command.factory.CommandRegistry;
@@ -88,6 +90,21 @@ public class TestPlotterApp {
         CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
 
         CommandRegistry commandRegistry = new CommandRegistry();
+        commandRegistry.addComplexCommandRegisterActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                Object source = e.getSource();
+                if(source instanceof ICompoundCommand) {
+                    ICompoundCommand command = (ICompoundCommand) source;
+                    application.addTest(command.getName(), new ActionListener() {
+                        @Override
+                        public void actionPerformed(final ActionEvent e) {
+                            command.execute(application.getDriverManager().getCurrentPlotter());
+                        }
+                    });
+                }
+            }
+        });
         try {
             commandRegistry.registerBasicCommand(DrawToCommand.class, int.class, int.class);
             commandRegistry.registerBasicCommand(SetPositionCommand.class, int.class, int.class);

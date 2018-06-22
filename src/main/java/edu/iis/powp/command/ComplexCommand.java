@@ -20,6 +20,11 @@ public final class ComplexCommand implements ICompoundCommand {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void execute(final IPlotter plotter) {
         for (IPlotterCommand command : commands) {
             command.execute(plotter);
@@ -30,4 +35,5 @@ public final class ComplexCommand implements ICompoundCommand {
     public String toString() {
         return name;
     }
+
 }

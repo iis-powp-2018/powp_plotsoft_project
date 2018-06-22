@@ -9,4 +9,5 @@ public interface ICompoundCommand extends IPlotterCommand {
 
 	public Iterator<IPlotterCommand> iterator();
 
+	public String getName();
 }

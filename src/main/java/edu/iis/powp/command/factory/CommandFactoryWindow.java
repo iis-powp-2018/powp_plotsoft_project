@@ -1,9 +1,11 @@
 package edu.iis.powp.command.factory;
 
+import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.features.DrawerFeature;
+import edu.kis.powp.drawer.panel.DrawPanelController;
+import edu.kis.powp.drawer.shape.LineFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,8 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
     private static final Integer COMMON_WIDTH = 100;
     private static final Integer COMMON_WIDTH2 = 160;
     private static final Integer COMMON_HEIGHT = 30;
+    private LineAdapterPlotterDriver lineAdapterPlotterDriver;
+    private DrawPanelController drawPanelController = new DrawPanelController();
 
 
     public CommandFactoryWindow(final CommandRegistry commandRegistry) {
@@ -86,7 +91,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
             @Override
             public void actionPerformed(final ActionEvent e) {
                 JFrame frame = new JFrame();
-                frame.setBounds(100,100,100,100);
+                frame.setBounds(100,100,200,100);
                 ConstructorDecorator selectedItem = (ConstructorDecorator) basicComboBox.getSelectedItem();
                 Constructor<? extends IPlotterCommand> constructor = selectedItem.getConstructor();
                 frame.setLayout(new GridLayout(constructor.getParameterCount() + 1, 2));
@@ -95,7 +100,6 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
                     JLabel label = new JLabel(parameter.getName());
                     frame.add(label);
                     JTextField field = new JTextField();
-                    field.setName(parameter.getName());
                     frame.add(field);
                     textFields.put(parameter, field);
                 }
@@ -110,7 +114,9 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
                             arguments.add(Integer.valueOf(value.getText()).intValue()); //FIXME
                         }
                         try {
-                            jListModel.addElement( constructor.newInstance(arguments.toArray()));
+                            IPlotterCommand element = constructor.newInstance(arguments.toArray());
+                            element.execute(lineAdapterPlotterDriver);
+                            jListModel.addElement(element);
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
@@ -143,6 +149,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
             public void actionPerformed(final ActionEvent e) {
                 ICompoundCommand selectedItem = (ICompoundCommand) complexComboBox.getSelectedItem();
                 jListModel.addElement(selectedItem);
+                selectedItem.execute(lineAdapterPlotterDriver);
             }
         });
         complexAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
@@ -159,11 +166,44 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(commandNameField,commandNameFieldConstraints);
 
         JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                String commandName = commandNameField.getText();
+                CommandFactory commandFactory = CommandFactory.create(commandName);
+                Enumeration<IPlotterCommand> elements = jListModel.elements();
+                while (elements.hasMoreElements()){
+                    IPlotterCommand command = elements.nextElement();
+                    commandFactory.addCommand(command);
+                }
+                ICompoundCommand newCommand = commandFactory.build();
+                commandRegistry.registerComplexCommand(newCommand);
+                complexComboBox.addItem(newCommand);
+                commandNameField.setText("");
+                jListModel.clear();
+                drawPanelController.clearPanel();
+            }
+        });
         saveButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints saveButtonConstraints = new GridBagConstraints();
         saveButtonConstraints.gridx = 1;
         saveButtonConstraints.gridy = 2;
         leftPanel.add(saveButton,saveButtonConstraints);
+
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                jListModel.clear();
+                drawPanelController.clearPanel();
+            }
+        });
+        clearButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
+        GridBagConstraints clearButtonConstraints = new GridBagConstraints();
+        clearButtonConstraints.gridx = 1;
+        clearButtonConstraints.gridy = 3;
+        leftPanel.add(clearButton,clearButtonConstraints);
+
 
         JScrollPane commandListScrollPane = new JScrollPane();
         GridBagConstraints gbcCommandListScrollPane = new GridBagConstraints();
@@ -174,7 +214,9 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         this.getContentPane().add(commandListScrollPane, gbcCommandListScrollPane);
         this.freePanel = new JPanel();
         commandListScrollPane.setViewportView(this.freePanel);
-        DrawerFeature.getDrawerController().initialize(freePanel);
+
+        drawPanelController.initialize(freePanel);
+        lineAdapterPlotterDriver = new LineAdapterPlotterDriver(drawPanelController, LineFactory.getBasicLine(), "Command Factory Plotter");
     }
 
     @Override
@@ -202,23 +244,4 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
             return constructor.getDeclaringClass().getSimpleName();
         }
     }
-
-//    private class ComplexCommandDecorator {
-//        final ICompoundCommand compoundCommand;
-//        final String name;
-//
-//        ComplexCommandDecorator(final ICompoundCommand compoundCommand, final String name) {
-//            this.compoundCommand = compoundCommand;
-//            this.name = name;
-//        }
-//
-//        ICompoundCommand getCompoundCommand() {
-//            return compoundCommand;
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return name;
-//        }
-//    }
 }
