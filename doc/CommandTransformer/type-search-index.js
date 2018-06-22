@@ -1,0 +1,82 @@
+typeSearchIndex = [{
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyCommandListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyFlipCommandListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyGraduationCommandListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyMoveCommandListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyRotationCommandListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "l": "ApplyStretchingCommandListener"
+}, {"p": "edu.iis.powp.commandtransformer.decorator", "l": "CommandDecorator"}, {
+    "p": "edu.iis.powp.commandtransformer",
+    "l": "CommandTransformer"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "CommandTransformerCreatorComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "CommandTransformerCreatorComponentModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui",
+    "l": "CommandTransformerCreatorWindow"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "l": "CompoundCommand"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "FlipCommandComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "FlipCommandComponentModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "l": "FlipCommandDecorator"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "GraduationCommandComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "GraduationCommandComponentModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "l": "GraduationCommandDecorator"
+}, {
+    "p": "edu.iis.powp.commandtransformer.adapter",
+    "l": "InterceptCoordinatesAdapterPlotterDriver"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "MoveCommandComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "MoveCommandComponentModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "l": "MoveCommandDecorator"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "PlotterMovementModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "RotationCommandComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "RotationCommandComponentModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "l": "RotationCommandDecorator"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "l": "StretchingCommandComponent"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "l": "StretchingCommandComponentModel"
+}, {"p": "edu.iis.powp.commandtransformer.decorator", "l": "StretchingCommandDecorator"}]
