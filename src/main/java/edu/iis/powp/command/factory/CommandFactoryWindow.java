@@ -2,10 +2,17 @@ package edu.iis.powp.command.factory;
 
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.features.DrawerFeature;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CommandFactoryWindow extends JFrame implements WindowComponent{
@@ -36,73 +43,128 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         mainGridBagLayout.columnWeights = new double[]{1.0D, 4.9E-324D};
         mainGridBagLayout.rowWeights = new double[]{0.0D, 1.0D};
         this.getContentPane().setLayout(mainGridBagLayout);
-        JPanel jPanel = new JPanel();
+        JPanel leftPanel = new JPanel();
         GridBagLayout gridBagLayout = new GridBagLayout();
-        jPanel.setLayout(gridBagLayout);
-        GridBagConstraints jPanelConstraints = new GridBagConstraints();
-        jPanelConstraints.fill = 1;
-        jPanelConstraints.gridheight = 1;
-        jPanelConstraints.gridx = 0;
-        jPanelConstraints.gridy = 0;
-        jPanelConstraints.weighty = 1;
-        this.getContentPane().add(jPanel, jPanelConstraints);
+        leftPanel.setLayout(gridBagLayout);
+        GridBagConstraints leftPanelConstraints = new GridBagConstraints();
+        leftPanelConstraints.fill = 1;
+        leftPanelConstraints.gridheight = 1;
+        leftPanelConstraints.gridx = 0;
+        leftPanelConstraints.gridy = 0;
+        leftPanelConstraints.weighty = 1;
+        this.getContentPane().add(leftPanel, leftPanelConstraints);
 
-        JComboBox basicComboBox = new JComboBox();
+        JList jList = new JList();
+        JScrollPane listScrollPane = new JScrollPane();
+        listScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        listScrollPane.setViewportView(jList);
+
+        listScrollPane.setPreferredSize(new Dimension(0, 520/2));
+        DefaultListModel<IPlotterCommand> jListModel = new DefaultListModel<>();
+        jList.setModel(jListModel);
+        GridBagConstraints jListConstraints = new GridBagConstraints();
+        jListConstraints.fill = 1;
+        jListConstraints.gridheight = 1;
+        jListConstraints.gridx = 0;
+        jListConstraints.gridy = 1;
+        jListConstraints.weighty = 1;
+        this.getContentPane().add(listScrollPane, jListConstraints);
+
+
+        JComboBox<ConstructorDecorator> basicComboBox = new JComboBox<>();
         basicComboBox.setPreferredSize(new Dimension(COMMON_WIDTH2, COMMON_HEIGHT));
-        for (Constructor<?> constructor : commandRegistry.getRegisteredBasicCommands()) {
+        for (Constructor<? extends IPlotterCommand> constructor : commandRegistry.getRegisteredBasicCommands()) {
             basicComboBox.addItem(new ConstructorDecorator(constructor));
         }
         GridBagConstraints basicComboBoxConstraints = new GridBagConstraints();
         basicComboBoxConstraints.gridx = 0;
         basicComboBoxConstraints.gridy = 0;
-        jPanel.add(basicComboBox,basicComboBoxConstraints);
+        leftPanel.add(basicComboBox,basicComboBoxConstraints);
 
         JButton basicAddButton = new JButton("Add");
+        basicAddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setBounds(100,100,100,100);
+                ConstructorDecorator selectedItem = (ConstructorDecorator) basicComboBox.getSelectedItem();
+                Constructor<? extends IPlotterCommand> constructor = selectedItem.getConstructor();
+                frame.setLayout(new GridLayout(constructor.getParameterCount() + 1, 2));
+                Map<Parameter, JTextField> textFields = new LinkedHashMap<>();
+                for (Parameter parameter : constructor.getParameters()) {
+                    JLabel label = new JLabel(parameter.getName());
+                    frame.add(label);
+                    JTextField field = new JTextField();
+                    field.setName(parameter.getName());
+                    frame.add(field);
+                    textFields.put(parameter, field);
+                }
+                JButton button = new JButton("Add");
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent actionEvent) {
+                        List<Object> arguments = new ArrayList<>();
+                        for (Map.Entry<Parameter, JTextField> parameterJTextFieldEntry : textFields.entrySet()) {
+                            Parameter param = parameterJTextFieldEntry.getKey();
+                            JTextField value = parameterJTextFieldEntry.getValue();
+                            arguments.add(Integer.valueOf(value.getText()).intValue()); //FIXME
+                        }
+                        try {
+                            jListModel.addElement( constructor.newInstance(arguments.toArray()));
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
+                        frame.dispose();
+                    }
+                });
+                frame.add(button);
+                frame.setVisible(true);
+            }
+        });
         basicAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints basicAddButtonConstraints = new GridBagConstraints();
         basicAddButtonConstraints.gridx = 1;
         basicAddButtonConstraints.gridy = 0;
-        jPanel.add(basicAddButton,basicAddButtonConstraints);
+        leftPanel.add(basicAddButton,basicAddButtonConstraints);
 
         JComboBox complexComboBox = new JComboBox();
         complexComboBox.setPreferredSize(new Dimension(COMMON_WIDTH2, COMMON_HEIGHT));
-        for(Map.Entry<ICompoundCommand, String> complexCommand : commandRegistry.getRegisteredComplexCommands().entrySet()){
-            complexComboBox.addItem(new ComplexCommandDecorator(complexCommand.getKey(), complexCommand.getValue()));
+        for(ICompoundCommand complexCommand : commandRegistry.getRegisteredComplexCommands()){
+            complexComboBox.addItem(complexCommand);
         }
         GridBagConstraints complexComboBoxConstraints = new GridBagConstraints();
         complexComboBoxConstraints.gridx = 0;
         complexComboBoxConstraints.gridy = 1;
-        jPanel.add(complexComboBox,complexComboBoxConstraints);
+        leftPanel.add(complexComboBox,complexComboBoxConstraints);
 
         JButton complexAddButton = new JButton("Add");
+        complexAddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                ICompoundCommand selectedItem = (ICompoundCommand) complexComboBox.getSelectedItem();
+                jListModel.addElement(selectedItem);
+            }
+        });
         complexAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints complexAddButtonConstraints = new GridBagConstraints();
         complexAddButtonConstraints.gridx = 1;
         complexAddButtonConstraints.gridy = 1;
-        jPanel.add(complexAddButton,complexAddButtonConstraints);
+        leftPanel.add(complexAddButton,complexAddButtonConstraints);
 
         JTextField commandNameField = new JTextField();
         commandNameField.setPreferredSize(new Dimension(COMMON_WIDTH2, COMMON_HEIGHT));
         GridBagConstraints commandNameFieldConstraints = new GridBagConstraints();
         commandNameFieldConstraints.gridx = 0;
         commandNameFieldConstraints.gridy = 2;
-        jPanel.add(commandNameField,commandNameFieldConstraints);
+        leftPanel.add(commandNameField,commandNameFieldConstraints);
 
         JButton saveButton = new JButton("Save");
         saveButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints saveButtonConstraints = new GridBagConstraints();
         saveButtonConstraints.gridx = 1;
         saveButtonConstraints.gridy = 2;
-        jPanel.add(saveButton,saveButtonConstraints);
+        leftPanel.add(saveButton,saveButtonConstraints);
 
-        JTable jTable = new JTable();
-        GridBagConstraints jTableConstraints = new GridBagConstraints();
-        jTableConstraints.fill = 1;
-        jTableConstraints.gridheight = 1;
-        jTableConstraints.gridx = 0;
-        jTableConstraints.gridy = 1;
-        jTableConstraints.weighty = 1;
-        this.getContentPane().add(jTable, jTableConstraints);
         JScrollPane commandListScrollPane = new JScrollPane();
         GridBagConstraints gbcCommandListScrollPane = new GridBagConstraints();
         gbcCommandListScrollPane.fill = 1;
@@ -125,13 +187,13 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
     }
 
     private class ConstructorDecorator{
-        final Constructor<?> constructor;
+        final Constructor<? extends IPlotterCommand> constructor;
 
-        public ConstructorDecorator(final Constructor<?> constructor) {
+        ConstructorDecorator(final Constructor<? extends IPlotterCommand> constructor) {
             this.constructor = constructor;
         }
 
-        public Constructor<?> getConstructor() {
+        public Constructor<? extends IPlotterCommand> getConstructor() {
             return constructor;
         }
 
@@ -141,18 +203,22 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         }
     }
 
-    private class ComplexCommandDecorator {
-        final ICompoundCommand compoundCommand;
-        final String name;
-
-        public ComplexCommandDecorator(final ICompoundCommand compoundCommand, final String name) {
-            this.compoundCommand = compoundCommand;
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-    }
+//    private class ComplexCommandDecorator {
+//        final ICompoundCommand compoundCommand;
+//        final String name;
+//
+//        ComplexCommandDecorator(final ICompoundCommand compoundCommand, final String name) {
+//            this.compoundCommand = compoundCommand;
+//            this.name = name;
+//        }
+//
+//        ICompoundCommand getCompoundCommand() {
+//            return compoundCommand;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return name;
+//        }
+//    }
 }

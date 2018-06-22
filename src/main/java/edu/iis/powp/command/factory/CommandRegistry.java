@@ -4,15 +4,13 @@ import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public final class CommandRegistry {
 
-    private Set<Constructor<?>> registeredBasicCommands = new HashSet<>();
-    private Map<ICompoundCommand,String> registeredComplexCommands = new HashMap<>();
+    private Set<Constructor<? extends IPlotterCommand>> registeredBasicCommands = new HashSet<>();
+    private Set<ICompoundCommand> registeredComplexCommands = new HashSet<>();
 
     public CommandRegistry() {
     }
@@ -22,23 +20,23 @@ public final class CommandRegistry {
         registeredBasicCommands.add(constructor);
     }
 
-    public void deregisterBasicCommand(Constructor<?> command){
+    public void deregisterBasicCommand(Constructor<? extends IPlotterCommand> command){
         registeredBasicCommands.remove(command);
     }
 
-    public Set<Constructor<?>> getRegisteredBasicCommands() {
+    public Set<Constructor<? extends IPlotterCommand>> getRegisteredBasicCommands() {
         return Collections.unmodifiableSet(registeredBasicCommands);
     }
 
-    public void registerComplexCommand(ICompoundCommand compoundCommand, String name){
-        registeredComplexCommands.put(compoundCommand, name);
+    public void registerComplexCommand(ICompoundCommand compoundCommand){
+        registeredComplexCommands.add(compoundCommand);
     }
 
     public void deregisterComplexCommand(ICompoundCommand compoundCommand){
         registeredComplexCommands.remove(compoundCommand);
     }
 
-    public Map<ICompoundCommand,String> getRegisteredComplexCommands() {
-        return Collections.unmodifiableMap(registeredComplexCommands);
+    public Set<ICompoundCommand> getRegisteredComplexCommands() {
+        return Collections.unmodifiableSet(registeredComplexCommands);
     }
 }

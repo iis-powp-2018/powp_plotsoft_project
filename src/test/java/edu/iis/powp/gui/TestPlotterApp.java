@@ -94,7 +94,7 @@ public class TestPlotterApp {
             commandRegistry.registerComplexCommand(new ComplexCommand(Lists.newArrayList(
                                 new SetPositionCommand(0,0),
                                 new DrawToCommand(10,10)
-            )), "Test command");
+            ), "Test command"));
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

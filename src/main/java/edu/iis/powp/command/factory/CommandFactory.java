@@ -9,11 +9,14 @@ import java.util.List;
 public final class CommandFactory {
 
     private final List<IPlotterCommand> commands = new ArrayList<>();
+    private final String name;
 
-    private CommandFactory(){}
+    private CommandFactory(final String name){
+        this.name = name;
+    }
 
-    public static CommandFactory create(){
-        return new CommandFactory();
+    public static CommandFactory create(String name){
+        return new CommandFactory(name);
     }
 
     public CommandFactory addCommand(IPlotterCommand command){
@@ -27,6 +30,6 @@ public final class CommandFactory {
     }
 
     public ICompoundCommand build(){
-        return new ComplexCommand(commands);
+        return new ComplexCommand(commands, name);
     }
 }
