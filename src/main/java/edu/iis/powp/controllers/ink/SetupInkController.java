@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 
 public class SetupInkController {
 
+    private static Observed inkControllerObserver;
+
     /**
      * Setup for ink control.
      *
@@ -14,13 +16,15 @@ public class SetupInkController {
     public static void setupInkController(Application application){
         setupInkControllerMenu(application);
 
+        inkControllerObserver.addObservator(new LoggingInkInformer());
+
         InkControlSubscriber inkControlSubscriber = new InkControlSubscriber(application.getDriverManager());
         application.getDriverManager().getChangePublisher().addSubscriber(inkControlSubscriber);
     }
 
     private static void setupInkControllerMenu(Application application) {
         InkControllerInterface inkController = SimmulationInkController.getInstance();
-        Observed inkControllerObserver = SimmulationInkController.getInstance();
+        inkControllerObserver = SimmulationInkController.getInstance();
 
         application.addComponentMenu(InkControllerInterface.class, "Ink Control", 2);
         application.addComponentMenuElement(InkControllerInterface.class, "ON/OFF",

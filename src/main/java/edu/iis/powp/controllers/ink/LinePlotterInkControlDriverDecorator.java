@@ -1,7 +1,6 @@
 package edu.iis.powp.controllers.ink;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 
 import java.util.logging.Logger;
 
@@ -19,7 +18,6 @@ public class LinePlotterInkControlDriverDecorator implements IPlotter {
         this.plotter = plotter;
         this.inkController = SimmulationInkController.getInstance();
         this.inkControllerObserved = SimmulationInkController.getInstance();
-        this.inkControllerObserved.addObservator(new InkInformer());
     }
 
     @Override
