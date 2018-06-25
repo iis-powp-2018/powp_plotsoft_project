@@ -11,7 +11,6 @@ import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
-import edu.iis.powp.controllers.ink.LinePlotterInkControlDriverDecorator;
 import edu.iis.powp.controllers.ink.SetupInkController;
 import edu.iis.powp.commandtransformer.CommandTransformer;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
@@ -105,7 +104,7 @@ public class TestPlotterApp {
 	}
 
 	/**
-	 * Launch the application.>>>>>>> master
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

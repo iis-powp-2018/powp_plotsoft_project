@@ -6,6 +6,11 @@ import java.awt.event.ActionEvent;
 
 public class SetupInkController {
 
+    /**
+     * Setup for ink control.
+     *
+     * @param application Application context.
+     */
     public static void setupInkController(Application application){
         setupInkControllerMenu(application);
 
@@ -13,13 +18,7 @@ public class SetupInkController {
         application.getDriverManager().getChangePublisher().addSubscriber(inkControlSubscriber);
     }
 
-    /**
-     * Setup menu for ink control.
-     *
-     * @param application
-     *            Application context.
-     */
-    public static void setupInkControllerMenu(Application application) {
+    private static void setupInkControllerMenu(Application application) {
         InkControllerInterface inkController = SimmulationInkController.getInstance();
         Observed inkControllerObserver = SimmulationInkController.getInstance();
 
