@@ -4,7 +4,15 @@ import edu.iis.powp.app.Application;
 
 import java.awt.event.ActionEvent;
 
-public class SetupInkControllerMenu {
+public class SetupInkController {
+
+    public static void setupInkController(Application application){
+        setupInkControllerMenu(application);
+
+        InkControlSubscriber inkControlSubscriber = new InkControlSubscriber(application.getDriverManager());
+        application.getDriverManager().getChangePublisher().addSubscriber(inkControlSubscriber);
+    }
+
     /**
      * Setup menu for ink control.
      *

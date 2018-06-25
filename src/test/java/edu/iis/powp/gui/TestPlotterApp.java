@@ -12,7 +12,7 @@ import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.controllers.ink.LinePlotterInkControlDriverDecorator;
-import edu.iis.powp.controllers.ink.SetupInkControllerMenu;
+import edu.iis.powp.controllers.ink.SetupInkController;
 import edu.iis.powp.commandtransformer.CommandTransformer;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
@@ -67,13 +67,11 @@ public class TestPlotterApp {
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
 		LineAdapterPlotterDriver linePlotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-		IPlotter plotter = new LinePlotterInkControlDriverDecorator(linePlotter);
-		application.addDriver("Line Simulator", plotter);
-		application.getDriverManager().setCurrentPlotter(plotter);
+		application.addDriver("Line Simulator", linePlotter);
+		application.getDriverManager().setCurrentPlotter(linePlotter);
 
 		linePlotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
-		plotter = new LinePlotterInkControlDriverDecorator(linePlotter);
-		application.addDriver("Special line Simulator", plotter);
+		application.addDriver("Special line Simulator", linePlotter);
 		application.updateDriverInfo();
 	}
 
@@ -116,13 +114,14 @@ public class TestPlotterApp {
 				DrawerFeature.setupDrawerPlugin(app);
 				CommandsFeature.setupCommandManager();
 
+				SetupInkController.setupInkController(app);
+				
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
 				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
 
-				SetupInkControllerMenu.setupInkControllerMenu(app);
 
 				setupWindows(app);
 

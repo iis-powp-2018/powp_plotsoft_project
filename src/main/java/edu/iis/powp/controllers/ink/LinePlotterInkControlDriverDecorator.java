@@ -10,11 +10,12 @@ import static java.util.logging.Level.WARNING;
 
 public class LinePlotterInkControlDriverDecorator implements IPlotter {
 
-    private LineAdapterPlotterDriver plotter;
+    private IPlotter plotter;
     private InkControllerInterface inkController;
     private Observed inkControllerObserved;
+    private int startX = 0, startY = 0;
 
-    public LinePlotterInkControlDriverDecorator(LineAdapterPlotterDriver plotter) {
+    public LinePlotterInkControlDriverDecorator(IPlotter plotter) {
         this.plotter = plotter;
         this.inkController = SimmulationInkController.getInstance();
         this.inkControllerObserved = SimmulationInkController.getInstance();
@@ -24,19 +25,18 @@ public class LinePlotterInkControlDriverDecorator implements IPlotter {
     @Override
     public void setPosition(int i, int i1) {
         plotter.setPosition(i, i1);
+        this.startX = i;
+        this.startY = i1;
     }
 
     @Override
     public void drawTo(int x, int y) {
-        float lineLength = calculateLineLength(plotter.getStartX(), plotter.getStartY(), x, y);
+        float lineLength = calculateLineLength(startX, startY, x, y);
         boolean enoughInk = inkController.isInkEnough(lineLength);
 
         if(enoughInk) {
-            plotter.getLine().setStartCoordinates(plotter.getStartX(), plotter.getStartY());
-            this.setPosition(x, y);
-            plotter.getLine().setEndCoordinates(x, y);
             inkController.reduceInkLevel(lineLength);
-            plotter.getDrawController().drawLine(plotter.getLine());
+            plotter.drawTo(x, y);
         }
         else {
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(WARNING,

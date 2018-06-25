@@ -42,19 +42,4 @@ public class LineAdapterPlotterDriver implements IPlotter {
 		return "Plotter Simulator - " + name;
 	}
 
-	public DrawPanelController getDrawController() {
-		return drawController;
-	}
-
-	public ILine getLine() {
-		return line;
-	}
-
-	public int getStartX() {
-		return startX;
-	}
-
-	public int getStartY() {
-		return startY;
-	}
 }
