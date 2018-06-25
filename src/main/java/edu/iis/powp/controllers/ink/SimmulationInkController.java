@@ -1,6 +1,9 @@
 package edu.iis.powp.controllers.ink;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.INFO;
 
 /**
  * Implementation of Ink Controller for simulation. Singleton design pattern.
@@ -11,6 +14,7 @@ public class SimmulationInkController implements InkControllerInterface, Observe
 	private float inkLevel;
 	final static float MAX_LEVEL_INK = 1000;
 	private ArrayList<Observator> observators;
+	private boolean isTurnedOn = false;
 
 	private SimmulationInkController() {
 		inkLevel = MAX_LEVEL_INK;
@@ -36,24 +40,44 @@ public class SimmulationInkController implements InkControllerInterface, Observe
 
 	@Override
 	public void reduceInkLevel(float level) {
-		inkLevel -= level;
-	}
+	    if(isTurnedOn) {
+            inkLevel -= level;
+        }
+    }
 
 	@Override
 	public void fillInk() {
-		inkLevel = MAX_LEVEL_INK;
+        if(isTurnedOn) {
+            inkLevel = MAX_LEVEL_INK;
+            Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(INFO, "Refilling ink.");
+        }
 	}
 
 	@Override
 	public boolean isInkEnough(float level) {
-		if (inkLevel >= level) {
-			return true;
-		} else {
-			return false;
-		}
+        if (!isTurnedOn || inkLevel >= level) {
+            return true;
+        } else {
+            return false;
+        }
 	}
 
-	@Override
+    @Override
+    public void turnOnOff() {
+        String word;
+	    if(isTurnedOn){
+            word = "off";
+	    }
+	    else{
+	        word = "on";
+        }
+
+        String msg = "Turning " + word + " ink control.";
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(INFO, msg);
+        isTurnedOn = !isTurnedOn;
+    }
+
+    @Override
 	public void addObservator(Observator o) {
 		observators.add(o);
 	}

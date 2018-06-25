@@ -114,14 +114,12 @@ public class TestPlotterApp {
 				DrawerFeature.setupDrawerPlugin(app);
 				CommandsFeature.setupCommandManager();
 
-				SetupInkController.setupInkController(app);
-				
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
 				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
-
+				SetupInkController.setupInkController(app);
 
 				setupWindows(app);
 

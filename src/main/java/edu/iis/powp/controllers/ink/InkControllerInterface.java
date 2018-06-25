@@ -27,4 +27,6 @@ public interface InkControllerInterface {
      * @return true if there is enough ink, false if there is not
      */
     boolean isInkEnough(float level);
+
+    void turnOnOff();
 }
