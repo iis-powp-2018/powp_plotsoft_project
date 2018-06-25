@@ -28,5 +28,8 @@ public interface InkControllerInterface {
      */
     boolean isInkEnough(float level);
 
+    /**
+     * Turns on and off ink control.
+     */
     void turnOnOff();
 }

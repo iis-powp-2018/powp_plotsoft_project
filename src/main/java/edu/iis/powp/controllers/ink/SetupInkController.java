@@ -20,13 +20,16 @@ public class SetupInkController {
      *            Application context.
      */
     public static void setupInkControllerMenu(Application application) {
+        InkControllerInterface inkController = SimmulationInkController.getInstance();
+        Observed inkControllerObserver = SimmulationInkController.getInstance();
+
         application.addComponentMenu(InkControllerInterface.class, "Ink Control", 2);
         application.addComponentMenuElement(InkControllerInterface.class, "ON/OFF",
-                (ActionEvent e) -> SimmulationInkController.getInstance().turnOnOff());
+                (ActionEvent e) -> inkController.turnOnOff());
         application.addComponentMenuElement(InkControllerInterface.class, "Refill",
-                (ActionEvent e) -> SimmulationInkController.getInstance().fillInk());
+                (ActionEvent e) -> inkController.fillInk());
         application.addComponentMenuElement(InkControllerInterface.class, "Log ink level",
-                (ActionEvent e) -> SimmulationInkController.getInstance().notifyObservators());
+                (ActionEvent e) -> inkControllerObserver.notifyObservators());
 
     }
 
