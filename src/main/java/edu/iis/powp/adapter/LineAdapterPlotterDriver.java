@@ -42,4 +42,11 @@ public class LineAdapterPlotterDriver implements IPlotter {
 		return "Plotter Simulator - " + name;
 	}
 
+    public ILine getLine() {
+        return line;
+    }
+
+    public void setLine(ILine line) {
+        this.line = line;
+    }
 }

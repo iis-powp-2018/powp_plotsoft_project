@@ -1,10 +1,10 @@
 package edu.iis.powp.command.manager;
 
-import java.util.logging.Logger;
-
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.observer.Subscriber;
+
+import java.util.logging.Logger;
 
 public class LoggerCommandChangeObserver implements Subscriber {
 
