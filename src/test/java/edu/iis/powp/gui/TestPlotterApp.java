@@ -2,9 +2,6 @@ package edu.iis.powp.gui;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,13 +9,6 @@ import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
-import edu.iis.powp.command.ComplexCommand;
-import edu.iis.powp.command.DrawToCommand;
-import edu.iis.powp.command.ICompoundCommand;
-import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.command.SetPositionCommand;
-import edu.iis.powp.command.factory.CommandFactoryWindow;
-import edu.iis.powp.command.factory.CommandRegistry;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
@@ -36,8 +26,8 @@ public class TestPlotterApp {
     /**
      * Setup test concerning preset figures in context.
      *
-	 * @param application
-	 *            Application context.
+     * @param application
+     *            Application context.
      */
     private static void setupPresetTests(Application application) {
         SelectTestFigureOptionListener selectTestFigureOptionListener = new SelectTestFigureOptionListener(
@@ -52,8 +42,8 @@ public class TestPlotterApp {
     /**
      * Setup test using plotter commands in context.
      *
-	 * @param application
-	 *            Application context.
+     * @param application
+     *            Application context.
      */
     private static void setupCommandTests(Application application) {
         application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
@@ -65,8 +55,8 @@ public class TestPlotterApp {
     /**
      * Setup driver manager, and set default IPlotter for application.
      *
-	 * @param application
-	 *            Application context.
+     * @param application
+     *            Application context.
      */
     private static void setupDrivers(Application application) {
         IPlotter clientPlotter = new ClientPlotter();
@@ -90,43 +80,13 @@ public class TestPlotterApp {
         CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
                 commandManager);
         CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
-
-        CommandRegistry commandRegistry = new CommandRegistry();
-        commandRegistry.addComplexCommandRegisterActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                Object source = e.getSource();
-                if(source instanceof ICompoundCommand) {
-                    ICompoundCommand command = (ICompoundCommand) source;
-                    application.addTest(command.getName(), new ActionListener() {
-                        @Override
-                        public void actionPerformed(final ActionEvent e) {
-                            command.execute(application.getDriverManager().getCurrentPlotter());
-                        }
-                    });
-                }
-            }
-        });
-        try {
-            commandRegistry.registerBasicCommand(DrawToCommand.class, int.class, int.class);
-            commandRegistry.registerBasicCommand(SetPositionCommand.class, int.class, int.class);
-            List<IPlotterCommand> commands = new ArrayList<>();
-            commands.add(new SetPositionCommand(0,0));
-            commands.add(new DrawToCommand(10,10));
-            commandRegistry.registerComplexCommand(new ComplexCommand(commands, "Test Command"));
-
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        CommandFactoryWindow window = new CommandFactoryWindow(commandRegistry);
-        application.addWindowComponent("Command Factory", window);
     }
 
     /**
      * Setup menu for adjusting logging settings.
      *
-	 * @param application
-	 *            Application context.
+     * @param application
+     *            Application context.
      */
     private static void setupLogger(Application application) {
 
@@ -157,10 +117,10 @@ public class TestPlotterApp {
                 setupCommandTests(app);
                 setupLogger(app);
                 setupWindows(app);
+                CommandFactoryTestBase.setupCommandFactory(app);
 
                 app.setVisibility(true);
             }
-
         });
     }
 

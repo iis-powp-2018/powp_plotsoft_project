@@ -8,15 +8,7 @@ import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class CommandFactoryWindow extends JFrame implements WindowComponent{
 
@@ -25,9 +17,22 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
     private static final Integer COMMON_WIDTH = 100;
     private static final Integer COMMON_WIDTH2 = 160;
     private static final Integer COMMON_HEIGHT = 30;
+    private final CommandFactoryWindowController commandFactoryWindowController = new CommandFactoryWindowController(this);
     private LineAdapterPlotterDriver lineAdapterPlotterDriver;
     private DrawPanelController drawPanelController = new DrawPanelController();
 
+    public LineAdapterPlotterDriver getLineAdapterPlotterDriver() {
+        return lineAdapterPlotterDriver;
+    }
+
+    public DrawPanelController getDrawPanelController() {
+        return drawPanelController;
+    }
+
+    public CommandRegistry getCommandRegistry() {
+
+        return commandRegistry;
+    }
 
     public CommandFactoryWindow(final CommandRegistry commandRegistry) {
         this.commandRegistry = commandRegistry;
@@ -87,47 +92,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(basicComboBox,basicComboBoxConstraints);
 
         JButton basicAddButton = new JButton("Add");
-        basicAddButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                JFrame frame = new JFrame();
-                frame.setBounds(100,100,200,100);
-                ConstructorDecorator selectedItem = (ConstructorDecorator) basicComboBox.getSelectedItem();
-                Constructor<? extends IPlotterCommand> constructor = selectedItem.getConstructor();
-                frame.setLayout(new GridLayout(constructor.getParameterCount() + 1, 2));
-                Map<Parameter, JTextField> textFields = new LinkedHashMap<>();
-                for (Parameter parameter : constructor.getParameters()) {
-                    JLabel label = new JLabel(parameter.getName());
-                    frame.add(label);
-                    JTextField field = new JTextField();
-                    frame.add(field);
-                    textFields.put(parameter, field);
-                }
-                JButton button = new JButton("Add");
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(final ActionEvent actionEvent) {
-                        List<Object> arguments = new ArrayList<>();
-                        for (Map.Entry<Parameter, JTextField> parameterJTextFieldEntry : textFields.entrySet()) {
-                            Parameter param = parameterJTextFieldEntry.getKey();
-                            JTextField value = parameterJTextFieldEntry.getValue();
-                            Object paramValue = convertTextFieldValueToArgument(param, value.getText());
-                            arguments.add(paramValue); //FIXME
-                        }
-                        try {
-                            IPlotterCommand element = constructor.newInstance(arguments.toArray());
-                            element.execute(lineAdapterPlotterDriver);
-                            jListModel.addElement(element);
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
-                        }
-                        frame.dispose();
-                    }
-                });
-                frame.add(button);
-                frame.setVisible(true);
-            }
-        });
+        basicAddButton.addActionListener(commandFactoryWindowController.handleBasicAddButton(jListModel, basicComboBox));
         basicAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints basicAddButtonConstraints = new GridBagConstraints();
         basicAddButtonConstraints.gridx = 1;
@@ -145,14 +110,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(complexComboBox,complexComboBoxConstraints);
 
         JButton complexAddButton = new JButton("Add");
-        complexAddButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ICompoundCommand selectedItem = (ICompoundCommand) complexComboBox.getSelectedItem();
-                jListModel.addElement(selectedItem);
-                selectedItem.execute(lineAdapterPlotterDriver);
-            }
-        });
+        complexAddButton.addActionListener(commandFactoryWindowController.handleComplexAddButton(jListModel, complexComboBox));
         complexAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints complexAddButtonConstraints = new GridBagConstraints();
         complexAddButtonConstraints.gridx = 1;
@@ -167,24 +125,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(commandNameField,commandNameFieldConstraints);
 
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                String commandName = commandNameField.getText();
-                CommandFactory commandFactory = CommandFactory.create(commandName);
-                Enumeration<IPlotterCommand> elements = jListModel.elements();
-                while (elements.hasMoreElements()){
-                    IPlotterCommand command = elements.nextElement();
-                    commandFactory.addCommand(command);
-                }
-                ICompoundCommand newCommand = commandFactory.build();
-                commandRegistry.registerComplexCommand(newCommand);
-                complexComboBox.addItem(newCommand);
-                commandNameField.setText("");
-                jListModel.clear();
-                drawPanelController.clearPanel();
-            }
-        });
+        saveButton.addActionListener(commandFactoryWindowController.handleSaveButton(jListModel, complexComboBox, commandNameField));
         saveButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints saveButtonConstraints = new GridBagConstraints();
         saveButtonConstraints.gridx = 1;
@@ -192,13 +133,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(saveButton,saveButtonConstraints);
 
         JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                jListModel.clear();
-                drawPanelController.clearPanel();
-            }
-        });
+        clearButton.addActionListener(commandFactoryWindowController.handleClearButton(jListModel));
         clearButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints clearButtonConstraints = new GridBagConstraints();
         clearButtonConstraints.gridx = 1;
@@ -220,25 +155,6 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         lineAdapterPlotterDriver = new LineAdapterPlotterDriver(drawPanelController, LineFactory.getBasicLine(), "Command Factory Plotter");
     }
 
-    private Object convertTextFieldValueToArgument(final Parameter param, final String text) {
-        switch (param.getType().getSimpleName()){
-            case "int":
-            case "Integer":
-                return Integer.valueOf(text);
-            case "double":
-            case "Double":
-                return Double.valueOf(text);
-            case "float":
-            case "Float":
-                return Float.valueOf(text);
-            case "String":
-                return text;
-            case "boolean":
-            case "Boolean":
-                return Boolean.valueOf(text);
-        }
-        return null;
-    }
 
     @Override
     public void HideIfVisibleAndShowIfHidden() {
@@ -249,7 +165,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         }
     }
 
-    private class ConstructorDecorator{
+    public class ConstructorDecorator{
         final Constructor<? extends IPlotterCommand> constructor;
 
         ConstructorDecorator(final Constructor<? extends IPlotterCommand> constructor) {
