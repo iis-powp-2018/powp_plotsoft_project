@@ -8,6 +8,7 @@ import edu.kis.powp.drawer.shape.ILine;
  * Line adapter - IPlotter with DrawPanelController object.
  */
 public class LineAdapterPlotterDriver implements IPlotter {
+
 	private ILine line;
 	private int startX = 0, startY = 0;
 	private String name;
