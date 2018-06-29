@@ -9,7 +9,7 @@ import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 
 /**
- * Factory for IPlotterCommands
+ * Factory for PlotterCommands
  */
 public class PlotterCommandFactory {
 	private static HashMap<String,IPlotterCommand> commandsPool = new HashMap<>();
