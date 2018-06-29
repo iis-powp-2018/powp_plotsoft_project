@@ -8,6 +8,7 @@ import edu.kis.powp.drawer.shape.ILine;
  * Line adapter - IPlotter with DrawPanelController object.
  */
 public class LineAdapterPlotterDriver implements IPlotter {
+
 	private ILine line;
 	private int startX = 0, startY = 0;
 	private String name;
@@ -40,4 +41,12 @@ public class LineAdapterPlotterDriver implements IPlotter {
 	public String toString() {
 		return "Plotter Simulator - " + name;
 	}
+
+    public ILine getLine() {
+        return line;
+    }
+
+    public void setLine(ILine line) {
+        this.line = line;
+    }
 }
