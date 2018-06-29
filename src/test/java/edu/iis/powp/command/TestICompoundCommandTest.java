@@ -10,18 +10,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iis.powp.command.complex.ComplexCommand;
-import edu.iis.powp.command.factory.IPlotterCommandFactory;
+import edu.iis.powp.command.factory.PlotterCommandFactory;
 import junit.framework.Assert;
 
 public class TestICompoundCommandTest {
 	ComplexCommand command;
 	List<IPlotterCommand> commands;
-	IPlotterCommandFactory factory;
+	PlotterCommandFactory factory;
 	
 	@Before
 	public void setUp() throws Exception {
 		commands = new ArrayList<>();
-		factory = new IPlotterCommandFactory();
+		factory = new PlotterCommandFactory();
 		commands.add(factory.makeSetPositionCommand(2, 2));
 		commands.add(factory.makeDrawToCommand(2, 4));
 		commands.add(factory.makeSetPositionCommand(2, 4));

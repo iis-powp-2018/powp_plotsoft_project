@@ -16,7 +16,7 @@ import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
-import edu.iis.powp.command.factory.IPlotterCommandFactory;
+import edu.iis.powp.command.factory.PlotterCommandFactory;
 
 public class CommandFileIOStorage implements ICommandIOOperation {
 
@@ -99,7 +99,7 @@ public class CommandFileIOStorage implements ICommandIOOperation {
         		int posX = (int)((long) coordinatesArray.get(0));
         		int posY = (int)((long) coordinatesArray.get(1));
         		
-        		IPlotterCommandFactory factory = new IPlotterCommandFactory();
+        		PlotterCommandFactory factory = new PlotterCommandFactory();
         		
         		if(className.equals("SetPositionCommand")) {
         			commands.add(factory.makeSetPositionCommand(posX, posY));

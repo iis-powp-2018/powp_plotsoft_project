@@ -5,14 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.iis.powp.command.factory.IPlotterCommandFactory;
+import edu.iis.powp.command.factory.PlotterCommandFactory;
 import junit.framework.Assert;
 
 public class TestFactoryPool {
 
 	@Test
 	public void factoryPoolTest() {
-		IPlotterCommandFactory factory = new IPlotterCommandFactory();
+		PlotterCommandFactory factory = new PlotterCommandFactory();
 		SetPositionCommand commandOne = factory.makeSetPositionCommand(2, 7);
 		SetPositionCommand commandTwo = factory.makeSetPositionCommand(2, 7);
 		

@@ -11,7 +11,7 @@ import edu.iis.powp.command.SetPositionCommand;
 /**
  * Factory for IPlotterCommands
  */
-public class IPlotterCommandFactory {
+public class PlotterCommandFactory {
 	private static HashMap<String,IPlotterCommand> commandsPool = new HashMap<>();
 	
 	/**
