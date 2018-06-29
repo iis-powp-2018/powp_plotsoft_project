@@ -27,11 +27,14 @@ public class ComplexCommand implements ICompoundCommand, ICompoundCommandEditor 
 	}
     
     public ComplexCommand(ICompoundCommand command) {
-    	Iterator<IPlotterCommand> i = command.iterator();
     	List<IPlotterCommand> commands =  new ArrayList();
+    	if (command == null)
+    		return;
+    	Iterator<IPlotterCommand> i = command.iterator();
     	while(i.hasNext()) {
     		commands.add((IPlotterCommand) i.next());
     	}
+    	listOfCommands = commands;
     }
 
     @Override
