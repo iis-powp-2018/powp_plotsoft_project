@@ -46,7 +46,7 @@ public class CommandFactoryTestBase {
                 Object source = e.getSource();
                 if (source instanceof ICompoundCommand) {
                     ICompoundCommand command = (ICompoundCommand) source;
-                    application.addTest(command.getName(), new ActionListener() {
+                    application.addTest(command.toString(), new ActionListener() {
 
                         @Override public void actionPerformed(final ActionEvent e) {
                             command.execute(application.getDriverManager().getCurrentPlotter());

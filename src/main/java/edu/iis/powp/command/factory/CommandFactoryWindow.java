@@ -92,7 +92,8 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(basicComboBox,basicComboBoxConstraints);
 
         JButton basicAddButton = new JButton("Add");
-        basicAddButton.addActionListener(commandFactoryWindowController.handleBasicAddButton(jListModel, basicComboBox));
+        basicAddButton.addActionListener(
+                actionEvent -> commandFactoryWindowController.handleBasicAddButton(jListModel, basicComboBox));
         basicAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints basicAddButtonConstraints = new GridBagConstraints();
         basicAddButtonConstraints.gridx = 1;
@@ -110,7 +111,8 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(complexComboBox,complexComboBoxConstraints);
 
         JButton complexAddButton = new JButton("Add");
-        complexAddButton.addActionListener(commandFactoryWindowController.handleComplexAddButton(jListModel, complexComboBox));
+        complexAddButton.addActionListener(
+                actionEvent -> commandFactoryWindowController.handleComplexAddButton(jListModel, complexComboBox));
         complexAddButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints complexAddButtonConstraints = new GridBagConstraints();
         complexAddButtonConstraints.gridx = 1;
@@ -125,7 +127,8 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(commandNameField,commandNameFieldConstraints);
 
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(commandFactoryWindowController.handleSaveButton(jListModel, complexComboBox, commandNameField));
+        saveButton.addActionListener(actionEvent -> commandFactoryWindowController
+                .handleSaveButton(jListModel, complexComboBox, commandNameField));
         saveButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints saveButtonConstraints = new GridBagConstraints();
         saveButtonConstraints.gridx = 1;
@@ -133,7 +136,7 @@ public class CommandFactoryWindow extends JFrame implements WindowComponent{
         leftPanel.add(saveButton,saveButtonConstraints);
 
         JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(commandFactoryWindowController.handleClearButton(jListModel));
+        clearButton.addActionListener(actionEvent -> commandFactoryWindowController.handleClearButton(jListModel));
         clearButton.setPreferredSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         GridBagConstraints clearButtonConstraints = new GridBagConstraints();
         clearButtonConstraints.gridx = 1;
