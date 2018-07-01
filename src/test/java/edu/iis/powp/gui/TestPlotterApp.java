@@ -4,6 +4,7 @@ import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
+import edu.iis.powp.command.gui.CommandEditorWindow;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.controllers.ink.SetupInkController;
@@ -83,9 +84,14 @@ public class TestPlotterApp {
 		application.addWindowComponent("Command Manager", commandManager);
 		application.addWindowComponent("Controls Manager", controlsManager);
 
-		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
-				commandManager);
-		CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
+        CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
+                commandManager);
+        CommandsFeature.getPlotterCommandManager().getChangePublisher().addSubscriber(windowObserver);
+
+		CommandEditorWindow commandEditor = new CommandEditorWindow();
+		application.addWindowComponent("Command Editor", commandEditor);
+
+
 	}
 
 	/**
