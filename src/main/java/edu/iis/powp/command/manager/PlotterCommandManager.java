@@ -50,6 +50,7 @@ public class PlotterCommandManager {
 				return plotterCommands.iterator();
 			}
 
+
 			@Override
 			public String toString() {
 				return name;

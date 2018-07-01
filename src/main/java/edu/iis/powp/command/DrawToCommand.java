@@ -20,4 +20,8 @@ public class DrawToCommand implements IPlotterCommand {
 		plotter.drawTo(posX, posY);
 	}
 
+	@Override
+	public String toString() {
+		return "DrawToCommand(" + posX + ", " + posY + ")";
+	}
 }

@@ -126,6 +126,7 @@ public class TestPlotterApp {
 
 				setupWindows(app);
 				InkSetup.InkSetupDriver(app);
+				CommandFactoryTestBase.setupCommandFactory(app);
 
 				app.setVisibility(true);
 			}
