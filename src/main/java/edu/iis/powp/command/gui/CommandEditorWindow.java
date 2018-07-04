@@ -4,14 +4,17 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.text.AbstractDocument.Content;
 
 import edu.iis.powp.app.gui.WindowComponent;
@@ -45,11 +48,6 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 		this.commandManager = commandManager;
 
 		c = new GridBagConstraints();
-		String[] selections = { "green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue" };
-		list = new JList(selections);
-		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 0;
-		content.add(list,c);
 		
 		JButton btnMoveUP = new JButton("Move Up");
 		btnMoveUP.addActionListener((ActionEvent e) -> this.moveUp());
@@ -84,6 +82,12 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 
 		content.add(btnLoadCommand, c);
+		
+		String[] selections = {"init","init","init","init","init","init","init"};
+		list = new JList(selections);
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		content.add(list,c);
 	}
 
 	private void moveUp() {
@@ -104,10 +108,9 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	}
 
 	private void loadCurrentSubCommands(PlotterCommandManager commandManager) {
-		model.removeAllElements();
 		ICompoundCommand currentCommand = commandManager.getCurrentCommand();
 		if (currentCommand != null) {
-			String[] commands = null;
+			List<String> commands = new ArrayList<String>();
 			commandCount = 0;
 			int count = 0;
 			Iterator<IPlotterCommand> iterator = currentCommand.iterator();
@@ -115,12 +118,13 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 			while (iterator.hasNext()) {
 				IPlotterCommand buff = iterator.next();
 				content.remove(list);
-				commands[count] = "Command " + count + " :" + buff.toString();
+				commands.add("Command " + count + ": " + buff.toString());
 				count++;
 				commandCount++;
 			}
-			list = new JList(commands);
+			list = new JList(commands.toArray());
 			content.add(list,c);
+			content.revalidate();
 		}
 	}
 	
