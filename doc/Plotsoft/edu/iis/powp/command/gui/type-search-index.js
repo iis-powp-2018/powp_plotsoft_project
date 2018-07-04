@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"edu.iis.powp.command.gui","l":"ControlsManagerWindow"}]

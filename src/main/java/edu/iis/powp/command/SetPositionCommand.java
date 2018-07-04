@@ -25,7 +25,6 @@ public class SetPositionCommand implements IPlotterCommand {
 		return "SetPositionCommand(" + posX + ", " + posY + ")";
 	}
 
-
 	public int getPosX() {
 		return posX;
 	}
@@ -33,5 +32,5 @@ public class SetPositionCommand implements IPlotterCommand {
 	public int getPosY() {
 		return posY;
 	}
-  
+
 }
