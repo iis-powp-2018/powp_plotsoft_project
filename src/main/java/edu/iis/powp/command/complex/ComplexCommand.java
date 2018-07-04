@@ -29,27 +29,27 @@ public class ComplexCommand implements ICompoundCommand, ICompundCommandEditor {
 
 	@Override
 	public void execute(IPlotter plotter) {
-		listOfCommands.stream().forEach(command -> command.execute(plotter));
+		getListOfCommands().stream().forEach(command -> command.execute(plotter));
 	}
 
 	@Override
 	public Iterator<IPlotterCommand> iterator() {
-		return listOfCommands.iterator();
+		return getListOfCommands().iterator();
 	}
 
 	@Override
 	public void changeSequence(int index, int indexToSwap) {
-		Collections.swap(listOfCommands, index, indexToSwap);
+		Collections.swap(getListOfCommands(), index, indexToSwap);
 	}
 
 	@Override
 	public void addCommand(int index, IPlotterCommand command) {
-		listOfCommands.add(index, command);
+		getListOfCommands().add(index, command);
 	}
 
 	@Override
 	public void removeCommand(int index) {
-		listOfCommands.remove(index);
+		getListOfCommands().remove(index);
 	}
 
 	@Override
@@ -64,6 +64,10 @@ public class ComplexCommand implements ICompoundCommand, ICompundCommandEditor {
 
 	public void setCommandName(String commandName) {
 		this.commandName = commandName;
+	}
+
+	public List<IPlotterCommand> getListOfCommands() {
+		return listOfCommands;
 	}
 
 }
