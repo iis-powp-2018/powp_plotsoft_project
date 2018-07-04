@@ -34,6 +34,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	private Container content;
 	private JList list;
 	private GridBagConstraints c;
+	private List<String> commands;
 	public CommandEditorWindow(PlotterCommandManager commandManager) {
 		this.commandManager = commandManager;
 		setupContainerUIComponents();
@@ -99,18 +100,28 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	}
 
 	private void removeCommand() {
-
+		int selected = list.getSelectedIndex();
+		if(selected>=0) {
+			commands.remove(selected);
+			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+			currentCommand.removeCommand(selected);
+			commandCount--;
+		}
+		content.remove(list);
+		list = new JList(commands.toArray());
+		content.add(list,c);
+		content.revalidate();
 	}
 
 	private void loadCommand() {
 		commandManager.setCurrentCommand(new ComplexCommand(commandManager.getCurrentCommand()));
-		loadCurrentSubCommands(commandManager);
+		loadSimpleCommands(commandManager);
 	}
 
-	private void loadCurrentSubCommands(PlotterCommandManager commandManager) {
-		ICompoundCommand currentCommand = commandManager.getCurrentCommand();
+	private void loadSimpleCommands(PlotterCommandManager commandManager) {
+		ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
 		if (currentCommand != null) {
-			List<String> commands = new ArrayList<String>();
+			commands = new ArrayList<String>();
 			commandCount = 0;
 			int count = 0;
 			Iterator<IPlotterCommand> iterator = currentCommand.iterator();
@@ -118,8 +129,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 			while (iterator.hasNext()) {
 				IPlotterCommand buff = iterator.next();
 				content.remove(list);
-				commands.add("Command " + count + ": " + buff.toString());
-				count++;
+				commands.add("Command " + ++count + ": " + buff.toString());
 				commandCount++;
 			}
 			list = new JList(commands.toArray());
