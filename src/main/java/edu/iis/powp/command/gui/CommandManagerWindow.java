@@ -4,13 +4,20 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
+import edu.iis.powp.command.complex.CompoundCommand;
+import edu.iis.powp.command.complex.ExportCompoundCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
@@ -55,7 +62,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(currentCommandField, c);
 		updateCurrentCommandField();
-		
+
 		JButton btnImportCommand = new JButton("Import command");
 		btnImportCommand.addActionListener((ActionEvent e) -> this.clearCommand());
 		c.fill = GridBagConstraints.BOTH;
@@ -63,9 +70,16 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnImportCommand, c);
-		
+
 		JButton btnExportCommand = new JButton("Export command");
-		btnExportCommand.addActionListener((ActionEvent e) -> this.clearCommand());
+		btnExportCommand.addActionListener((ActionEvent e) -> {
+			try {
+				this.exportCommand();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -88,13 +102,20 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(btnClearObservers, c);
 	}
-	
-	private void importCommand() {
-		
+
+	private void importCommand() throws FileNotFoundException {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showOpenDialog(this);
+
 	}
-	
-	private void exportCommand() {
-		
+
+	private void exportCommand() throws FileNotFoundException {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showSaveDialog(this);
+		ComplexCommand complex = new ComplexCommand(commandManager.getCurrentCommand());
+		CompoundCommand currentCommand = new CompoundCommand(new ArrayList<ComplexCommand>());
+		currentCommand.addComplexCommand(complex);
+		ExportCompoundCommand.export(fileChooser.getSelectedFile().getAbsolutePath(), currentCommand);
 	}
 
 	private void clearCommand() {
@@ -117,8 +138,9 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		for (Subscriber observer : commandChangeSubscribers) {
 			observerListString += observer.toString() + System.lineSeparator();
 		}
-		if (commandChangeSubscribers.isEmpty())
+		if (commandChangeSubscribers.isEmpty()) {
 			observerListString = "No observers loaded";
+		}
 
 		observerListField.setText(observerListString);
 	}

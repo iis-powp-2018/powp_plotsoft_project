@@ -41,7 +41,6 @@ public class ImportComplexCommandToStringsList {
 				commands = new ComplexCommand(listOfCommands);
 				compoundCommand.addComplexCommand(commands);
 				commands = new ComplexCommand(listOfCommands);
-
 			} else if (tempLine.contains("SetPositionCommand")) {
 				listOfCommands.add(new SetPositionCommand(scanner.nextInt(), scanner.nextInt()));
 			} else {
