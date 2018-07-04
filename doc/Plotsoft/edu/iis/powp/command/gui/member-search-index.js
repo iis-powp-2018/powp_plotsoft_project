@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"edu.iis.powp.command.gui","c":"ControlsManagerWindow","l":"ControlsManagerWindow(Application)","url":"ControlsManagerWindow-edu.iis.powp.app.Application-"},{"p":"edu.iis.powp.command.gui","c":"ControlsManagerWindow","l":"HideIfVisibleAndShowIfHidden()"}]
