@@ -22,7 +22,7 @@ public class DrawToCommand implements IPlotterCommand {
 
 	@Override
 	public String toString() {
-		return "DrawToCommand(" + posX + ", " + posY + ")";
+		return "DrawToCommand " + " " + posX + " " + posY;
 	}
 
 	public int getPosX() {
