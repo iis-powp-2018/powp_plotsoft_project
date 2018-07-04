@@ -2,7 +2,7 @@ package edu.iis.powp.command.complex;
 
 import edu.iis.powp.command.IPlotterCommand;
 
-public interface ICompundCommandEditor {
+public interface IComplexCommandEditor {
 
 	/**
 	 * Change sequence of commands
