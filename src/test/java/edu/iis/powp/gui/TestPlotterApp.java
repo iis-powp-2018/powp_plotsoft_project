@@ -1,24 +1,28 @@
 package edu.iis.powp.gui;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import edu.iis.client.plottermagic.ClientPlotter;
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
+import edu.iis.powp.controllers.ink.SetupInkController;
+import edu.iis.powp.command.gui.ControlsManagerWindow;
+import edu.iis.powp.commandtransformer.CommandTransformer;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.features.CommandsFeature;
 import edu.iis.powp.features.DrawerFeature;
+import edu.iis.powp.inkDriver.*;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -63,19 +67,21 @@ public class TestPlotterApp {
 		application.addDriver("Client Plotter", clientPlotter);
 
 		DrawPanelController drawerController = DrawerFeature.getDrawerController();
-		IPlotter plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
-		application.addDriver("Line Simulator", plotter);
-		application.getDriverManager().setCurrentPlotter(plotter);
+		LineAdapterPlotterDriver linePlotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getBasicLine(), "basic");
+		application.addDriver("Line Simulator", linePlotter);
+		application.getDriverManager().setCurrentPlotter(linePlotter);
 
-		plotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
-		application.addDriver("Special line Simulator", plotter);
+		linePlotter = new LineAdapterPlotterDriver(drawerController, LineFactory.getSpecialLine(), "special");
+		application.addDriver("Special line Simulator", linePlotter);
 		application.updateDriverInfo();
 	}
 
 	private static void setupWindows(Application application) {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(CommandsFeature.getPlotterCommandManager());
+		ControlsManagerWindow controlsManager = new ControlsManagerWindow(application);
 		application.addWindowComponent("Command Manager", commandManager);
+		application.addWindowComponent("Controls Manager", controlsManager);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
@@ -89,7 +95,6 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupLogger(Application application) {
-
 		application.addComponentMenu(Logger.class, "Logger", 0);
 		application.addComponentMenuElement(Logger.class, "Clear log",
 				(ActionEvent e) -> application.flushLoggerOutput());
@@ -115,8 +120,13 @@ public class TestPlotterApp {
 				setupDrivers(app);
 				setupPresetTests(app);
 				setupCommandTests(app);
+				CommandTransformer.setupCommandTransformer(app);
 				setupLogger(app);
+				SetupInkController.setupInkController(app);
+
 				setupWindows(app);
+				InkSetup.InkSetupDriver(app);
+				CommandFactoryTestBase.setupCommandFactory(app);
 
 				app.setVisibility(true);
 			}

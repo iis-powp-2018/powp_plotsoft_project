@@ -1,12 +1,12 @@
 package edu.iis.powp.command.manager;
 
-import java.util.Iterator;
-import java.util.List;
-
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.observer.Publisher;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Driver Manager.
@@ -49,6 +49,7 @@ public class PlotterCommandManager {
 			public Iterator<IPlotterCommand> iterator() {
 				return plotterCommands.iterator();
 			}
+
 
 			@Override
 			public String toString() {

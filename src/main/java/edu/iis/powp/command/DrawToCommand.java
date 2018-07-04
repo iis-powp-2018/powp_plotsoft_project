@@ -32,4 +32,5 @@ public class DrawToCommand implements IPlotterCommand {
 	public int getPosY() {
 		return posY;
 	}
+
 }
