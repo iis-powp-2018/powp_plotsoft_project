@@ -63,6 +63,7 @@ local.properties
 .apt_generated
 
 
+<<<<<<< HEAD
 # End of https://www.gitignore.io/api/eclipse
 =======
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
@@ -124,3 +125,6 @@ fabric.properties
 .classpath
 .project
 .settings/
+=======
+# End of https://www.gitignore.io/api/eclipse
+>>>>>>> parent of aaf72c9... Dodano interface ICompundCommandEditor i klasę implementującą go - ComplexCommand.
