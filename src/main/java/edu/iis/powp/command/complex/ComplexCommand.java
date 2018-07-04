@@ -8,7 +8,7 @@ import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 
-public class ComplexCommand implements ICompoundCommand, ICompundCommandEditor {
+public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 
 	private List<IPlotterCommand> listOfCommands;
 
