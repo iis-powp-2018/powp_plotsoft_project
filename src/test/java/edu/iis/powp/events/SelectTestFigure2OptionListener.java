@@ -10,7 +10,8 @@ import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
-import edu.iis.powp.command.complex.ExportComplexCommand;
+import edu.iis.powp.command.complex.CompoundCommand;
+import edu.iis.powp.command.complex.ExportCompoundCommand;
 
 public class SelectTestFigure2OptionListener implements ActionListener {
 
@@ -23,6 +24,7 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		FiguresJoe.figureScript2(driverManager.getCurrentPlotter());
+
 		ArrayList<IPlotterCommand> listOfCommands = new ArrayList<IPlotterCommand>();
 		listOfCommands.add(new SetPositionCommand(0, 0));
 		listOfCommands.add(new SetPositionCommand(10, 0));
@@ -30,8 +32,13 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 		listOfCommands.add(new SetPositionCommand(20, 0));
 		listOfCommands.add(new SetPositionCommand(0, 20));
 		ComplexCommand commands = new ComplexCommand(listOfCommands);
+		CompoundCommand compoundCommand = new CompoundCommand();
+		compoundCommand.addComplexCommand(commands);
+		compoundCommand.addComplexCommand(commands);
+		compoundCommand.addComplexCommand(commands);
+		compoundCommand.addComplexCommand(commands);
 		try {
-			ExportComplexCommand.export("exportedlistofcommands.txt", listOfCommands);
+			ExportCompoundCommand.export("exportedlistofcommands.txt", compoundCommand);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		}
