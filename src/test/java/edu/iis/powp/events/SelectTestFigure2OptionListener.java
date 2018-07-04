@@ -12,6 +12,7 @@ import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.complex.CompoundCommand;
 import edu.iis.powp.command.complex.ExportCompoundCommand;
+import edu.iis.powp.command.complex.ImportComplexCommandToStringsList;
 
 public class SelectTestFigure2OptionListener implements ActionListener {
 
@@ -39,6 +40,14 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 		compoundCommand.addComplexCommand(commands);
 		try {
 			ExportCompoundCommand.export("exportedlistofcommands.txt", compoundCommand);
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		compoundCommand = new CompoundCommand();
+
+		compoundCommand = ImportComplexCommandToStringsList.getCommands("exportedlistofcommands.txt");
+		try {
+			ExportCompoundCommand.export("listofcommandsafterimport.txt", compoundCommand);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		}
