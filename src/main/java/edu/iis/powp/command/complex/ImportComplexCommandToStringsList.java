@@ -16,15 +16,15 @@ public class ImportComplexCommandToStringsList {
 		ArrayList<IPlotterCommand> listOfCommands = new ArrayList<IPlotterCommand>();
 		String tempLine;
 		ComplexCommand commands = new ComplexCommand(listOfCommands);
-		CompoundCommand compoundCommand = new CompoundCommand();
+		CompoundCommand compoundCommand = new CompoundCommand(new ArrayList<ComplexCommand>());
 
 		if (fileName == null)
-			return new CompoundCommand();
+			return new CompoundCommand(new ArrayList<ComplexCommand>());
 
 		File file = new File(fileName);
 		if (!(file.exists() && file.canRead())) {
 			System.err.println("Cannot access file! Non-existent or read access restricted");
-			return new CompoundCommand();
+			return new CompoundCommand(new ArrayList<ComplexCommand>());
 		}
 
 		Scanner scanner = null;
@@ -33,23 +33,22 @@ public class ImportComplexCommandToStringsList {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		while (scanner.hasNextLine()) {
-			if ((tempLine = scanner.next()).equals("END")) {
+
+		while (scanner.hasNext()) {
+			tempLine = scanner.next();
+			System.out.println(tempLine);
+			if (tempLine.contains("END")) {
 				commands = new ComplexCommand(listOfCommands);
 				compoundCommand.addComplexCommand(commands);
-				listOfCommands.clear();
 				commands = new ComplexCommand(listOfCommands);
 
-			} else if (tempLine.equals("SetPositionCommand")) {
+			} else if (tempLine.contains("SetPositionCommand")) {
 				listOfCommands.add(new SetPositionCommand(scanner.nextInt(), scanner.nextInt()));
 			} else {
 				listOfCommands.add(new DrawToCommand(scanner.nextInt(), scanner.nextInt()));
 			}
-
 		}
-
 		scanner.close();
-
 		return compoundCommand;
 	}
 

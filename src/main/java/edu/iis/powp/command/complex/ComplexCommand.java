@@ -13,8 +13,6 @@ public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 
 	private List<IPlotterCommand> listOfCommands;
 
-	private String commandName = new String();
-
 	/**
 	 * Constructor to create ComplexCommnad
 	 * 
@@ -28,17 +26,17 @@ public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 		this.listOfCommands = listOfCommands;
 	}
 
-    public ComplexCommand(ICompoundCommand command) {
-    	List<IPlotterCommand> commands =  new ArrayList();
-    	if (command == null)
-    		return;
-    	Iterator<IPlotterCommand> i = command.iterator();
-    	while(i.hasNext()) {
-    		commands.add((IPlotterCommand) i.next());
-    	}
-    	listOfCommands = commands;
-    }
-	
+	public ComplexCommand(ICompoundCommand command) {
+		List<IPlotterCommand> commands = new ArrayList();
+		if (command == null)
+			return;
+		Iterator<IPlotterCommand> i = command.iterator();
+		while (i.hasNext()) {
+			commands.add((IPlotterCommand) i.next());
+		}
+		listOfCommands = commands;
+	}
+
 	@Override
 	public void execute(IPlotter plotter) {
 		getListOfCommands().stream().forEach(command -> command.execute(plotter));
@@ -68,14 +66,6 @@ public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 	public void changeCommand(int index, IPlotterCommand command) {
 		removeCommand(index);
 		addCommand(index, command);
-	}
-
-	public String getCommandName() {
-		return commandName;
-	}
-
-	public void setCommandName(String commandName) {
-		this.commandName = commandName;
 	}
 
 	public List<IPlotterCommand> getListOfCommands() {

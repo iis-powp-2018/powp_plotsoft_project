@@ -15,6 +15,7 @@ public class ExportCompoundCommand {
 		for (ComplexCommand complexCommand : commandsList.getComplexCommandList()) {
 			for (IPlotterCommand iPlotterCommand : complexCommand.getListOfCommands()) {
 				pw.println(iPlotterCommand.toString());
+				System.out.println(iPlotterCommand.toString());
 			}
 			pw.println("END");
 		}

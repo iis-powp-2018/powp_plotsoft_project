@@ -8,7 +8,11 @@ import edu.iis.powp.command.IPlotterCommand;
 
 public class CompoundCommand implements IPlotterCommand {
 
-	private List<ComplexCommand> complexCommandList = new ArrayList<ComplexCommand>();
+	private List<ComplexCommand> complexCommandList;
+
+	public CompoundCommand(List<ComplexCommand> complexCommandList) {
+		this.complexCommandList = complexCommandList;
+	}
 
 	public void addComplexCommand(ComplexCommand command) {
 		complexCommandList.add(command);
