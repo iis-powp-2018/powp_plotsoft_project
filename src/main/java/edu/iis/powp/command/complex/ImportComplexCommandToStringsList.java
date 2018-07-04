@@ -33,12 +33,12 @@ public class ImportComplexCommandToStringsList {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		while (scanner.hasNextLine()) {
+		while (scanner.hasNext()) {
 			if ((tempLine = scanner.next()).equals("END")) {
 				commands = new ComplexCommand(listOfCommands);
 				compoundCommand.addComplexCommand(commands);
 				listOfCommands.clear();
-				commands = new ComplexCommand(listOfCommands);
+				commands = null;;
 
 			} else if (tempLine.equals("SetPositionCommand")) {
 				listOfCommands.add(new SetPositionCommand(scanner.nextInt(), scanner.nextInt()));
