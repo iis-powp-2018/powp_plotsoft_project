@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompoundCommand {
-	List<ArrayList<ComplexCommand>> list = new ArrayList<ArrayList<ComplexCommand>>();
+	List<ComplexCommand> list = new ArrayList<ComplexCommand>();
 
-	public void addComplexCommand(ArrayList<ComplexCommand> command) {
+	public void addComplexCommand(ComplexCommand command) {
 		list.add(command);
 	}
 
 	public void executeOrder66() {
-		for (ArrayList<ComplexCommand> arrayList : list) {
-			for (ComplexCommand complexCommand : arrayList) {
-			}
+		for (ComplexCommand complexCommand : list) {
+
 		}
 	}
 }
