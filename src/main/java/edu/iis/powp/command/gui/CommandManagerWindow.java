@@ -50,6 +50,22 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.weighty = 1;
 		content.add(currentCommandField, c);
 		updateCurrentCommandField();
+		
+		JButton btnImportCommand = new JButton("Import command");
+		btnImportCommand.addActionListener((ActionEvent e) -> this.clearCommand());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnImportCommand, c);
+		
+		JButton btnExportCommand = new JButton("Export command");
+		btnExportCommand.addActionListener((ActionEvent e) -> this.clearCommand());
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.weighty = 1;
+		content.add(btnExportCommand, c);
 
 		JButton btnClearCommand = new JButton("Clear command");
 		btnClearCommand.addActionListener((ActionEvent e) -> this.clearCommand());
@@ -66,6 +82,14 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnClearObservers, c);
+	}
+	
+	private void importCommand() {
+		
+	}
+	
+	private void exportCommand() {
+		
 	}
 
 	private void clearCommand() {

@@ -24,4 +24,13 @@ public class DrawToCommand implements IPlotterCommand {
 	public String toString() {
 		return "DrawToCommand(" + posX + ", " + posY + ")";
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
 }
