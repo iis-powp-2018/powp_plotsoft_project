@@ -12,7 +12,7 @@ import edu.iis.powp.observer.Publisher;
  * Driver Manager.
  */
 public class PlotterCommandManager {
-	private IPlotterCommand currentCommand = null;
+	private ICompoundCommand currentCommand = null;
 
 	private Publisher changePublisher = new Publisher();
 
@@ -22,7 +22,7 @@ public class PlotterCommandManager {
 	 * @param commandList
 	 *            Set the command as current.
 	 */
-	public synchronized void setCurrentCommand(IPlotterCommand commandList) {
+	public synchronized void setCurrentCommand(ICompoundCommand commandList) {
 		this.currentCommand = commandList;
 		changePublisher.notifyObservers();
 	}
@@ -63,7 +63,7 @@ public class PlotterCommandManager {
 	 * 
 	 * @return Current command.
 	 */
-	public synchronized IPlotterCommand getCurrentCommand() {
+	public synchronized ICompoundCommand getCurrentCommand() {
 		return currentCommand;
 	}
 

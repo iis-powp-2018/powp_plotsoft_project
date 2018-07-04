@@ -1,5 +1,6 @@
 package edu.iis.powp.command.complex;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +28,17 @@ public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 		this.listOfCommands = listOfCommands;
 	}
 
+    public ComplexCommand(ICompoundCommand command) {
+    	List<IPlotterCommand> commands =  new ArrayList();
+    	if (command == null)
+    		return;
+    	Iterator<IPlotterCommand> i = command.iterator();
+    	while(i.hasNext()) {
+    		commands.add((IPlotterCommand) i.next());
+    	}
+    	listOfCommands = commands;
+    }
+	
 	@Override
 	public void execute(IPlotter plotter) {
 		getListOfCommands().stream().forEach(command -> command.execute(plotter));

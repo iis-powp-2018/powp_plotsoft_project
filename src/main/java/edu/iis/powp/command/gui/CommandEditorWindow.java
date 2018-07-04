@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -11,8 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+import javax.swing.text.AbstractDocument.Content;
 
 import edu.iis.powp.app.gui.WindowComponent;
+import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
@@ -21,7 +26,11 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	private static final long serialVersionUID = 9204679248304669948L;
 	private PlotterCommandManager commandManager;
 	private DefaultListModel model;
-
+	private IPlotterCommand currentCommand;
+	private int commandCount = 0;
+	private Container content;
+	private JList list;
+	private GridBagConstraints c;
 	public CommandEditorWindow(PlotterCommandManager commandManager) {
 		this.commandManager = commandManager;
 		setupContainerUIComponents();
@@ -31,13 +40,13 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	private void setupContainerUIComponents() {
 		this.setTitle("Command Editor");
 		this.setSize(400, 800);
-		Container content = this.getContentPane();
+		content = this.getContentPane();
 		content.setLayout(new GridBagLayout());
 		this.commandManager = commandManager;
 
-		GridBagConstraints c = new GridBagConstraints();
+		c = new GridBagConstraints();
 		String[] selections = { "green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue","green", "red", "orange", "dark blue" };
-		JList list = new JList(selections);
+		list = new JList(selections);
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
 		content.add(list,c);
@@ -90,9 +99,31 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	}
 
 	private void loadCommand() {
-
+		commandManager.setCurrentCommand(new ComplexCommand(commandManager.getCurrentCommand()));
+		loadCurrentSubCommands(commandManager);
 	}
 
+	private void loadCurrentSubCommands(PlotterCommandManager commandManager) {
+		model.removeAllElements();
+		ICompoundCommand currentCommand = commandManager.getCurrentCommand();
+		if (currentCommand != null) {
+			String[] commands = null;
+			commandCount = 0;
+			int count = 0;
+			Iterator<IPlotterCommand> iterator = currentCommand.iterator();
+			content.remove(list);
+			while (iterator.hasNext()) {
+				IPlotterCommand buff = iterator.next();
+				content.remove(list);
+				commands[count] = "Command " + count + " :" + buff.toString();
+				count++;
+				commandCount++;
+			}
+			list = new JList(commands);
+			content.add(list,c);
+		}
+	}
+	
 	@Override
 	public void HideIfVisibleAndShowIfHidden() {
 
