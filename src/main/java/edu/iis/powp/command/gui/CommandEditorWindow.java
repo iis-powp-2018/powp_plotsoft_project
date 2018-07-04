@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -92,11 +93,31 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 	}
 
 	private void moveUp() {
-
+		int selected= list.getSelectedIndex();
+		if(selected>=0) {
+			Collections.swap(commands,selected,selected-1);
+			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+			currentCommand.changeSequence(selected - 1, selected);
+		}
+		content.remove(list);
+		list = new JList(commands.toArray());
+		content.add(list,c);
+		content.revalidate();
+		list.setSelectedIndex(selected-1);
 	}
 
 	private void moveDown() {
-
+		int selected= list.getSelectedIndex();
+		if(selected>=0) {
+			Collections.swap(commands,selected,selected+1);
+			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
+			currentCommand.changeSequence(selected + 1, selected);
+		}
+		content.remove(list);
+		list = new JList(commands.toArray());
+		content.add(list,c);
+		content.revalidate();
+		list.setSelectedIndex(selected+1);
 	}
 
 	private void removeCommand() {
