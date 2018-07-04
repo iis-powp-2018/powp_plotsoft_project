@@ -33,17 +33,19 @@ public class ImportComplexCommandToStringsList {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		int i = 0;
 
 		while (scanner.hasNext()) {
+			i++;
 			tempLine = scanner.next();
-			System.out.println(tempLine);
+			System.out.println(tempLine + i);
 			if (tempLine.contains("END")) {
 				commands = new ComplexCommand(listOfCommands);
 				compoundCommand.addComplexCommand(commands);
-				commands = new ComplexCommand(listOfCommands);
+				commands = new ComplexCommand(new ArrayList<IPlotterCommand>());
 			} else if (tempLine.contains("SetPositionCommand")) {
 				listOfCommands.add(new SetPositionCommand(scanner.nextInt(), scanner.nextInt()));
-			} else {
+			} else if (tempLine.contains("DrawToCommand")) {
 				listOfCommands.add(new DrawToCommand(scanner.nextInt(), scanner.nextInt()));
 			}
 		}

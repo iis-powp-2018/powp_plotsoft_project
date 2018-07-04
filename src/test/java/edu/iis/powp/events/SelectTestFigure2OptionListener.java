@@ -51,11 +51,11 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 			ex.printStackTrace();
 		}
 
-		compoundCommand = new CompoundCommand(new ArrayList<ComplexCommand>());
+		CompoundCommand compoundCommand2 = new CompoundCommand(new ArrayList<ComplexCommand>());
 
-		compoundCommand = ImportComplexCommandToStringsList.getCommands("exportedlistofcommands.txt");
+		compoundCommand2 = ImportComplexCommandToStringsList.getCommands("exportedlistofcommands.txt");
 
-		compoundCommand.execute(driverManager.getCurrentPlotter());
+		compoundCommand2.execute(driverManager.getCurrentPlotter());
 
 		try {
 			ExportCompoundCommand.export("listofcommandsafterimport.txt", compoundCommand);
