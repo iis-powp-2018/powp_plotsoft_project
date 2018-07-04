@@ -10,14 +10,19 @@ import edu.iis.powp.command.IPlotterCommand;
 
 public class ComplexCommand implements ICompoundCommand, ICompundCommandEditor {
 
-	List<IPlotterCommand> listOfCommands;
+	private List<IPlotterCommand> listOfCommands;
+
+	private String commandName = new String();
 
 	/**
 	 * Constructor to create ComplexCommnad
 	 * 
 	 * @param listOfCommands
-	 *            List of commands ComplexCommand will contain
+	 *            listOfCommands List of commands ComplexCommand will contain
+	 * @param commandName
+	 *            name of complex command
 	 */
+
 	public ComplexCommand(List<IPlotterCommand> listOfCommands) {
 		this.listOfCommands = listOfCommands;
 	}
@@ -51,6 +56,14 @@ public class ComplexCommand implements ICompoundCommand, ICompundCommandEditor {
 	public void changeCommand(int index, IPlotterCommand command) {
 		removeCommand(index);
 		addCommand(index, command);
+	}
+
+	public String getCommandName() {
+		return commandName;
+	}
+
+	public void setCommandName(String commandName) {
+		this.commandName = commandName;
 	}
 
 }
