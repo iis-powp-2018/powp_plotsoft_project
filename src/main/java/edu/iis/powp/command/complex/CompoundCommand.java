@@ -10,10 +10,22 @@ public class CompoundCommand implements IPlotterCommand {
 
 	private List<ComplexCommand> complexCommandList;
 
+	/**
+	 * constructor to create CompoundCommand
+	 * 
+	 * @param complexCommandList
+	 *            list of complex commands that object will contain
+	 */
 	public CompoundCommand(List<ComplexCommand> complexCommandList) {
 		this.complexCommandList = complexCommandList;
 	}
 
+	/**
+	 * Add new ComplexCommand to object
+	 * 
+	 * @param command
+	 *            ComplexCommand that will be added
+	 */
 	public void addComplexCommand(ComplexCommand command) {
 		complexCommandList.add(command);
 	}

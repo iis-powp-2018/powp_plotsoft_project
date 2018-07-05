@@ -11,7 +11,7 @@ import edu.iis.powp.command.complex.CompoundCommand;
 
 public class ExportCompoundCommand {
 	/**
-	 * Class rensponsible for exporting compound command to file
+	 * Class responsible for exporting compound command to file
 	 * 
 	 * @param fileName
 	 *            name of exported file
