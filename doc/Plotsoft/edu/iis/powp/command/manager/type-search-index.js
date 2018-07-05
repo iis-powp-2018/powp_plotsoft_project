@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"edu.iis.powp.command.manager","l":"PlotterControlsManager"}]

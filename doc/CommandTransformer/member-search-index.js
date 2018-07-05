@@ -1,0 +1,595 @@
+memberSearchIndex = [{
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "actionPerformed(ActionEvent)",
+    "url": "actionPerformed-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "FlipCommandComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "GraduationCommandComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "MoveCommandComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "RotationCommandComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "StretchingCommandComponent",
+    "l": "addApplyButton(JPanel, GridBagConstraints)",
+    "url": "addApplyButton-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui",
+    "c": "CommandTransformerCreatorWindow",
+    "l": "addComponent(String, CommandTransformerCreatorComponent)",
+    "url": "addComponent-java.lang.String-edu.iis.powp.commandtransformer.decorator.gui.components.CommandTransformerCreatorComponent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "FlipCommandComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "GraduationCommandComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "MoveCommandComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "RotationCommandComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "StretchingCommandComponent",
+    "l": "addContent(JPanel, GridBagConstraints)",
+    "url": "addContent-javax.swing.JPanel-java.awt.GridBagConstraints-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "addPlotterCommand(IPlotterCommand)",
+    "url": "addPlotterCommand-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "addPlotterCommand(IPlotterCommand, int)",
+    "url": "addPlotterCommand-edu.iis.powp.command.IPlotterCommand-int-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "addPlotterCommands(List<IPlotterCommand>)",
+    "url": "addPlotterCommands-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "applyButtonClickListener"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyFlipCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyGraduationCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyMoveCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyRotationCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyStretchingCommandListener",
+    "l": "applyCommand(PlotterCommandManager, IPlotterCommand)",
+    "url": "applyCommand-edu.iis.powp.command.manager.PlotterCommandManager-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "ApplyCommandListener(T)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyFlipCommandListener",
+    "l": "ApplyFlipCommandListener()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyFlipCommandListener",
+    "l": "ApplyFlipCommandListener(FlipCommandComponentModel)",
+    "url": "ApplyFlipCommandListener-edu.iis.powp.commandtransformer.model.FlipCommandComponentModel-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyGraduationCommandListener",
+    "l": "ApplyGraduationCommandListener()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyGraduationCommandListener",
+    "l": "ApplyGraduationCommandListener(GraduationCommandComponentModel)",
+    "url": "ApplyGraduationCommandListener-edu.iis.powp.commandtransformer.model.GraduationCommandComponentModel-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyMoveCommandListener",
+    "l": "ApplyMoveCommandListener()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyMoveCommandListener",
+    "l": "ApplyMoveCommandListener(MoveCommandComponentModel)",
+    "url": "ApplyMoveCommandListener-edu.iis.powp.commandtransformer.model.MoveCommandComponentModel-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyRotationCommandListener",
+    "l": "ApplyRotationCommandListener()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyRotationCommandListener",
+    "l": "ApplyRotationCommandListener(RotationCommandComponentModel)",
+    "url": "ApplyRotationCommandListener-edu.iis.powp.commandtransformer.model.RotationCommandComponentModel-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyStretchingCommandListener",
+    "l": "ApplyStretchingCommandListener()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyStretchingCommandListener",
+    "l": "ApplyStretchingCommandListener(StretchingCommandComponentModel)",
+    "url": "ApplyStretchingCommandListener-edu.iis.powp.commandtransformer.model.StretchingCommandComponentModel-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "baseCommand"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "buildComponent()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "clearCommandsList()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "CommandDecorator(IPlotterCommand)",
+    "url": "CommandDecorator-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "commands"
+}, {
+    "p": "edu.iis.powp.commandtransformer",
+    "c": "CommandTransformer",
+    "l": "CommandTransformer()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "CommandTransformerCreatorComponent()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "CommandTransformerCreatorComponent(T)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui",
+    "c": "CommandTransformerCreatorWindow",
+    "l": "CommandTransformerCreatorWindow(DriverManager)",
+    "url": "CommandTransformerCreatorWindow-edu.iis.powp.app.DriverManager-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "compoundCommand"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "CompoundCommand()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "constructApplyButtonGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "GraduationCommandComponent",
+    "l": "constructApplyButtonGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "MoveCommandComponent",
+    "l": "constructApplyButtonGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "RotationCommandComponent",
+    "l": "constructApplyButtonGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "StretchingCommandComponent",
+    "l": "constructApplyButtonGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "constructElementGridBagConstraints()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "constructJPanel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "FlipCommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "GraduationCommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "MoveCommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "RotationCommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "StretchingCommandDecorator",
+    "l": "constructTransformedCompoundCommand(List<PlotterMovementModel>)",
+    "url": "constructTransformedCompoundCommand-java.util.List-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "coordinates"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "dataModel"
+}, {
+    "p": "edu.iis.powp.commandtransformer.adapter",
+    "c": "InterceptCoordinatesAdapterPlotterDriver",
+    "l": "drawTo(int, int)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "execute(IPlotter)",
+    "url": "execute-edu.iis.client.plottermagic.IPlotter-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "execute(IPlotter)",
+    "url": "execute-edu.iis.client.plottermagic.IPlotter-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "FlipCommandComponent",
+    "l": "FlipCommandComponent(ApplyFlipCommandListener)",
+    "url": "FlipCommandComponent-edu.iis.powp.commandtransformer.decorator.gui.events.ApplyFlipCommandListener-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "FlipCommandComponentModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "FlipCommandComponentModel(Boolean, Boolean)",
+    "url": "FlipCommandComponentModel-java.lang.Boolean-java.lang.Boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "FlipCommandDecorator",
+    "l": "FlipCommandDecorator(IPlotterCommand, boolean, boolean)",
+    "url": "FlipCommandDecorator-edu.iis.powp.command.IPlotterCommand-boolean-boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer",
+    "c": "CommandTransformer",
+    "l": "getCommandTransformerCreatorWindow()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.adapter",
+    "c": "InterceptCoordinatesAdapterPlotterDriver",
+    "l": "getCoordinates()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "getDataModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "getFlipX()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "getFlipY()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "GraduationCommandComponentModel",
+    "l": "getGraduation()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "getMovementX()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "getMovementY()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "getPosX()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "getPosY()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "RotationCommandComponentModel",
+    "l": "getRotation()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "getStretchValue()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "getStretchX()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "getStretchY()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "GraduationCommandComponent",
+    "l": "GraduationCommandComponent(ApplyGraduationCommandListener)",
+    "url": "GraduationCommandComponent-edu.iis.powp.commandtransformer.decorator.gui.events.ApplyGraduationCommandListener-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "GraduationCommandComponentModel",
+    "l": "GraduationCommandComponentModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "GraduationCommandComponentModel",
+    "l": "GraduationCommandComponentModel(Integer)",
+    "url": "GraduationCommandComponentModel-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "GraduationCommandDecorator",
+    "l": "GraduationCommandDecorator(IPlotterCommand, Integer)",
+    "url": "GraduationCommandDecorator-edu.iis.powp.command.IPlotterCommand-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui",
+    "c": "CommandTransformerCreatorWindow",
+    "l": "HideIfVisibleAndShowIfHidden()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.adapter",
+    "c": "InterceptCoordinatesAdapterPlotterDriver",
+    "l": "InterceptCoordinatesAdapterPlotterDriver()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "isDrawing()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "iterator()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "CommandDecorator",
+    "l": "iterator()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "MoveCommandComponent",
+    "l": "MoveCommandComponent(ApplyMoveCommandListener)",
+    "url": "MoveCommandComponent-edu.iis.powp.commandtransformer.decorator.gui.events.ApplyMoveCommandListener-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "MoveCommandComponentModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "MoveCommandComponentModel(Integer, Integer)",
+    "url": "MoveCommandComponentModel-java.lang.Integer-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "MoveCommandDecorator",
+    "l": "MoveCommandDecorator(IPlotterCommand, int, int)",
+    "url": "MoveCommandDecorator-edu.iis.powp.command.IPlotterCommand-int-int-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "PlotterMovementModel(int, int, boolean)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "removePlotterCommand(int)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.command",
+    "c": "CompoundCommand",
+    "l": "removePlotterCommand(IPlotterCommand)",
+    "url": "removePlotterCommand-edu.iis.powp.command.IPlotterCommand-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "RotationCommandComponent",
+    "l": "RotationCommandComponent(ApplyRotationCommandListener)",
+    "url": "RotationCommandComponent-edu.iis.powp.commandtransformer.decorator.gui.events.ApplyRotationCommandListener-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "RotationCommandComponentModel",
+    "l": "RotationCommandComponentModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "RotationCommandComponentModel",
+    "l": "RotationCommandComponentModel(Integer)",
+    "url": "RotationCommandComponentModel-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "RotationCommandDecorator",
+    "l": "RotationCommandDecorator(IPlotterCommand, int)",
+    "url": "RotationCommandDecorator-edu.iis.powp.command.IPlotterCommand-int-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "CommandTransformerCreatorComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "FlipCommandComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "GraduationCommandComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "MoveCommandComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "RotationCommandComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "StretchingCommandComponent",
+    "l": "setApplyButtonActions(ActionEvent)",
+    "url": "setApplyButtonActions-java.awt.event.ActionEvent-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.events",
+    "c": "ApplyCommandListener",
+    "l": "setDataModel(T)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "setDrawing(boolean)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "setFlipX(Boolean)",
+    "url": "setFlipX-java.lang.Boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "FlipCommandComponentModel",
+    "l": "setFlipY(Boolean)",
+    "url": "setFlipY-java.lang.Boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "GraduationCommandComponentModel",
+    "l": "setGraduation(Integer)",
+    "url": "setGraduation-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "setMovementX(Integer)",
+    "url": "setMovementX-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "MoveCommandComponentModel",
+    "l": "setMovementY(Integer)",
+    "url": "setMovementY-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.adapter",
+    "c": "InterceptCoordinatesAdapterPlotterDriver",
+    "l": "setPosition(int, int)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "setPosX(int)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "PlotterMovementModel",
+    "l": "setPosY(int)"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "RotationCommandComponentModel",
+    "l": "setRotation(Integer)",
+    "url": "setRotation-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "setStretchValue(Integer)",
+    "url": "setStretchValue-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "setStretchX(Boolean)",
+    "url": "setStretchX-java.lang.Boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "setStretchY(Boolean)",
+    "url": "setStretchY-java.lang.Boolean-"
+}, {
+    "p": "edu.iis.powp.commandtransformer",
+    "c": "CommandTransformer",
+    "l": "setupCommandTransformer(Application)",
+    "url": "setupCommandTransformer-edu.iis.powp.app.Application-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator.gui.components",
+    "c": "StretchingCommandComponent",
+    "l": "StretchingCommandComponent(ApplyStretchingCommandListener)",
+    "url": "StretchingCommandComponent-edu.iis.powp.commandtransformer.decorator.gui.events.ApplyStretchingCommandListener-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "StretchingCommandComponentModel()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.model",
+    "c": "StretchingCommandComponentModel",
+    "l": "StretchingCommandComponentModel(Boolean, Boolean, Integer)",
+    "url": "StretchingCommandComponentModel-java.lang.Boolean-java.lang.Boolean-java.lang.Integer-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "StretchingCommandDecorator",
+    "l": "StretchingCommandDecorator(IPlotterCommand, boolean, boolean, int)",
+    "url": "StretchingCommandDecorator-edu.iis.powp.command.IPlotterCommand-boolean-boolean-int-"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "FlipCommandDecorator",
+    "l": "toString()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "GraduationCommandDecorator",
+    "l": "toString()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "MoveCommandDecorator",
+    "l": "toString()"
+}, {
+    "p": "edu.iis.powp.commandtransformer.decorator",
+    "c": "RotationCommandDecorator",
+    "l": "toString()"
+}, {"p": "edu.iis.powp.commandtransformer.decorator", "c": "StretchingCommandDecorator", "l": "toString()"}]
