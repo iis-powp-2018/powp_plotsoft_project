@@ -1,18 +1,18 @@
 package edu.iis.powp.command.manager;
 
+import java.util.Iterator;
+import java.util.List;
+
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.observer.Publisher;
 
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Driver Manager.
  */
 public class PlotterCommandManager {
-	private IPlotterCommand currentCommand = null;
+	private ICompoundCommand currentCommand = null;
 
 	private Publisher changePublisher = new Publisher();
 
@@ -22,7 +22,7 @@ public class PlotterCommandManager {
 	 * @param commandList
 	 *            Set the command as current.
 	 */
-	public synchronized void setCurrentCommand(IPlotterCommand commandList) {
+	public synchronized void setCurrentCommand(ICompoundCommand commandList) {
 		this.currentCommand = commandList;
 		changePublisher.notifyObservers();
 	}
@@ -50,7 +50,6 @@ public class PlotterCommandManager {
 				return plotterCommands.iterator();
 			}
 
-
 			@Override
 			public String toString() {
 				return name;
@@ -64,7 +63,7 @@ public class PlotterCommandManager {
 	 * 
 	 * @return Current command.
 	 */
-	public synchronized IPlotterCommand getCurrentCommand() {
+	public synchronized ICompoundCommand getCurrentCommand() {
 		return currentCommand;
 	}
 
