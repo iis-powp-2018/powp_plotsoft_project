@@ -66,7 +66,14 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		updateCurrentCommandField();
 
 		JButton btnImportCommand = new JButton("Import command");
-		btnImportCommand.addActionListener((ActionEvent e) -> this.clearCommand());
+		btnImportCommand.addActionListener((ActionEvent e) -> {
+			try {
+				this.importCommand();
+			} catch (FileNotFoundException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		});
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -109,8 +116,7 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(this);
 		CompoundCommand newCommand = ImportComplexCommand.getCommands(fileChooser.getSelectedFile().getAbsolutePath());	
-		List<ComplexCommand> complexList = newCommand.getComplexCommandList();
-		commandManager.setCurrentCommand(compoundToComplex(complexList));
+		commandManager.setCurrentCommand(compoundToComplex(newCommand));
 
 	}
 
@@ -160,16 +166,15 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		}
 	}
 	
-	public ComplexCommand compoundToComplex(List<ComplexCommand> complexList) {
-		ComplexCommand newComplex;
-		List<IPlotterCommand> listTemp;
-		for(ComplexCommand iterator:complexList) {
-			listTemp=iterator.getListOfCommands();
-			newComplex.addCommand(index, command);
-		}
-		
-		return newComplex;
-		
-	}
+	private ComplexCommand compoundToComplex(CompoundCommand compCmd) {
+        ComplexCommand temp = null;
+        List<ComplexCommand> tempList = new ArrayList<ComplexCommand>(compCmd.getComplexCommandList());
+        List<IPlotterCommand> tempListIPlot = new ArrayList<IPlotterCommand>();
+        for(ComplexCommand cc : tempList) {
+                tempListIPlot.addAll(cc.getListOfCommands());
+            }
+        temp = new ComplexCommand(tempListIPlot);
+        return temp;
+        }
 
 }
