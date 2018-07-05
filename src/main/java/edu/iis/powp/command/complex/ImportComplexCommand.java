@@ -10,7 +10,7 @@ import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 
-public class ImportComplexCommandToStringsList {
+public class ImportComplexCommand {
 
 	public static CompoundCommand getCommands(String fileName) {
 		ArrayList<IPlotterCommand> listOfCommands = new ArrayList<IPlotterCommand>();

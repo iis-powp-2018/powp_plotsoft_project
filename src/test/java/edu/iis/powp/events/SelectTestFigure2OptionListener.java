@@ -13,7 +13,7 @@ import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.complex.CompoundCommand;
 import edu.iis.powp.command.complex.ExportCompoundCommand;
-import edu.iis.powp.command.complex.ImportComplexCommandToStringsList;
+import edu.iis.powp.command.complex.ImportComplexCommand;
 
 public class SelectTestFigure2OptionListener implements ActionListener {
 
@@ -53,7 +53,7 @@ public class SelectTestFigure2OptionListener implements ActionListener {
 
 		CompoundCommand compoundCommand2 = new CompoundCommand(new ArrayList<ComplexCommand>());
 
-		compoundCommand2 = ImportComplexCommandToStringsList.getCommands("exportedlistofcommands.txt");
+		compoundCommand2 = ImportComplexCommand.getCommands("exportedlistofcommands.txt");
 
 		compoundCommand2.execute(driverManager.getCurrentPlotter());
 

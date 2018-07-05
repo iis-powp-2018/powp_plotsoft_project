@@ -15,9 +15,11 @@ import javax.swing.JTextArea;
 
 import edu.iis.powp.app.gui.WindowComponent;
 import edu.iis.powp.command.ICompoundCommand;
+import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.complex.CompoundCommand;
 import edu.iis.powp.command.complex.ExportCompoundCommand;
+import edu.iis.powp.command.complex.ImportComplexCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 
@@ -106,6 +108,9 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 	private void importCommand() throws FileNotFoundException {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(this);
+		CompoundCommand newCommand = ImportComplexCommand.getCommands(fileChooser.getSelectedFile().getAbsolutePath());	
+		List<ComplexCommand> complexList = newCommand.getComplexCommandList();
+		commandManager.setCurrentCommand(compoundToComplex(complexList));
 
 	}
 
@@ -153,6 +158,18 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 		} else {
 			this.setVisible(true);
 		}
+	}
+	
+	public ComplexCommand compoundToComplex(List<ComplexCommand> complexList) {
+		ComplexCommand newComplex;
+		List<IPlotterCommand> listTemp;
+		for(ComplexCommand iterator:complexList) {
+			listTemp=iterator.getListOfCommands();
+			newComplex.addCommand(index, command);
+		}
+		
+		return newComplex;
+		
 	}
 
 }
