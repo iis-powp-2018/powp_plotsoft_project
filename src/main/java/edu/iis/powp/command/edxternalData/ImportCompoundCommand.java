@@ -1,4 +1,4 @@
-package edu.iis.powp.command.complex;
+package edu.iis.powp.command.edxternalData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,8 +9,10 @@ import java.util.Scanner;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
+import edu.iis.powp.command.complex.ComplexCommand;
+import edu.iis.powp.command.complex.CompoundCommand;
 
-public class ImportComplexCommand {
+public class ImportCompoundCommand {
 
 	public static CompoundCommand getCommands(String fileName) {
 		ArrayList<IPlotterCommand> listOfCommands = new ArrayList<IPlotterCommand>();
@@ -33,12 +35,9 @@ public class ImportComplexCommand {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		int i = 0;
 
 		while (scanner.hasNext()) {
-			i++;
 			tempLine = scanner.next();
-			System.out.println(tempLine + i);
 			if (tempLine.contains("END")) {
 				commands = new ComplexCommand(listOfCommands);
 				compoundCommand.addComplexCommand(commands);
