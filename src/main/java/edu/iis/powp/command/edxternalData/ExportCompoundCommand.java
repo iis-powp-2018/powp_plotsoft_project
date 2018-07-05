@@ -10,6 +10,15 @@ import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.complex.CompoundCommand;
 
 public class ExportCompoundCommand {
+	/**
+	 * Class rensponsible for exporting compound command to file
+	 * 
+	 * @param fileName
+	 *            name of exported file
+	 * @param commandsList
+	 *            object containing all complex commands to be saved
+	 * @throws FileNotFoundException
+	 */
 	public static void export(String fileName, CompoundCommand commandsList) throws FileNotFoundException {
 
 		PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));

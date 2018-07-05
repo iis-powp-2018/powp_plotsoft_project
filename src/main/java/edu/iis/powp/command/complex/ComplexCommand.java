@@ -18,8 +18,6 @@ public class ComplexCommand implements ICompoundCommand, IComplexCommandEditor {
 	 * 
 	 * @param listOfCommands
 	 *            listOfCommands List of commands ComplexCommand will contain
-	 * @param commandName
-	 *            name of complex command
 	 */
 
 	public ComplexCommand(List<IPlotterCommand> listOfCommands) {

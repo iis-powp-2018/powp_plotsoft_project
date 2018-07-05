@@ -14,6 +14,11 @@ import edu.iis.powp.command.complex.CompoundCommand;
 
 public class ImportCompoundCommand {
 
+	/**
+	 * @param fileName
+	 *            name of file to be imported
+	 * @return CompoundCommand object containing list with imported commands
+	 */
 	public static CompoundCommand getCommands(String fileName) {
 		ArrayList<IPlotterCommand> listOfCommands = new ArrayList<IPlotterCommand>();
 		String tempLine;
