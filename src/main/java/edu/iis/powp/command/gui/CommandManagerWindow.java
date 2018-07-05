@@ -18,6 +18,7 @@ import edu.iis.powp.command.ICompoundCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.complex.ComplexCommand;
 import edu.iis.powp.command.complex.CompoundCommand;
+import edu.iis.powp.command.complex.CompundCommandToComplexCommandConverter;
 import edu.iis.powp.command.edxternalData.ExportCompoundCommand;
 import edu.iis.powp.command.edxternalData.ImportCompoundCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
@@ -70,7 +71,6 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 			try {
 				this.importCommand();
 			} catch (FileNotFoundException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 		});
@@ -85,7 +85,6 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 			try {
 				this.exportCommand();
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -115,8 +114,8 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 	private void importCommand() throws FileNotFoundException {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(this);
-		CompoundCommand newCommand = ImportCompoundCommand.getCommands(fileChooser.getSelectedFile().getAbsolutePath());	
-		commandManager.setCurrentCommand(compoundToComplex(newCommand));
+		CompoundCommand newCommand = ImportCompoundCommand.getCommands(fileChooser.getSelectedFile().getAbsolutePath());
+		commandManager.setCurrentCommand(CompundCommandToComplexCommandConverter.compoundToComplex(newCommand));
 
 	}
 
@@ -165,16 +164,5 @@ public class CommandManagerWindow extends JFrame implements WindowComponent {
 			this.setVisible(true);
 		}
 	}
-	
-	private ComplexCommand compoundToComplex(CompoundCommand compCmd) {
-        ComplexCommand temp = null;
-        List<ComplexCommand> tempList = new ArrayList<ComplexCommand>(compCmd.getComplexCommandList());
-        List<IPlotterCommand> tempListIPlot = new ArrayList<IPlotterCommand>();
-        for(ComplexCommand cc : tempList) {
-                tempListIPlot.addAll(cc.getListOfCommands());
-            }
-        temp = new ComplexCommand(tempListIPlot);
-        return temp;
-        }
 
 }
