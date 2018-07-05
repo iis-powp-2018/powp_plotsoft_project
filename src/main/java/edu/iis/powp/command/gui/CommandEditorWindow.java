@@ -94,7 +94,7 @@ public class CommandEditorWindow extends JFrame implements WindowComponent {
 
 	private void moveUp() {
 		int selected= list.getSelectedIndex();
-		if(selected>=0) {
+		if(selected>0) {
 			Collections.swap(commands,selected,selected-1);
 			ComplexCommand currentCommand = (ComplexCommand) commandManager.getCurrentCommand();
 			currentCommand.changeSequence(selected - 1, selected);
